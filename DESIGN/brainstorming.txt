@@ -1,0 +1,78 @@
+Klassen
+
+SPIELFELD   --- Modell
+
+Attribute:
+
+breite = 7
+hoehe = 6
+int[breite][hoehe]
+
+links unten = 0 | 0
+rechts oben = breite - 1 |  hoehe - 1
+
+Codierung
+
+0 == leer
+1 == Spieler 1
+2 == Spieler 2
+
+
+Methoden: 
+
+/**
+
+  gibt zurück ob an der Stelle (x|y) ein Stein ist
+  und welcher Spieler
+  
+  0 -- leer
+  1 -- Spieler 1
+  2 -- Spieler 2
+  
+**/
+
+int getZustand(int x, int y)
+
+/**
+  setzt einen spieler-Stein in die x-Spalte falls möglich
+  
+  Rückgabewert
+  
+  true -- hat geklappt
+  false -- Spalte ist schon voll
+**/
+boolean spielsteinSetzen(int x, int spieler) 
+
+
+
+
+
+
+int getBreite()
+int getHoehe()
+int setBreite()
+int setHoehe()
+
+
+
+SPIELSTEIN (?)
+
+
+SPIELER {abstract}
+
+-- COMPUTERSPIELER
+-- MENSCHSPIELER
+
+
+VIEW View
+
+CONTROLLER Controller
+
+Attribute:
+
+int amZug 
+1 -- Spieler 1
+2 -- Spieler 2
+
+
+Methoden:
