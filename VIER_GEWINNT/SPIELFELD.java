@@ -9,7 +9,7 @@ public class SPIELFELD
 {
     int breite;
     int hoehe;
-    int spielfeld[][];
+    int[][] spielfeld;
 
     public SPIELFELD()
     {
@@ -28,5 +28,23 @@ public class SPIELFELD
     public boolean spielSteinSetzen (int x, int spieler)
     {
         return false;
+    }
+    
+    /**
+     * gibt die hoehe des felds als integer zurueck
+     * 
+     * @return die hoehe des spielfelds
+     */
+    public int getHoehe(){
+        return spielfeld[0].length;
+    }
+    
+    /**
+     * gibt die breite des felds als integer zurueck
+     * 
+     * @return die breite des spielfelds
+     */
+    public int getBreite(){
+        return spielfeld.length;
     }
 }
