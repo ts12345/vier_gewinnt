@@ -93,4 +93,8 @@ public class SPIELFELD
             }
         }
     }
+    public int getSpielfeld (int spalte)
+    {
+        return 2;
+    }
 }
