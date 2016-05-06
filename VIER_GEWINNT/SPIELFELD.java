@@ -101,8 +101,8 @@ public class SPIELFELD
      * Methode die fuer einen spieler herausfindet ob er vier in einer Reihe hat
      * @param   spieler     Spieler fuer den getestet werden soll
      */
-    public bool checkFourInARow(int spieler)
+    public boolean checkFourInARow(int spieler)
     {
-        
+        return true;
     }
 }
