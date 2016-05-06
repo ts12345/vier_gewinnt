@@ -14,16 +14,7 @@ public class SPIELFELD
     public SPIELFELD()
     {
         spielfeld = new int[7][6];   
-        spielSteinSetzen (1,2);
-        spielSteinSetzen (2,1);
-        spielSteinSetzen (2,2);
-        spielSteinSetzen (3,1);
-        spielSteinSetzen (3,1);
-        spielSteinSetzen (3,2);
-        spielSteinSetzen (4,2);
-        spielSteinSetzen (4,1);
-        spielSteinSetzen (4,1);
-        spielSteinSetzen (4,2);
+
     }
 
     /**
@@ -117,7 +108,7 @@ public class SPIELFELD
      * @return ob der Stein in einer 4er Reihe liegt
      */
     public boolean checkFourInARow(int spieler, int x ,int y){
-        
+
         int test = 0; //zum zaelen der gleichartigen Steine in einer Reihe
         boolean rueck = false; //wird wahr wenn vier Steine in einer Reihe liegen
         //checkt die Waagrechte
