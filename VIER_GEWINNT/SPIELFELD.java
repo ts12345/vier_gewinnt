@@ -13,7 +13,7 @@ public class SPIELFELD
 
     public SPIELFELD()
     {
-
+        spielfeld = new int[7][6];        
     }
 
     /**
