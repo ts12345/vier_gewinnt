@@ -93,9 +93,9 @@ public class SPIELFELD
             }
         }
     }
-    public int getSpielfeld (int spalte)
+    public int[][] getSpielfeld()
     {
-        return 2;
+        return spielfeld;
     }
     /**
      * Methode die fuer einen spieler herausfindet ob er vier in einer Reihe hat
