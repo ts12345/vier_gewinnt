@@ -1,4 +1,9 @@
-
+/**
+ * Die Klasse VIEW zeigt das Spielfeld an und interagiert mit dem Spieler.
+ * 
+ * @author (cd) 
+ *
+ */
 public class VIEW
 {
     SPIELFELD spielfeld;
