@@ -15,6 +15,11 @@ public class CONTROLLER
 
     }
     
+    public static void main(String[] args)
+    {
+        CONTROLLER c = new CONTROLLER();
+    }
+    
     /**
      * Metode die das Feld mit n Steinen fuellt in abwechselnder Reihenfolge
      * 
