@@ -13,7 +13,17 @@ public class SPIELFELD
 
     public SPIELFELD()
     {
-        spielfeld = new int[7][6];        
+        spielfeld = new int[7][6];   
+        spielSteinSetzen (1,2);
+        spielSteinSetzen (2,1);
+        spielSteinSetzen (2,2);
+        spielSteinSetzen (3,1);
+        spielSteinSetzen (3,1);
+        spielSteinSetzen (3,2);
+        spielSteinSetzen (4,2);
+        spielSteinSetzen (4,1);
+        spielSteinSetzen (4,1);
+        spielSteinSetzen (4,2);
     }
 
     /**
@@ -93,16 +103,102 @@ public class SPIELFELD
             }
         }
     }
+
     public int[][] getSpielfeld()
     {
         return spielfeld;
     }
+
     /**
      * Methode die fuer einen spieler herausfindet ob er vier in einer Reihe hat
-     * @param   spieler     Spieler fuer den getestet werden soll
+     * @param spieler Spieler fuer den getestet werden soll
+     * @param x ist die x-coordinate des Spielsteins
+     * @param y ist die y-coordinate des Spielsteins
+     * @return ob der Stein in einer 4er Reihe liegt
      */
-    public boolean checkFourInARow(int spieler)
-    {
-        return true;
+    public boolean checkFourInARow(int spieler, int x ,int y){
+        
+        int test = 0; //zum zaelen der gleichartigen Steine in einer Reihe
+        boolean rueck = false; //wird wahr wenn vier Steine in einer Reihe liegen
+        //checkt die Waagrechte
+        for(int i = 3; i > -1; i--){ 
+            if(test == 4){
+                break; //bricht ab wenn eine Viererreihe gefunden worden ist
+            }
+            test =0;
+            for(int j = 0; j < 4; j++){
+                if((x-i)+j < getBreite() && (x-i)+j > -1 && spielfeld[(x-i)+j][y] == spieler){
+                    test++; 
+                }
+
+                if(test == 4){
+                    break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                }
+            }
+        }
+        //checkt die Senkrechte
+        if(test == 4){
+            rueck = true;
+        }else{
+            for(int k = 3; k > -1; k--){ 
+                if(test == 4){
+                    break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                }
+                test =0;
+                for(int l= 0; l < 4; l++){
+                    if((y+k)-l < getHoehe() &&(y+k)-l > -1 && spielfeld[x][(y+k)-l] == spieler){
+                        test++; 
+                    }
+
+                    if(test == 4){
+                        break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                    }
+                }
+            } 
+        }
+        //checkt die diagonale von klein nach groß
+        if(test == 4){
+            rueck = true;
+        }else{
+            for(int m = 3; m > -1; m--){ 
+                if(test == 4){
+                    break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                }
+                test =0;
+                for(int n= 0; n < 4; n++){
+                    if((x-m)+n < getBreite() && (y-m)+n < getHoehe() && (x-m)+n > -1 && (y-m)+n > -1 &&spielfeld[(x-m)+n][(y-m)+n] == spieler){
+                        test++; 
+                    }
+
+                    if(test == 4){
+                        break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                    }
+                }
+            } 
+        }
+        //checkt die Diagonale von groß nach kein
+        if(test == 4){
+            rueck = true;
+        }else{
+            for(int o= 3; o > -1 ; o--){
+                if(test == 4){
+                    break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                }
+                test =0;
+                for(int p = 0; p < 4; p++){ 
+                    if((x+o)-p < getBreite() && (y+o)-p < getHoehe() &&(x+o)-p > -1 &&(y+o)-p > -1 && spielfeld[(x+o)-p][(y+o)-p] == spieler){
+                        test++; 
+                    }
+
+                    if(test == 4){
+                        break; //bricht ab wenn eine Viererreihe gefunden worden ist
+                    }
+                }
+            } 
+        }
+        if(test == 4){
+            rueck = true; //letzter (unnötiger) Check
+        }
+        return rueck;
     }
 }
