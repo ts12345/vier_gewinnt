@@ -1,3 +1,10 @@
+/**
+ * Die Klasse CONTROLLER beschreibt die Steuerung des Spiels
+ * legt ein Spielfeld und ein View an
+ * @author (kinder)
+ * 
+ */
+
 public class CONTROLLER
 {
     SPIELFELD spielfeld;
