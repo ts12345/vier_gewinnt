@@ -1,7 +1,7 @@
 /**
  * Die Klasse VIEW zeigt das Spielfeld an und interagiert mit dem Spieler.
  * 
- * @author (cd) 
+ * @author (kinder) 
  *
  */
 public class VIEW
