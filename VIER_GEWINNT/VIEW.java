@@ -1,10 +1,15 @@
+import javax.swing.*;
+import java.awt.*; 
+import java.awt.event.*;
+
+
 /**
  * Die Klasse VIEW zeigt das Spielfeld an und interagiert mit dem Spieler.
  * 
  * @author (kinder) 
  *
  */
-public class VIEW
+public class VIEW extends JPanel
 {
     SPIELFELD spielfeld;
 
