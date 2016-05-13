@@ -14,6 +14,7 @@ public class CONTROLLER
     {
         spielfeld = new SPIELFELD();
         view = new VIEW(spielfeld);
+        TEST_VIEW v = new TEST_VIEW();
 
         spielfeld.spielSteinSetzen(1, 1);
         spielfeld.spielSteinSetzen(1, 2);
@@ -24,6 +25,7 @@ public class CONTROLLER
     public static void main(String[] args)
     {
         CONTROLLER c = new CONTROLLER();
+
     }
 
     /**

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
 
-
 /**
  * Die Klasse VIEW zeigt das Spielfeld an und interagiert mit dem Spieler.
  * 
@@ -36,5 +35,19 @@ public class VIEW extends JPanel
             System.out.println();
         }
         System.out.println();
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);       
+
+        for(int i=0; i < spielfeld.getHoehe(); i++) {
+            g.setColor(Color.BLACK);
+            g.drawRect(0, 0+(i*20), 20, 20);
+            for(int b=0; b < spielfeld.getBreite(); b++) {
+                g.setColor(Color.BLACK);
+                g.drawRect(20+(i*20),0, 20,20);
+            }
+        }
+
     }
 }
