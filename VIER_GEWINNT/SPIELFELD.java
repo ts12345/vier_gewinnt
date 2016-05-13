@@ -61,7 +61,7 @@ public class SPIELFELD
      * 
      * @return die Hoehe des niedrigsten freien Felds (0 bis hoehe-1 ist gueltig, wenn die spalte voll ist, wird hoehe ausgegeben)
      */
-    private int freiesFeld(int s){
+    public int freiesFeld(int s){
         boolean a = true;
         int i = 0;
         while(a){
