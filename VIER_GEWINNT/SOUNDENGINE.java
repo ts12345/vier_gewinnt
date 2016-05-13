@@ -18,9 +18,7 @@ public class SOUNDENGINE
         try{
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(Sound));
-            clip.start();
-
-            Thread.sleep(clip.getMicrosecondLength()/1000);
+            clip.start();            
         }catch(Exception e)
         {
             System.out.println("fail");
