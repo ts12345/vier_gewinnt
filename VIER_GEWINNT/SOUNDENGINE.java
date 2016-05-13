@@ -7,8 +7,8 @@ public class SOUNDENGINE
     File fanfare;
     public SOUNDENGINE()
     {
-        File click = new File("click.wav"); 
-        File fanfare = new File("fanfare.wav"); 
+        File click = new File("sounds/click.wav"); 
+        File fanfare = new File("sounds/fanfare.wav"); 
         this.click = click;
         this.fanfare = fanfare;
 
