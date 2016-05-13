@@ -14,7 +14,6 @@ public class SPIELFELD
     public SPIELFELD()
     {
         spielfeld = new int[7][6];   
-
     }
 
     /**
@@ -28,7 +27,7 @@ public class SPIELFELD
      */
     public boolean spielSteinSetzen (int x, int spieler)
     {
-        int i=freiesFeld(x);
+        int i = freiesFeld(x);
         if(i == spielfeld[x].length){
             return false;
         }
@@ -59,18 +58,17 @@ public class SPIELFELD
      * 
      * @param s die Spalte, in der gesucht wird
      * 
-     * @return die Hoehe des niedrigsten freien Felds (0 bis hoehe-1 ist gueltig, wenn die spalte voll ist, wird hoehe ausgegeben)
+     * @return die Hoehe des niedrigsten freien Felds (0 bis hoehe - 1  ist gueltig, wenn die spalte voll ist, wird hoehe ausgegeben)
      */
     public int freiesFeld(int s){
         boolean a = true;
         int i = 0;
         while(a){
-
-            a=spielfeld[s][i]!=0;
-            //ist das Feld leer (==0), dann wird a negativ gesetzt und die schleife abgebrochen
-            //i ist logischerweis auch die Hoehe des leeren felds und wird zurueckgegeben
+            a=spielfeld[s][i] != 0;
+            // ist das Feld leer (==0), dann wird a negativ gesetzt und die schleife abgebrochen
+            // i ist logischerweis auch die Hoehe des leeren felds und wird zurueckgegeben
             if(a){
-                a = spielfeld[s].length > i+1;
+                a = spielfeld[s].length > i + 1;
                 //wenn i+1 == length, dann wurde das oberste Feld geprüft und es war besetzt
                 //a wird dann negativ gesetzt, damit die Schleife abbricht
                 //jetzt wird i vergroessert, um entweder
@@ -88,9 +86,9 @@ public class SPIELFELD
      */
     private void initialise(){
         spielfeld = new int[7][6];
-        for (int i=0; i<spielfeld.length; i++){
-            for(int i2=0; i2<spielfeld[i].length; i2++){
-                spielfeld[i][i2]=0;
+        for (int i = 0; i < spielfeld.length; i++){
+            for(int i2 = 0; i2 < spielfeld[i].length; i2++){
+                spielfeld[i][i2] = 0;
             }
         }
     }
@@ -118,7 +116,7 @@ public class SPIELFELD
             }
             test =0;
             for(int j = 0; j < 4; j++){
-                if((x-i)+j < getBreite() && (x-i)+j > -1 && spielfeld[(x-i)+j][y] == spieler){
+                if((x - i) + j < getBreite() && (x - i)+j > -1 && spielfeld[(x - i) + j][y] == spieler){
                     test++; 
                 }
 
@@ -137,7 +135,7 @@ public class SPIELFELD
                 }
                 test =0;
                 for(int l= 0; l < 4; l++){
-                    if((y+k)-l < getHoehe() &&(y+k)-l > -1 && spielfeld[x][(y+k)-l] == spieler){
+                    if((y + k)-l < getHoehe() &&(y + k)-l > -1 && spielfeld[x][(y + k)-l] == spieler){
                         test++; 
                     }
 
@@ -157,7 +155,7 @@ public class SPIELFELD
                 }
                 test =0;
                 for(int n= 0; n < 4; n++){
-                    if((x-m)+n < getBreite() && (y-m)+n < getHoehe() && (x-m)+n > -1 && (y-m)+n > -1 &&spielfeld[(x-m)+n][(y-m)+n] == spieler){
+                    if((x - m) + n < getBreite() && (y - m) + n < getHoehe() && (x - m) + n > -1 && (y - m) + n > -1 && spielfeld[(x - m) + n][(y - m) + n] == spieler){
                         test++; 
                     }
 
@@ -177,7 +175,7 @@ public class SPIELFELD
                 }
                 test =0;
                 for(int p = 0; p < 4; p++){ 
-                    if((x+o)-p < getBreite() && (y+o)-p < getHoehe() &&(x+o)-p > -1 &&(y+o)-p > -1 && spielfeld[(x+o)-p][(y+o)-p] == spieler){
+                    if((x + o) - p < getBreite() && (y + o) - p < getHoehe() &&(x + o) - p > -1 &&(y + o) - p > -1 && spielfeld[(x + o) - p][(y + o) - p] == spieler){
                         test++; 
                     }
 
