@@ -47,5 +47,7 @@ public class CONTROLLER
         }
     }
     
-    
+    public void spielStarten(){
+        COMPUTERSPIELER[][]
+    }
 }
