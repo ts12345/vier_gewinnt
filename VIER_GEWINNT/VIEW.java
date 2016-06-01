@@ -38,16 +38,28 @@ public class VIEW extends JPanel
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);       
-
-        for(int i=0; i < spielfeld.getHoehe(); i++) {
-            g.setColor(Color.BLACK);
-            g.drawRect(0, 0+(i*20), 20, 20);
-            for(int b=0; b < spielfeld.getBreite(); b++) {
+        super.paintComponent(g);
+        int size = 100;
+        g.setColor(Color.BLUE);
+        g.fillRect(0,0,spielfeld.getBreite()*size-size,spielfeld.getHoehe()*size);
+        for(int i=0;  i < spielfeld.getHoehe(); i++) {
+            for(int j= 0 ;  j < spielfeld.getBreite(); j++) {
+                int[][] s = spielfeld.getSpielfeld();
+                
+                if(s[j][i] == 1)
+                {
+                    g.setColor(Color.BLUE);
+                }
+                if(s[j][i] == 2)
+                {
+                    g.setColor(Color.RED);
+                }
+                
                 g.setColor(Color.BLACK);
-                g.drawRect(20+(i*20),0, 20,20);
-            }
-        }
+                g.fillOval(i * size,(-j+5) * size  ,size ,size);
 
+            }
+
+        }
     }
 }
