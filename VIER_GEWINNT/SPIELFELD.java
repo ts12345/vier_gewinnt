@@ -7,10 +7,11 @@
  */
 public class SPIELFELD
 {
-    int breite;
-    int hoehe;
-    int[][] spielfeld;
+    int[][] spielfeld;  //Spielfeldarray (Breite x Hoehe)
 
+    /**
+     * Konstruktor der neues Spielfeldarray anlegt
+     */
     public SPIELFELD()
     {
         spielfeld = new int[7][6];   
@@ -81,18 +82,10 @@ public class SPIELFELD
     }
 
     /**
-     * Hilfsmethode zum Testen; Erstellt ein komplett leeres Spielfeld
-     * Sollte vorm Speichern immer auf private gesetzt werden
+     * gibt das spielfeldarray zurueck als 2D - Array
+     * 
+     * @return das 2D - array
      */
-    private void initialise(){
-        spielfeld = new int[7][6];
-        for (int i = 0; i < spielfeld.length; i++){
-            for(int i2 = 0; i2 < spielfeld[i].length; i2++){
-                spielfeld[i][i2] = 0;
-            }
-        }
-    }
-
     public int[][] getSpielfeld()
     {
         return spielfeld;
@@ -100,6 +93,7 @@ public class SPIELFELD
 
     /**
      * Methode die fuer einen spieler herausfindet ob er vier in einer Reihe hat
+     * 
      * @param spieler Spieler fuer den getestet werden soll
      * @param x ist die x-coordinate des Spielsteins
      * @param y ist die y-coordinate des Spielsteins
