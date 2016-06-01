@@ -9,12 +9,15 @@ public class CONTROLLER
 {
     SPIELFELD spielfeld;    //Referenz auf das Spielfeld
     VIEW view;              //Referenz auf die Darstellung
-
+    SOUNDENGINE soundengine;
+    int spieleramzug;
     public CONTROLLER()
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
         view = new VIEW(spielfeld);     //Neuer View
         TEST_VIEW v = new TEST_VIEW();
+        soundengine = new SOUNDENGINE();
+        spieleramzug = 0;
 
         //spielfeld.spielSteinSetzen(1, 1);
         //spielfeld.spielSteinSetzen(1, 2);
@@ -46,7 +49,7 @@ public class CONTROLLER
      * Startet das Spiel und fragt die Spieler abwechselnd nach ihren Zügen, bis einer gewonnen hat
      */
     public void spielStarten(){
-       
+
         COMPUTERSPIELER[] players = new COMPUTERSPIELER[2];
         players[0]=new COMPUTERSPIELER();
         players[1]=new COMPUTERSPIELER();
@@ -87,7 +90,7 @@ public class CONTROLLER
         }
         return 0;
     }
-    
+
     /**
      * Hilsmethode fuer spielStarten(), die zufällig 1 oder 0 zurückgibt
      * 
@@ -99,5 +102,16 @@ public class CONTROLLER
             return 0;
         }
         return 1;
+    }
+
+    public boolean spielsteinsetzen(int x)
+    {
+        boolean geklappt = spielfeld.spielSteinSetzen(x, spieleramzug);
+        if (geklappt)
+        {
+            soundengine.playClick();
+        }
+        return geklappt;
+
     }
 }
