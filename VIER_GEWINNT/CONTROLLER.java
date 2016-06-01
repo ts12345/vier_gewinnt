@@ -59,7 +59,7 @@ public class CONTROLLER
                 a = spielfeld.spielSteinSetzen(lastx,player+1);
                 i++;
                 if(i==3){
-                    playerwon=nextplayer(player)+1;
+                    playerwon=nextplayer(player);
                 }
             }
 
