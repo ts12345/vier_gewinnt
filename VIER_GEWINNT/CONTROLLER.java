@@ -16,8 +16,8 @@ public class CONTROLLER
         view = new VIEW(spielfeld);
         TEST_VIEW v = new TEST_VIEW();
 
-        spielfeld.spielSteinSetzen(1, 1);
-        spielfeld.spielSteinSetzen(1, 2);
+        //spielfeld.spielSteinSetzen(1, 1);
+        //spielfeld.spielSteinSetzen(1, 2);
         view.printOutToConsole();
 
     }
@@ -52,14 +52,14 @@ public class CONTROLLER
         COMPUTERSPIELER[] players=new COMPUTERSPIELER[2];
         players[0]=new COMPUTERSPIELER();
         players[1]=new COMPUTERSPIELER();
-        int player=(int)Math.random()*2;
+        int player=(int)(Math.random()*2);
         int lastx=0;
         int playerwon=3;
-        boolean a=false;
         while (playerwon!=0&&playerwon!=1){
             player=nextplayer(player);
             int i=0;
-            while(!a||i!=3){
+            boolean a=false;
+            while(!a&&i!=3){
                 lastx=players[player].getNextMove();
                 a = spielfeld.spielSteinSetzen(lastx,player+1);
                 i++;
