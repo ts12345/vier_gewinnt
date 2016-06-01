@@ -47,7 +47,7 @@ public class CONTROLLER
         COMPUTERSPIELER[] players=new COMPUTERSPIELER[2];
         players[0]=new COMPUTERSPIELER();
         players[1]=new COMPUTERSPIELER();
-        int player=(int)(Math.random()*2);
+        int player=randomtwo();
         int lastx=0;
         int playerwon=3;
         while (playerwon!=0&&playerwon!=1){
@@ -77,5 +77,11 @@ public class CONTROLLER
             case 1: return 0;
         }
         return 0;
+    }
+    
+    private int randomtwo(){
+        double a=Math.random();
+        if(a>0.5){return 0;}
+        return 1;
     }
 }
