@@ -42,35 +42,44 @@ public class CONTROLLER
         }
     }
 
+    /**
+     * Startet das Spiel und fragt die Spieler abwechselnd nach ihren Zügen, bis einer gewonnen hat
+     */
     public void spielStarten(){
        
-        COMPUTERSPIELER[] players=new COMPUTERSPIELER[2];
+        COMPUTERSPIELER[] players = new COMPUTERSPIELER[2];
         players[0]=new COMPUTERSPIELER();
         players[1]=new COMPUTERSPIELER();
         int player=randomtwo();
         int lastx=0;
         int playerwon=3;
-        while (playerwon!=0&&playerwon!=1){
-            player=nextplayer(player);
-            int i=0;
-            boolean a=false;
-            while(!a&&i!=3){
-                lastx=players[player].getNextMove();
+        while ((playerwon!=0) && (playerwon!=1)){
+            player = nextplayer(player);
+            int i = 0;
+            boolean a = false;
+            while((!a) && (i!=3)){
+                lastx = players[player].getNextMove();
                 a = spielfeld.spielSteinSetzen(lastx,player+1);
                 i++;
-                if(i==3){
-                    playerwon=nextplayer(player);
+                if(i == 3){
+                    playerwon = nextplayer(player);
                 }
             }
 
             if(spielfeld.checkFourInARow(player+1,lastx,spielfeld.freiesFeld(lastx)-1)){
-                playerwon=player;
+                playerwon = player;
             }
             view.printOutToConsole();
         }
-        System.out.println("Spieler "+(player+1)+" hat gewonnen");
+        System.out.println("Spieler " + (player+1) + " hat gewonnen");
     }
 
+    /**
+     * Hilfsmethode, die spielStarten() den naechsten Spieler übergibt
+     * 
+     * @param p Der vorherige Spieler
+     * @return Der naechste Spieler
+     */
     private int nextplayer(int p){
         switch (p){
             case 0: return 1;
@@ -79,9 +88,16 @@ public class CONTROLLER
         return 0;
     }
     
+    /**
+     * Hilsmethode fuer spielStarten(), die zufällig 1 oder 0 zurückgibt
+     * 
+     * @return 0 oder 1
+     */
     private int randomtwo(){
         double a=Math.random();
-        if(a>0.5){return 0;}
+        if(a>0.5){
+            return 0;
+        }
         return 1;
     }
 }
