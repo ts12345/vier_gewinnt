@@ -46,22 +46,19 @@ public class TEST_SPIELSTEINTEXTURE extends JPanel {
         g.drawImage(gelberStein, 100, 100, null);
 
     }
+
     public static void main(String s[]) {
         JFrame f = new JFrame();
 
-        f.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e) {
-                    System.exit(0);
-                }
-            });
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
         TEST_SPIELSTEINTEXTURE p = new TEST_SPIELSTEINTEXTURE();
-        f.getContentPane().add("Center", p);
         p.setBackground(Color.blue);
 
+        f.getContentPane().add("Center", p);
         f.pack();
         f.setSize(new Dimension(800, 800));
-        f.show();
+        f.setVisible(true);
     }
 
 }
