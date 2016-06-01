@@ -7,24 +7,18 @@
 
 public class CONTROLLER
 {
-    SPIELFELD spielfeld;
-    VIEW view;
+    SPIELFELD spielfeld;    //Referenz auf das Spielfeld
+    VIEW view;              //Referenz auf die Darstellung
 
     public CONTROLLER()
     {
-        spielfeld = new SPIELFELD();
-        view = new VIEW(spielfeld);
+        spielfeld = new SPIELFELD();    //Neues Spielfeld
+        view = new VIEW(spielfeld);     //Neuer View
         TEST_VIEW v = new TEST_VIEW();
 
         //spielfeld.spielSteinSetzen(1, 1);
         //spielfeld.spielSteinSetzen(1, 2);
         view.printOutToConsole();
-
-    }
-
-    public static void main(String[] args)
-    {
-        CONTROLLER c = new CONTROLLER();
 
     }
 
@@ -49,6 +43,7 @@ public class CONTROLLER
     }
 
     public void spielStarten(){
+       
         COMPUTERSPIELER[] players=new COMPUTERSPIELER[2];
         players[0]=new COMPUTERSPIELER();
         players[1]=new COMPUTERSPIELER();
