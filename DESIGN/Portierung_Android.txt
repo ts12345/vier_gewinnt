@@ -1,1 +1,8 @@
-
+Zur Portierung nach Androide wären mehrere Sachen von Nöten:
+  - Das Androide SDK
+  - Eine neue grafische Oberfläche, da awt und swing auf Androide nicht kompatibel sind
+  - Eine geänderte Spiellogik, da Androide - Programmierung hauptsächlich Ereignisgesteuert ist
+  - Etwas Einarbeitungszeit in das Java - AndroideSDK (eben so lang wie fuer awt un swing)
+  (- Evt. XML - Kentnisse können schneller machen)
+  
+=> Kein großes Problem, da das Aufwendigste, die Spiellogik, bereits existiert
