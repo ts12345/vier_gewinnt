@@ -15,6 +15,9 @@ public class VIEW extends JPanel
     public VIEW(SPIELFELD spielfeld)
     {
         this.spielfeld = spielfeld;
+
+        setPreferredSize(new Dimension(800, 800));
+        setBorder(BorderFactory.createLineBorder(Color.yellow));
     }
 
     /**
@@ -45,7 +48,7 @@ public class VIEW extends JPanel
         for(int i=0;  i < spielfeld.getHoehe(); i++) {
             for(int j= 0 ;  j < spielfeld.getBreite(); j++) {
                 int[][] s = spielfeld.getSpielfeld();
-                
+
                 if(s[j][i] == 1)
                 {
                     g.setColor(Color.BLUE);
@@ -54,7 +57,7 @@ public class VIEW extends JPanel
                 {
                     g.setColor(Color.RED);
                 }
-                
+
                 g.setColor(Color.BLACK);
                 g.fillOval(i * size,(-j+5) * size  ,size ,size);
 

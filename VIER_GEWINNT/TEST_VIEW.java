@@ -23,9 +23,7 @@ public class TEST_VIEW
 
         frameView.pack();
         frameView.setVisible(true);
-        test_view.setPreferredSize(new Dimension(100, 150));
-        test_view.setBorder(BorderFactory.createLineBorder(Color.yellow));
+
     }
 
-  
 }
