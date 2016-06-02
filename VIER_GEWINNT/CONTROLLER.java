@@ -18,11 +18,6 @@ public class CONTROLLER
         TEST_VIEW v = new TEST_VIEW();
         soundengine = new SOUNDENGINE();
         spieleramzug = 0;
-
-        //spielfeld.spielSteinSetzen(1, 1);
-        //spielfeld.spielSteinSetzen(1, 2);
-        view.printOutToConsole();
-
     }
 
     /**
@@ -114,4 +109,18 @@ public class CONTROLLER
         return geklappt;
 
     }
+
+    public void testModelAndView() {
+        System.out.println("Teste Model und Ausgabe");
+        view.repaint();
+        view.printOutToConsole();       
+
+        System.out.println("Fülle zufällig mit 10 Steinen");
+        
+        fillRandomly(10);
+        
+        view.repaint();
+        view.printOutToConsole();       
+    }
+
 }
