@@ -11,7 +11,7 @@ import java.awt.event.*;
 public class VIEW extends JPanel
 {
     SPIELFELD spielfeld;
-
+    int size;
     public VIEW(SPIELFELD spielfeld)
     {
         this.spielfeld = spielfeld;
@@ -40,9 +40,14 @@ public class VIEW extends JPanel
         System.out.println();
     }
 
+    public int getsize()
+    {
+        return size;
+    }
+    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int size = 100;
+        size = 100;
         g.setColor(Color.BLUE);
         g.fillRect(0,0,spielfeld.getBreite()*size-size,spielfeld.getHoehe()*size);
 

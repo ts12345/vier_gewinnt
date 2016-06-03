@@ -15,7 +15,7 @@ public class CONTROLLER
     SOUNDENGINE soundengine;
     int spieleramzug;
     JFrame frameView = new JFrame("Vier gewinnt!");
-
+    
     public CONTROLLER()
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
@@ -57,7 +57,7 @@ public class CONTROLLER
      */
     public void spielStarten(){
 
-        COMPUTERSPIELER[] players = new COMPUTERSPIELER[2];
+        SPIELER[] players = new COMPUTERSPIELER[2];
         players[0]=new COMPUTERSPIELER();
         players[1]=new COMPUTERSPIELER();
         int player=randomtwo();
