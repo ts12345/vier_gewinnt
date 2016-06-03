@@ -72,16 +72,17 @@ public class CONTROLLER
                 a = spielfeld.spielSteinSetzen(lastx,player+1);
                 i++;
                 if(i == 3){
-                    playerwon = player;
+                    playerwon = nextplayer(player);
                 }
             }
+            
             if(spielfeld.checkFourInARow(player+1,lastx,spielfeld.freiesFeld(lastx)-1)){
                 playerwon = nextplayer(player);
             }
             view.printOutToConsole();
             //hier kann auch auf View gepainted werden
         }
-        System.out.println("Spieler " + (player+1) + " hat gewonnen");
+        System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
     }
 
     /**
