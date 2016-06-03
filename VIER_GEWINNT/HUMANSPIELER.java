@@ -1,4 +1,4 @@
-
+import java.awt.event.*;
 /**
  * Beschreiben Sie hier die Klasse HUMANSPIELER.
  * 
@@ -15,9 +15,12 @@ public class HUMANSPIELER extends SPIELER
     }
     public int getNextMove()
     {
-        LISTENER.startListening();
-        while(LISTENER.lastX == 0)
-        {}
-        return (int)(LISTENER.lastX / 100);
+        LISTENER.startListening(this);
+        return 1;
+    }
+    
+    public void clicked(MouseEvent e)
+    {
+        
     }
 }

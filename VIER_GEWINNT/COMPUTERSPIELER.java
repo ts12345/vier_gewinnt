@@ -1,4 +1,4 @@
-
+import java.awt.event.*;
 /**
  * Beschreiben Sie hier die Klasse COMPUTERSPIELER.
  * 
@@ -16,5 +16,10 @@ public class COMPUTERSPIELER extends SPIELER
     public int getNextMove()
     {
         return 1;
+    }
+    
+    public void clicked(MouseEvent e)
+    {
+        
     }
 }
