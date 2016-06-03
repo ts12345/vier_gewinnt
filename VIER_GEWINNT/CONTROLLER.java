@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*; 
+import java.awt.event.*;
 /**
  * Die Klasse CONTROLLER beschreibt die Steuerung des Spiels
  * legt ein Spielfeld und ein View an
@@ -11,12 +14,22 @@ public class CONTROLLER
     VIEW view;              //Referenz auf die Darstellung
     SOUNDENGINE soundengine;
     int spieleramzug;
+    JFrame frameView = new JFrame("Vier gewinnt!");
+
     public CONTROLLER()
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
         view = new VIEW(spielfeld);     //Neuer View
+
         soundengine = new SOUNDENGINE();
         spieleramzug = 0;
+
+        frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+
+        frameView.add(view);
+
+        frameView.pack();
+        frameView.setVisible(true);
     }
 
     /**
@@ -115,9 +128,9 @@ public class CONTROLLER
         view.printOutToConsole();       
 
         System.out.println("Fülle zufällig mit 10 Steinen");
-        
+
         fillRandomly(10);
-        
+
         view.repaint();
         view.printOutToConsole();       
     }
