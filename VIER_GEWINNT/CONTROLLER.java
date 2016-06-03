@@ -15,7 +15,6 @@ public class CONTROLLER
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
         view = new VIEW(spielfeld);     //Neuer View
-        TEST_VIEW v = new TEST_VIEW();
         soundengine = new SOUNDENGINE();
         spieleramzug = 0;
     }
