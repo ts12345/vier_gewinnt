@@ -80,7 +80,7 @@ public class CONTROLLER
                 playerwon = nextplayer(player);
             }
             view.printOutToConsole();
-            //hier kann auch auf View gepainted werden
+            view.repaint();
         }
         System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
     }
