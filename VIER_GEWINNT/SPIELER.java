@@ -5,16 +5,15 @@
  * @author (Ihr Name) 
  * @version (eine Versionsnummer oder ein Datum)
  */
-public class COMPUTERSPIELER extends SPIELER
+public abstract class SPIELER
 {
     /**
      * Konstruktor für Objekte der Klasse COMPUTERSPIELER
      */
-    public COMPUTERSPIELER()
-    {}
-    
-    public int getNextMove()
+    public SPIELER()
     {
-        return 1;
+
     }
+
+    public abstract int getNextMove();
 }
