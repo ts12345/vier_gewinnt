@@ -45,20 +45,24 @@ public class VIEW extends JPanel
         int size = 100;
         g.setColor(Color.BLUE);
         g.fillRect(0,0,spielfeld.getBreite()*size-size,spielfeld.getHoehe()*size);
+
+        int[][] s = spielfeld.getSpielfeld();
+
         for(int i=0;  i < spielfeld.getHoehe(); i++) {
             for(int j= 0 ;  j < spielfeld.getBreite(); j++) {
-                int[][] s = spielfeld.getSpielfeld();
 
                 if(s[j][i] == 1)
                 {
-                    g.setColor(Color.BLUE);
+                    g.setColor(Color.RED);
                 }
                 if(s[j][i] == 2)
                 {
-                    g.setColor(Color.RED);
+                    g.setColor(Color.YELLOW);
                 }
-
-                g.setColor(Color.BLACK);
+                if(s[j][i] == 0)
+                {
+                    g.setColor(Color.BLACK);
+                }
                 g.fillOval(i * size,(-j+5) * size  ,size ,size);
 
             }
