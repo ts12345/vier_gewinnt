@@ -7,6 +7,7 @@ import java.awt.event.*;
  */
 public class HUMANSPIELER extends SPIELER
 {
+    
     /**
      * Konstruktor für Objekte der Klasse HUMANSPIELER
      */
@@ -15,12 +16,15 @@ public class HUMANSPIELER extends SPIELER
     }
     public int getNextMove()
     {
-        LISTENER.startListening(this);
-        return 1;
-    }
-    
-    public void clicked(MouseEvent e)
-    {
+        LISTENER.startListening();
         
+        while(LISTENER.getLastX() == 0)
+        {
+            //Warten darauf dass geklickt wird
+            //evtl. wait(100)
+        }
+        
+        System.out.println("Next Move : " + (LISTENER.getLastX()/100));
+        return (int)(LISTENER.getLastX()/100);
     }
 }

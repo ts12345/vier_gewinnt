@@ -5,7 +5,8 @@ import java.awt.event.*;
 public class LISTENER implements MouseListener
 {
     private CONTROLLER controller;
-    private static CLICKABLE clicker;
+    static int lastX;
+    static int lastY;
     
     public LISTENER(CONTROLLER controller)
     {
@@ -21,15 +22,28 @@ public class LISTENER implements MouseListener
     }
     public void mouseClicked(MouseEvent e)
     {
-        clicker.clicked(e);
+        //System.out.println("Click");
+        lastX = e.getX();
+        lastY = e.getY();
     }
     public void mouseDragged(MouseEvent e){}
     public void mouseEntered(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
     public void mousePressed(MouseEvent e){}
     
-    public static void startListening(CLICKABLE clicker)
+    public static void startListening()
     {
-        LISTENER.clicker = clicker; 
+        lastX = 0;
+        lastY = 0;
+    }
+    
+    public static int getLastX()
+    {
+        return lastX;
+    }
+    
+    public static int getLastY()
+    {
+        return lastY;
     }
 }

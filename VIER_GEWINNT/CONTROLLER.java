@@ -12,6 +12,7 @@ public class CONTROLLER
 {
     SPIELFELD spielfeld;    //Referenz auf das Spielfeld
     VIEW view;              //Referenz auf die Darstellung
+    LISTENER listener;
     SOUNDENGINE soundengine;
     int spieleramzug;
     JFrame frameView = new JFrame("Vier gewinnt!");
@@ -20,7 +21,8 @@ public class CONTROLLER
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
         view = new VIEW(spielfeld);     //Neuer View
-
+        listener = new LISTENER(this);
+        frameView.addMouseListener(listener);
         soundengine = new SOUNDENGINE();
         spieleramzug = 0;
 

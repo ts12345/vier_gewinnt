@@ -17,9 +17,4 @@ public class COMPUTERSPIELER extends SPIELER
     {
         return 1;
     }
-    
-    public void clicked(MouseEvent e)
-    {
-        
-    }
 }
