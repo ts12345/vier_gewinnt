@@ -11,12 +11,20 @@ import java.awt.event.*;
 public class VIEW extends JPanel
 {
     SPIELFELD spielfeld;
-    int size;
+
+    // Groesse eines "Basisquadrats
+    private final static int size = 100;
+    private int breite;
+    private int hoehe;
+
     public VIEW(SPIELFELD spielfeld)
     {
         this.spielfeld = spielfeld;
 
-        setPreferredSize(new Dimension(800, 800));
+        breite = spielfeld.getBreite();
+        hoehe  = spielfeld.getHoehe();
+        
+        setPreferredSize(new Dimension(breite * size, hoehe * size));
         setBorder(BorderFactory.createLineBorder(Color.yellow));
     }
 
@@ -44,34 +52,36 @@ public class VIEW extends JPanel
     {
         return size;
     }
-    
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        size = 100;
+
+
+        // Blaue Spielfläche ohne Löcher
         g.setColor(Color.BLUE);
-        g.fillRect(0,0,spielfeld.getBreite()*size-size,spielfeld.getHoehe()*size);
+        g.fillRect(0, 0, breite * size, hoehe * size);
 
         int[][] s = spielfeld.getSpielfeld();
 
-        for(int i=0;  i < spielfeld.getHoehe(); i++) {
-            for(int j= 0 ;  j < spielfeld.getBreite(); j++) {
+        // Jetzt werden rote oder blaue Spielsteine gezeichnet bzw. schwarze Loecher
+        for(int i = 0;  i < spielfeld.getBreite(); i++) {
+            for(int j = 0 ;  j < spielfeld.getHoehe(); j++) {
 
-                if(s[j][i] == 1)
+                if(s[i][j] == 1)
                 {
                     g.setColor(Color.RED);
                 }
-                if(s[j][i] == 2)
+                if(s[i][j] == 2)
                 {
                     g.setColor(Color.YELLOW);
                 }
-                if(s[j][i] == 0)
+                if(s[i][j] == 0)
                 {
                     g.setColor(Color.BLACK);
                 }
-                g.fillOval(i * size,(-j+5) * size  ,size ,size);
+                g.fillOval(i * size,(-j + 5) * size, size, size);
 
             }
-
         }
     }
 }
