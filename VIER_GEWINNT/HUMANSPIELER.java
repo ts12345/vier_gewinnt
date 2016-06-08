@@ -1,4 +1,8 @@
+import javax.swing.*;
+import java.awt.*; 
 import java.awt.event.*;
+import java.util.concurrent.*;
+
 /**
  * Beschreiben Sie hier die Klasse HUMANSPIELER.
  * 
@@ -7,31 +11,40 @@ import java.awt.event.*;
  */
 public class HUMANSPIELER extends SPIELER
 {
+    // Signal, das wir benutzen um vom Listener zu erfahren, wann geklickt wurde
+    private CyclicBarrier doneSignal;
+    private HUMANPLAYER_LISTENER listener;
 
     /**
      * Konstruktor für Objekte der Klasse HUMANSPIELER
      */
-    public HUMANSPIELER()
+    public HUMANSPIELER(JFrame f)    
     {
+        // CylclicBarrier(2)
+        // Die 2 bedeutet, dass zweimal await() aufgerufen werden muss, bis alle Threads weitermachen
+        doneSignal = new CyclicBarrier(2);
+
+        // Der Listener braucht eine Referenz auf das Signal
+        listener = new HUMANPLAYER_LISTENER(doneSignal);
+
+        // Wir fügen unseren eigenen Listener dem Frame hinzu
+        f.addMouseListener(listener);
     }
 
     public int getNextMove()
     {
-        //System.out.println("am zug");     
-        LISTENER.startListening();
+        // Signal zurücksetzen
+        doneSignal.reset();
+        listener.startListening();
 
-        while(LISTENER.getLastX() == 0)
-        {
-            //System.out.println(LISTENER.getLastX());
+        try {
+            doneSignal.await();
+            System.out.println("wait for click");
+        } 
+        catch (InterruptedException ex) { } 
+        catch (BrokenBarrierException ex) { }
 
-            try {
-                Thread.sleep(100);  // milliseconds
-            } catch (InterruptedException ex) { } 
-            //Warten darauf dass geklickt wird
-            //evtl. wait(100)
-        }
-
-        //System.out.println("Next Move : " + (LISTENER.getLastX()/100));
-        return (int)(LISTENER.getLastX()/100);
+        System.out.println("got click");
+        return (int)(listener.getLastX()/100);
     }
 }
