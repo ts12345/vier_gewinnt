@@ -1,6 +1,13 @@
 import java.io.File;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+/**
+ * Die Klasse SOUNDENGINE spielt die Sounds Click und Fanfare ab.
+ * @author (kinder)
+ * @version (08.06.16)
+ * @since (21.04.16)
+ * 
+ */
 public class SOUNDENGINE
 {
     File click;
