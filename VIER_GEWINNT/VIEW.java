@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 public class VIEW extends JPanel
 {
     SPIELFELD spielfeld;
-    TEST_SPIELSTEINTEXTURE test_spielsteintexture;
 
     // Groesse eines "Basisquadrats
     private final static int size = 100;
