@@ -17,7 +17,7 @@ public class CONTROLLER
     SOUNDENGINE soundengine;
     int spieleramzug;
     JFrame frameView = new JFrame("Vier gewinnt!");
-    
+
     public CONTROLLER()
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
@@ -47,10 +47,10 @@ public class CONTROLLER
         {
             if((i%2) == 0)
             {
-                spielfeld.spielSteinSetzen((int)(Math.random()*7), 1);
+                spielsteinSetzen((int)(Math.random()*7), 1);
             }else
             {
-                spielfeld.spielSteinSetzen((int)(Math.random()*7), 2);
+                spielsteinSetzen((int)(Math.random()*7), 2);
             }
         }
         view.repaint();
@@ -73,13 +73,13 @@ public class CONTROLLER
             boolean a = false;
             while((!a) && (i!=3)){
                 lastx = players[player].getNextMove();
-                a = spielfeld.spielSteinSetzen(lastx,player+1);
+                a = spielsteinSetzen(lastx,player+1);
                 i++;
                 if(i == 3){
                     playerwon = nextplayer(player);
                 }
             }
-            
+
             if(spielfeld.checkFourInARow(player+1,lastx,spielfeld.freiesFeld(lastx)-1)){
                 playerwon = nextplayer(player);
             }
@@ -116,7 +116,7 @@ public class CONTROLLER
         return 1;
     }
 
-    public boolean spielsteinsetzen(int x)
+    public boolean spielsteinSetzen(int x, int spieleramzug)
     {
         boolean geklappt = spielfeld.spielSteinSetzen(x, spieleramzug);
         if (geklappt)
