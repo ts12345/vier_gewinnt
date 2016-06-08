@@ -1,9 +1,11 @@
 
 /**
- * Beschreiben Sie hier die Klasse SPIELFELD.
+ * Die Klasse SPIELFELD erstellt ein Spielfeld und setzt Spielsteine
+ * gibt an, wenn man gewinnt
+ * @author (kinder)
+ * @version (08.06.16)
+ * @since (21.04.16)
  * 
- * @author (Ihr Name) 
- * @version (eine Versionsnummer oder ein Datum)
  */
 public class SPIELFELD
 {
