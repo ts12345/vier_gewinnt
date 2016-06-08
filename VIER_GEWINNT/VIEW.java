@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
-
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 /**
  * Die Klasse VIEW zeigt das Spielfeld an und interagiert mit dem Spieler.
  * 
@@ -11,11 +14,24 @@ import java.awt.event.*;
 public class VIEW extends JPanel
 {
     SPIELFELD spielfeld;
+    TEST_SPIELSTEINTEXTURE test_spielsteintexture;
 
     // Groesse eines "Basisquadrats
     private final static int size = 100;
     private int breite;
     private int hoehe;
+    private BufferedImage roterStein;
+    private BufferedImage gelberStein;
+
+    private void loadImages() {
+        try {
+            roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
+            gelberStein = ImageIO.read(new File("textures/gelber_Stein.png"));
+
+        } catch (IOException ex) {
+
+        }
+    }
 
     public VIEW(SPIELFELD spielfeld)
     {
@@ -23,9 +39,10 @@ public class VIEW extends JPanel
 
         breite = spielfeld.getBreite();
         hoehe  = spielfeld.getHoehe();
-        
+
         setPreferredSize(new Dimension(breite * size, hoehe * size));
         setBorder(BorderFactory.createLineBorder(Color.yellow));
+        loadImages();
     }
 
     /**
@@ -56,7 +73,6 @@ public class VIEW extends JPanel
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
         // Blaue Spielfläche ohne Löcher
         g.setColor(Color.BLUE);
         g.fillRect(0, 0, breite * size, hoehe * size);
@@ -69,17 +85,18 @@ public class VIEW extends JPanel
 
                 if(s[i][j] == 1)
                 {
-                    g.setColor(Color.RED);
+                    g.drawImage(roterStein, i * size,(-j + 5) * size, size, size, null);
                 }
                 if(s[i][j] == 2)
                 {
-                    g.setColor(Color.YELLOW);
+                    g.drawImage(gelberStein, i * size,(-j + 5) * size, size, size, null);
                 }
                 if(s[i][j] == 0)
                 {
                     g.setColor(Color.BLACK);
+                    g.fillOval(i * size,(-j + 5) * size, size, size);
                 }
-                g.fillOval(i * size,(-j + 5) * size, size, size);
+
 
             }
         }
