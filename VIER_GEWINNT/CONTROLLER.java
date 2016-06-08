@@ -5,7 +5,8 @@ import java.awt.event.*;
  * Die Klasse CONTROLLER beschreibt die Steuerung des Spiels
  * legt ein Spielfeld und ein View an
  * @author (kinder)
- * 
+ * @version (08.06.16)
+ * @since (21.04.16)
  */
 
 public class CONTROLLER
