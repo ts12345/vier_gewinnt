@@ -97,8 +97,17 @@ public class VIEW extends JPanel
                     g.fillOval(i * size,(-j + 5) * size, size, size);
                 }
 
-
             }
         }
+    }
+
+    public void showWinner(int winner) 
+    {
+        String str;
+        if (winner==0){str = "Spieler 1 hat gewonnen!";}
+        else{str = "Spieler 2 hat gewonnen!";}
+        Graphics g = this.getGraphics();
+        g.setColor(Color.GREEN);
+        g.drawString(str, 30, 50);
     }
 }
