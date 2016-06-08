@@ -53,6 +53,7 @@ public class CONTROLLER
                 spielfeld.spielSteinSetzen((int)(Math.random()*7), 2);
             }
         }
+        view.repaint();
     }
 
     /**
