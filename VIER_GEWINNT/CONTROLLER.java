@@ -53,7 +53,6 @@ public class CONTROLLER
                 spielsteinSetzen((int)(Math.random()*7), 2);
             }
         }
-        view.repaint();
     }
 
     /**
@@ -83,8 +82,6 @@ public class CONTROLLER
             if(spielfeld.checkFourInARow(player+1,lastx,spielfeld.freiesFeld(lastx)-1)){
                 playerwon = nextplayer(player);
             }
-            view.printOutToConsole();
-            view.repaint();
         }
         //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
     }
@@ -122,6 +119,7 @@ public class CONTROLLER
         if (geklappt)
         {
             soundengine.playClick();
+            view.repaint();
         }
         return geklappt;
 
