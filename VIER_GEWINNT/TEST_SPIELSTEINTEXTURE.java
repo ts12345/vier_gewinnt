@@ -59,6 +59,10 @@ public class TEST_SPIELSTEINTEXTURE extends JPanel {
         f.pack();
         f.setSize(new Dimension(800, 800));
         f.setVisible(true);
+        
+        ANIMATION_THREAD t = new ANIMATION_THREAD(100, 600, p);
+        
+        t.run();
     }
 
 }
