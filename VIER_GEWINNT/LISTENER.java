@@ -26,7 +26,7 @@ public class LISTENER implements MouseListener
 
         lastX = e.getX();
         lastY = e.getY();
-        System.out.println("Click " + lastX + " " + lastY);
+        //System.out.println("Click " + lastX + " " + lastY);
     }
 
     public void mouseDragged(MouseEvent e){}

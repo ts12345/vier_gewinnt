@@ -84,7 +84,7 @@ public class CONTROLLER
             view.printOutToConsole();
             view.repaint();
         }
-        System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
+        //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
     }
 
     /**
@@ -126,11 +126,11 @@ public class CONTROLLER
     }
 
     public void testModelAndView() {
-        System.out.println("Teste Model und Ausgabe");
+        //System.out.println("Teste Model und Ausgabe");
         view.repaint();
         view.printOutToConsole();       
 
-        System.out.println("Fülle zufällig mit 10 Steinen");
+        //System.out.println("Fülle zufällig mit 10 Steinen");
 
         fillRandomly(10);
 

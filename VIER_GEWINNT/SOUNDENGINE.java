@@ -21,7 +21,7 @@ public class SOUNDENGINE
             clip.start();            
         }catch(Exception e)
         {
-            System.out.println("fail");
+            //System.out.println("fail");
         }
 
     }

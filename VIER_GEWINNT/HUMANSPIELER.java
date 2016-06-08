@@ -17,12 +17,12 @@ public class HUMANSPIELER extends SPIELER
 
     public int getNextMove()
     {
-        System.out.println("am zug");     
+        //System.out.println("am zug");     
         LISTENER.startListening();
 
         while(LISTENER.getLastX() == 0)
         {
-            System.out.println(LISTENER.getLastX());
+            //System.out.println(LISTENER.getLastX());
 
             try {
                 Thread.sleep(100);  // milliseconds
@@ -31,7 +31,7 @@ public class HUMANSPIELER extends SPIELER
             //evtl. wait(100)
         }
 
-        System.out.println("Next Move : " + (LISTENER.getLastX()/100));
+        //System.out.println("Next Move : " + (LISTENER.getLastX()/100));
         return (int)(LISTENER.getLastX()/100);
     }
 }
