@@ -61,7 +61,7 @@ public class CONTROLLER
     public void spielStarten(){
 
         SPIELER[] players = new SPIELER[2];
-        players[0]=new COMPUTERSPIELER();
+        players[0]=new COMPUTERSPIELER(spielfeld);
         players[1]=new HUMANSPIELER();
         int player=randomtwo();
         int lastx=0;

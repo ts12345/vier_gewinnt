@@ -7,11 +7,14 @@ import java.awt.event.*;
  */
 public class COMPUTERSPIELER extends SPIELER
 {
+    private SPIELFELD feld;
     /**
      * Konstruktor für Objekte der Klasse COMPUTERSPIELER
      */
-    public COMPUTERSPIELER()
-    {}
+    public COMPUTERSPIELER(SPIELFELD feld)
+    {
+        this.feld = feld;
+    }
     
     public int getNextMove()
     {
