@@ -24,6 +24,7 @@ public class VIEW extends JPanel
     private CONTROLLER controller;
 
     private int spalte;
+    static boolean drawNeeded;
 
     private boolean showWinner;
     private int winner;
@@ -84,11 +85,11 @@ public class VIEW extends JPanel
 
         int[][] s = spielfeld.getSpielfeld();
 
-        if(controller.spieleramzug == 2)
+        if(controller.spieleramzug == 2&& drawNeeded)
         {
             g.drawImage(roterStein, spalte * size,0 , size, size, null);
         }
-        if(controller.spieleramzug == 1)
+        if(controller.spieleramzug == 1 && drawNeeded)
         {
             g.drawImage(gelberStein, spalte * size,0 , size, size, null);
         }
