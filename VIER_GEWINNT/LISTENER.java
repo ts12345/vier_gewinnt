@@ -7,10 +7,12 @@ public class LISTENER implements MouseListener
     private CONTROLLER controller;
     static int lastX;
     static int lastY;
+    private VIEW view;
 
     public LISTENER(CONTROLLER controller)
     {
         this.controller = controller;
+        view = controller.getView();
     }
 
     public void mouseExited(MouseEvent e)
@@ -19,6 +21,7 @@ public class LISTENER implements MouseListener
 
     public void mouseMoved(MouseEvent e)
     {
+        view.setSpalte(e.getX());
     }
 
     public void mouseClicked(MouseEvent e)

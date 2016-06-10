@@ -21,6 +21,8 @@ public class VIEW extends JPanel
     private int hoehe;
     private BufferedImage roterStein;
     private BufferedImage gelberStein;
+    
+    private int spalte;
 
     private void loadImages() {
         try {
@@ -39,7 +41,7 @@ public class VIEW extends JPanel
         breite = spielfeld.getBreite();
         hoehe  = spielfeld.getHoehe();
 
-        setPreferredSize(new Dimension(breite * size, hoehe * size));
+        setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
         setBorder(BorderFactory.createLineBorder(Color.yellow));
         loadImages();
     }
@@ -71,29 +73,32 @@ public class VIEW extends JPanel
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        
         // Blaue Spielfläche ohne Löcher
         g.setColor(Color.BLUE);
         g.fillRect(0, 0, breite * size, hoehe * size);
 
         int[][] s = spielfeld.getSpielfeld();
 
+        g.drawImage(roterStein, spalte * size,0 , size, size, null);
+        
+        
         // Jetzt werden rote oder blaue Spielsteine gezeichnet bzw. schwarze Loecher
         for(int i = 0;  i < spielfeld.getBreite(); i++) {
             for(int j = 0 ;  j < spielfeld.getHoehe(); j++) {
 
                 if(s[i][j] == 1)
                 {
-                    g.drawImage(roterStein, i * size,(-j + 5) * size, size, size, null);
+                    g.drawImage(roterStein, i * size,(-j + 5) * size + size, size, size, null);
                 }
                 if(s[i][j] == 2)
                 {
-                    g.drawImage(gelberStein, i * size,(-j + 5) * size, size, size, null);
+                    g.drawImage(gelberStein, i * size,(-j + 5) * size + size, size, size, null);
                 }
                 if(s[i][j] == 0)
                 {
                     g.setColor(Color.BLACK);
-                    g.fillOval(i * size,(-j + 5) * size, size, size);
+                    g.fillOval(i * size,(-j + 5) * size + size, size, size);
                 }
 
             }
@@ -109,5 +114,10 @@ public class VIEW extends JPanel
         g.setColor(Color.GREEN);
         g.drawString(str, 30, 50);
         repaint();
+    }
+    
+    public void setSpalte(int xWert)
+    {
+        spalte = (xWert / size);
     }
 }

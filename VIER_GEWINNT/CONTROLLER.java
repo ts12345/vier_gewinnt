@@ -142,4 +142,8 @@ public class CONTROLLER
         view.printOutToConsole();       
     }
 
+    public VIEW getView()
+    {
+        return view;
+    }
 }
