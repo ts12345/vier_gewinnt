@@ -25,6 +25,9 @@ public class VIEW extends JPanel
 
     private int spalte;
 
+    private boolean showWinner;
+    private int winner;
+
     private void loadImages() {
         try {
             roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
@@ -110,17 +113,27 @@ public class VIEW extends JPanel
 
             }
         }
+
+        if(showWinner)
+        {
+            String str;
+            if (winner==0)
+                str = "Spieler 1 hat gewonnen!";
+            else
+                str = "Spieler 2 hat gewonnen!";
+            g.setColor(Color.GREEN);
+            g.drawString(str, 300, 500);
+        }
+
     }
 
-    public void showWinner(int winner) 
+    /**
+     * ändert interne Werte, damit der Gewinner in View ausgegeben wird
+     */
+    public void showWinner (int winner)
     {
-        String str;
-        if (winner==0){str = "Spieler 1 hat gewonnen!";}
-        else{str = "Spieler 2 hat gewonnen!";}
-        Graphics g = this.getGraphics();
-        g.setColor(Color.GREEN);
-        g.drawString(str, 30, 50);
-        repaint();
+        this.winner = winner;
+        showWinner = true;
     }
 
     public void setSpalte(int xWert)
