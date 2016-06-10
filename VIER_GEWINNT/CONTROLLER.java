@@ -146,4 +146,9 @@ public class CONTROLLER
     {
         return view;
     }
+
+    public void reset() {
+        spielfeld.leereSpielfeld();
+    }
+
 }
