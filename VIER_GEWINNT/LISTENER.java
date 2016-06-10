@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
 
-public class LISTENER implements MouseListener
+public class LISTENER implements MouseMotionListener
 {
     private CONTROLLER controller;
     static int lastX;
@@ -21,7 +21,9 @@ public class LISTENER implements MouseListener
 
     public void mouseMoved(MouseEvent e)
     {
-        view.setSpalte(e.getX());
+       System.out.println(e.getX());
+       view.setSpalte(e.getX());
+       view.repaint();
     }
 
     public void mouseClicked(MouseEvent e)

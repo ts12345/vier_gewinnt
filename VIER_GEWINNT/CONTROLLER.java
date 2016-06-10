@@ -21,9 +21,9 @@ public class CONTROLLER
     public CONTROLLER()
     {
         spielfeld = new SPIELFELD();    //Neues Spielfeld
-        view = new VIEW(spielfeld);     //Neuer View
+        view = new VIEW(spielfeld,this);     //Neuer View
         listener = new LISTENER(this);
-        frameView.addMouseListener(listener);
+        frameView.addMouseMotionListener(listener);
         soundengine = new SOUNDENGINE();
         spieleramzug = 0;
 

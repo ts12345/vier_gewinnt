@@ -21,7 +21,8 @@ public class VIEW extends JPanel
     private int hoehe;
     private BufferedImage roterStein;
     private BufferedImage gelberStein;
-    
+    private CONTROLLER controller;
+
     private int spalte;
 
     private void loadImages() {
@@ -34,10 +35,10 @@ public class VIEW extends JPanel
         }
     }
 
-    public VIEW(SPIELFELD spielfeld)
+    public VIEW(SPIELFELD spielfeld, CONTROLLER controller)
     {
         this.spielfeld = spielfeld;
-
+        this.controller = controller;
         breite = spielfeld.getBreite();
         hoehe  = spielfeld.getHoehe();
 
@@ -73,16 +74,22 @@ public class VIEW extends JPanel
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         // Blaue Spielfläche ohne Löcher
         g.setColor(Color.BLUE);
         g.fillRect(0, 0, breite * size, hoehe * size);
 
         int[][] s = spielfeld.getSpielfeld();
 
-        g.drawImage(roterStein, spalte * size,0 , size, size, null);
-        
-        
+        if(controller.spieleramzug == 2)
+        {
+            g.drawImage(roterStein, spalte * size,0 , size, size, null);
+        }
+        if(controller.spieleramzug == 1)
+        {
+            g.drawImage(gelberStein, spalte * size,0 , size, size, null);
+        }
+
         // Jetzt werden rote oder blaue Spielsteine gezeichnet bzw. schwarze Loecher
         for(int i = 0;  i < spielfeld.getBreite(); i++) {
             for(int j = 0 ;  j < spielfeld.getHoehe(); j++) {
@@ -115,7 +122,7 @@ public class VIEW extends JPanel
         g.drawString(str, 30, 50);
         repaint();
     }
-    
+
     public void setSpalte(int xWert)
     {
         spalte = (xWert / size);
