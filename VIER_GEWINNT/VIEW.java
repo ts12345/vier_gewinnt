@@ -77,7 +77,7 @@ public class VIEW extends JPanel
 
         // Blaue Spielfläche ohne Löcher
         g.setColor(Color.BLUE);
-        g.fillRect(0, 0, breite * size, hoehe * size);
+        g.fillRect(0, 0 + size , breite * size, hoehe * size + size);
 
         int[][] s = spielfeld.getSpielfeld();
 

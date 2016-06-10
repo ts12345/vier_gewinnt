@@ -21,7 +21,7 @@ public class LISTENER implements MouseMotionListener
 
     public void mouseMoved(MouseEvent e)
     {
-       System.out.println(e.getX());
+       //System.out.println(e.getX());
        view.setSpalte(e.getX());
        view.repaint();
     }
