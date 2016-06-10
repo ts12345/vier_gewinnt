@@ -186,4 +186,14 @@ public class SPIELFELD
         }
         return rueck;
     }
+
+    public void leereSpielfeld () {
+        for (int x = 0; x < 7; x++){
+
+            for (int y = 0; y < 6; y++) {
+                spielfeld [x][y] = 0;
+            }
+
+        }
+    }
 }
