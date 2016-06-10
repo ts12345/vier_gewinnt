@@ -67,25 +67,26 @@ public class CONTROLLER
 
         int player=randomtwo();
         int lastx=0;
-        int playerwon=3;
-        while ((playerwon!=0) && (playerwon!=1)){
+        int playerwon=4;
+        while ((playerwon!=2) && (playerwon!=1)){
             player = nextplayer(player);
             int i = 0;
             boolean a = false;
             while((!a) && (i!=3)){
-                lastx = players[player].getNextMove();
-                a = spielsteinSetzen(lastx,player+1);
+                lastx = players[player-1].getNextMove();
+                a = spielsteinSetzen(lastx,player);
                 i++;
                 if(i == 3){
                     playerwon = nextplayer(player);
                 }
             }
 
-            if(spielfeld.checkFourInARow(player+1,lastx,spielfeld.freiesFeld(lastx)-1)){
-                playerwon = nextplayer(player);
+            if(spielfeld.checkFourInARow(player,lastx,spielfeld.freiesFeld(lastx)-1)){
+                playerwon = player;
             }
         }
         //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
+        view.showWinner(playerwon);
     }
 
     /**
@@ -96,8 +97,8 @@ public class CONTROLLER
      */
     private int nextplayer(int p){
         switch (p){
-            case 0: return 1;
-            case 1: return 0;
+            case 2: return 1;
+            case 1: return 2;
         }
         return 0;
     }
@@ -110,7 +111,7 @@ public class CONTROLLER
     private int randomtwo(){
         double a=Math.random();
         if(a>0.5){
-            return 0;
+            return 2;
         }
         return 1;
     }
