@@ -74,6 +74,7 @@ public class CONTROLLER
             boolean a = false;
             while((!a) && (i!=3)){
                 lastx = players[player-1].getNextMove();
+                spieleramzug=player;
                 a = spielsteinSetzen(lastx,player);
                 i++;
                 if(i == 3){

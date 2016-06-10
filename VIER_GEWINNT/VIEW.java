@@ -108,5 +108,6 @@ public class VIEW extends JPanel
         Graphics g = this.getGraphics();
         g.setColor(Color.GREEN);
         g.drawString(str, 30, 50);
+        repaint();
     }
 }
