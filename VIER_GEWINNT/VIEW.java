@@ -137,6 +137,11 @@ public class VIEW extends JPanel
         showWinner = true;
     }
 
+    public void showPreview(boolean showPreview)
+    {
+        this.drawNeeded = showPreview;
+    }
+
     public void setSpalte(int xWert)
     {
         spalte = (xWert / size);

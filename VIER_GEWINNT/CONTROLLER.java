@@ -61,6 +61,7 @@ public class CONTROLLER
     public void spielStarten(){
 
         SPIELER[] players = new SPIELER[2];
+
         players[0]=new HUMANSPIELER(frameView);
         players[1]=new HUMANSPIELER(frameView);
 
@@ -72,6 +73,13 @@ public class CONTROLLER
             int i = 0;
             boolean a = false;
             while((!a) && (i!=3)){
+
+                if(players[player-1].isHuman())
+                    view.showPreview(true);
+                else
+                    view.showPreview(false);
+                    
+                    
                 lastx = players[player-1].getNextMove();
                 spieleramzug=player;
                 a = spielsteinSetzen(lastx,player);
