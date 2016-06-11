@@ -26,8 +26,7 @@ public class HUMANSPIELER extends SPIELER
 
         // Der Listener braucht eine Referenz auf das Signal
         listener = new HUMANPLAYER_LISTENER(doneSignal);
-        
-        VIEW.drawNeeded = true;
+
         // Wir fügen unseren eigenen Listener dem Frame hinzu
         f.addMouseListener(listener);
     }
@@ -47,5 +46,9 @@ public class HUMANSPIELER extends SPIELER
 
         System.out.println("got click");
         return (int)(listener.getLastX()/100);
+    }
+
+    public boolean isHuman() {
+        return true;
     }
 }

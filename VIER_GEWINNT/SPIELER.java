@@ -14,6 +14,8 @@ public abstract class SPIELER
     {
 
     }
-    
+
     public abstract int getNextMove();
+
+    public abstract boolean isHuman();
 }

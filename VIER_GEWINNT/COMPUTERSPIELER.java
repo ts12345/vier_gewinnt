@@ -15,9 +15,13 @@ public class COMPUTERSPIELER extends SPIELER
     {
         this.feld = feld;
     }
-    
+
     public int getNextMove()
     {
         return 1;
+    }
+
+    public boolean isHuman() {
+        return false;
     }
 }
