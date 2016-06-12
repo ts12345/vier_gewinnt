@@ -62,8 +62,8 @@ public class CONTROLLER
 
         SPIELER[] players = new SPIELER[2];
 
-        players[0]=new HUMANSPIELER(frameView);
-        players[1]=new HUMANSPIELER(frameView);
+        players[0] = new COMPUTERSPIELER_TS(spielfeld);
+        players[1] = new HUMANSPIELER(frameView);
 
         int player=randomtwo();
         int lastx=0;
@@ -72,14 +72,13 @@ public class CONTROLLER
             player = nextplayer(player);
             int i = 0;
             boolean a = false;
-            while((!a) && (i!=3)){
 
-                if(players[player-1].isHuman())
-                    view.showPreview(true);
-                else
-                    view.showPreview(false);
-                    
-                    
+            if(players[player-1].isHuman())
+                view.showPreview(true);
+            else
+                view.showPreview(false);
+
+            while((!a) && (i!=3)){
                 lastx = players[player-1].getNextMove();
                 spieleramzug=player;
                 a = spielsteinSetzen(lastx,player);
