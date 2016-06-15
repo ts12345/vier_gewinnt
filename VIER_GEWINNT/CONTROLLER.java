@@ -59,7 +59,7 @@ public class CONTROLLER
      * Startet das Spiel und fragt die Spieler abwechselnd nach ihren Zügen, bis einer gewonnen hat
      */
     public void spielStarten(){
-
+        int pause = 0;
         SPIELER[] players = new SPIELER[2];
 
         players[0] = new COMPUTERSPIELER_TS(spielfeld);
@@ -74,12 +74,24 @@ public class CONTROLLER
             boolean a = false;
 
             if(players[player-1].isHuman())
+            {
                 view.showPreview(true);
+                pause = 0;
+            }
+
             else
+            {
                 view.showPreview(false);
+                pause = 1000;
+            }
 
             while((!a) && (i!=3)){
                 lastx = players[player-1].getNextMove();
+                try {
+                    Thread.sleep(pause); 
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
                 spieleramzug=player;
                 a = spielsteinSetzen(lastx,player);
                 i++;
