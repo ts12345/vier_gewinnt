@@ -105,6 +105,7 @@ public class CONTROLLER
             }
         }
         //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
+        soundengine.playFanfare();
         view.showWinner(playerwon);
     }
 
