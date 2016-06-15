@@ -168,6 +168,7 @@ public class CONTROLLER
 
     public void reset() {
         spielfeld.leereSpielfeld();
+        view.showWinner = false;
     }
 
 }

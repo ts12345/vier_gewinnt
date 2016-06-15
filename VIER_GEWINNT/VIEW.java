@@ -26,7 +26,7 @@ public class VIEW extends JPanel
     private int spalte;
     static boolean drawNeeded;
 
-    private boolean showWinner;
+    public boolean showWinner;
     private int winner;
 
     private void loadImages() {
