@@ -171,4 +171,18 @@ public class CONTROLLER
         view.showWinner = false;
     }
 
+    public void testeDiagonalengewinnMethode() {
+        reset();
+        int player = 1;
+        for(int i = 0; i < 4; i++) {
+            for(int j = 2; j < 5 - i; j++) {
+                spielsteinSetzen(j, player);
+            }
+            player = 3 - player;
+        }
+        for(int i = 0; i < 4; i++) {
+            spielsteinSetzen(2 + i, 2);
+        }
+        System.out.println(spielfeld.checkFourInARow(2, 3, spielfeld.freiesFeld(3) - 1));
+    }
 }
