@@ -20,7 +20,7 @@ public class CONTROLLER
 
     public CONTROLLER()
     {
-        spielfeld = new SPIELFELD();    //Neues Spielfeld
+        spielfeld = new SPIELFELD();         //Neues Spielfeld
         view = new VIEW(spielfeld,this);     //Neuer View
         listener = new LISTENER(this);
         frameView.addMouseMotionListener(listener);
@@ -58,22 +58,28 @@ public class CONTROLLER
     /**
      * Startet das Spiel und fragt die Spieler abwechselnd nach ihren Zügen, bis einer gewonnen hat
      */
-    public void spielStarten(){
+    public void spielStarten(SPIELER s1, SPIELER s2){
         int pause = 0;
-        SPIELER[] players = new SPIELER[2];
 
-        players[0] = new COMPUTERSPIELER_TS(spielfeld);
-        players[1] = new HUMANSPIELER(frameView);
+        s1.activateListener(frameView);
+        s2.activateListener(frameView);
 
-        int player=randomtwo();
+        SPIELER[] players = new SPIELER[3];
+
+        players[1] = s1;
+        players[2] = s2;
+
+        int currentPlayer = 1;
+
         int lastx=0;
         int playerwon=4;
-        while ((playerwon!=2) && (playerwon!=1)){
-            player = nextplayer(player);
-            int i = 0;
-            boolean a = false;
 
-            if(players[player-1].isHuman())
+        boolean spielZuEnde = false;
+        while ( !spielZuEnde ){
+            int anzahlVersuche = 0;
+            boolean gueltigerZug = false;
+
+            if(players[currentPlayer].isHuman())
             {
                 view.showPreview(true);
                 pause = 0;
@@ -85,25 +91,34 @@ public class CONTROLLER
                 pause = 1000;
             }
 
-            while((!a) && (i!=3)){
-                lastx = players[player-1].getNextMove();
+            while(( !gueltigerZug ) && ( anzahlVersuche !=3 )){
+
+                lastx = players[currentPlayer].getNextMove();
+
                 try {
                     Thread.sleep(pause); 
                 } catch(InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
-                spieleramzug=player;
-                a = spielsteinSetzen(lastx,player);
-                i++;
-                if(i == 3){
-                    playerwon = nextplayer(player);
+
+                spieleramzug=currentPlayer;
+
+                gueltigerZug = spielsteinSetzen(lastx, currentPlayer);                                
+                anzahlVersuche++;
+
+                if(anzahlVersuche == 3){
+                    spielZuEnde = true;
+                    playerwon = nextplayer(currentPlayer);
                 }
             }
 
-            if(spielfeld.checkFourInARow(player,lastx,spielfeld.freiesFeld(lastx)-1)){
-                playerwon = player;
+            if(spielfeld.checkFourInARow(currentPlayer,lastx,spielfeld.freiesFeld(lastx)-1)){
+                spielZuEnde = true;
+                playerwon = currentPlayer;
             }
+            currentPlayer = nextplayer(currentPlayer);
         }
+
         //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
         soundengine.playFanfare();
         view.showWinner(playerwon);
@@ -117,8 +132,8 @@ public class CONTROLLER
      */
     private int nextplayer(int p){
         switch (p){
-            case 2: return 1;
             case 1: return 2;
+            case 2: return 1;
         }
         return 0;
     }
