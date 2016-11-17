@@ -18,7 +18,7 @@ public class HUMANSPIELER extends SPIELER
     /**
      * Konstruktor für Objekte der Klasse HUMANSPIELER
      */
-    public HUMANSPIELER(JFrame f)    
+    public HUMANSPIELER()    
     {
         // CylclicBarrier(2)
         // Die 2 bedeutet, dass zweimal await() aufgerufen werden muss, bis alle Threads weitermachen
@@ -26,9 +26,6 @@ public class HUMANSPIELER extends SPIELER
 
         // Der Listener braucht eine Referenz auf das Signal
         listener = new HUMANPLAYER_LISTENER(doneSignal);
-
-        // Wir fügen unseren eigenen Listener dem Frame hinzu
-        f.addMouseListener(listener);
     }
 
     public int getNextMove()
@@ -50,5 +47,9 @@ public class HUMANSPIELER extends SPIELER
 
     public boolean isHuman() {
         return true;
+    }
+
+    public void activateListener(JFrame f) {
+        f.addMouseListener(listener);
     }
 }
