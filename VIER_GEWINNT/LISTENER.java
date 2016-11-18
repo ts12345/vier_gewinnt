@@ -17,6 +17,7 @@ public class LISTENER implements MouseMotionListener
 
     public void mouseExited(MouseEvent e)
     {
+        view.showPreview(false);
     }
 
     public void mouseMoved(MouseEvent e)
@@ -36,7 +37,7 @@ public class LISTENER implements MouseMotionListener
 
     public void mouseDragged(MouseEvent e){}
 
-    public void mouseEntered(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){view.showPreview(true);}
 
     public void mouseReleased(MouseEvent e){}
 
