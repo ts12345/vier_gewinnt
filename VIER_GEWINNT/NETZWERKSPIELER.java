@@ -16,6 +16,8 @@ public class NETZWERKSPIELER extends SPIELER
     {
         try{
             server = new Socket(ipadresse,port);
+            zumServer = new PrintWriter(server.getOutputStream(),true);
+            vomServer = new BufferedReader(new InputStreamReader(server.getInputStream()));
         }catch(Exception e){}
     }
 
@@ -26,11 +28,15 @@ public class NETZWERKSPIELER extends SPIELER
 
     public int getNextMove()
     {
-        return 1;
+        int Zug= 1;
+        try{ 
+            Zug = Integer.parseInt(vomServer.readLine());}
+        catch(Exception e){}
+        return Zug;
     }
 
-    public void VerarbeiteGegnerischenZug(int gegnerischerSpieler)
+    public void VerarbeiteGegnerischenZug(int ZuggegnerischerSpieler)
     {
-
+        zumServer.println(ZuggegnerischerSpieler);
     }
 }
