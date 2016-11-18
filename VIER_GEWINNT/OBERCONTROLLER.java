@@ -23,6 +23,9 @@ public class OBERCONTROLLER
             s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
             s2 = new HUMANSPIELER();
             break;
+            case "3":
+            s1 = new NETZWERKSPIELER("localhost", 2001);
+            s2 = new HUMANSPIELER();
             default:
             s1 = new HUMANSPIELER();
             System.out.println("Und jetzt fuer Spieler 2:");
