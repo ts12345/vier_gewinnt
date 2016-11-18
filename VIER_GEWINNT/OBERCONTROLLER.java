@@ -2,7 +2,7 @@
 /**
  * Beschreiben Sie hier die Klasse OBERCONTROLLER.
  * 
- * @author (Ihr Name) 
+ * @author nobody knows cause nobody cares 
  * @version (eine Versionsnummer oder ein Datum)
  */
 public class OBERCONTROLLER
