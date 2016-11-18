@@ -171,7 +171,7 @@ public class SPIELFELD
                 }
                 test =0;
                 for(int p = 0; p < 4; p++){ 
-                    if((x + o) - p < getBreite() && (y + o) - p < getHoehe() &&(x + o) - p > -1 &&(y + o) - p > -1 && spielfeld[(x + o) - p][(y + o) - p] == spieler){
+                    if((x + o) - p < getBreite() && (y - o) - p < getHoehe() &&(x + o) - p > -1 &&(y - o) - p > -1 && spielfeld[(x + o) - p][(y - o) - p] == spieler){
                         test++; 
                     }
 

@@ -32,10 +32,13 @@ public class NETZWERKSPIELER extends SPIELER
 
     public int getNextMove()
     {
-        int Zug= 1;
+        int Zug = 1;
         try{ 
             Zug = Integer.parseInt(vomServer.readLine());}
-        catch(Exception e){}
+        catch(Exception e)
+        {
+            System.out.println("Kein Zug empfangen");
+        }
         return Zug;
     }
 

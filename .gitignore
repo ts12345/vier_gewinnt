@@ -7,3 +7,4 @@ VIER_GEWINNT/*.ctxt
 # BlueJ-Config-Datei
 
 VIER_GEWINNT/package.bluej
+.gitignore

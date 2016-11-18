@@ -26,6 +26,11 @@ public class OBERCONTROLLER
             case "3":
             s1 = new NETZWERKSPIELER("localhost", 2001);
             s2 = new HUMANSPIELER();
+            break;
+            case "4":
+            s2 = new NETZWERKSPIELER("localhost", 2002);
+            s1 = new HUMANSPIELER();
+            break;
             default:
             s1 = new HUMANSPIELER();
             System.out.println("Und jetzt fuer Spieler 2:");
