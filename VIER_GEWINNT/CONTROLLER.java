@@ -78,7 +78,7 @@ public class CONTROLLER
         while ( !spielZuEnde ){
             int anzahlVersuche = 0;
             boolean gueltigerZug = false;
-
+            spieleramzug = nextplayer(currentPlayer);
             if(players[currentPlayer].isHuman())
             {
                 view.showPreview(true);
