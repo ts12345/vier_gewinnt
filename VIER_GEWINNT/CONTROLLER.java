@@ -111,7 +111,7 @@ public class CONTROLLER
                     playerwon = nextplayer(currentPlayer);
                 }
             }
-
+            players[nextplayer(currentPlayer)].VerarbeiteGegnerischenZug(lastx);
             if(spielfeld.checkFourInARow(currentPlayer,lastx,spielfeld.freiesFeld(lastx)-1)){
                 spielZuEnde = true;
                 playerwon = currentPlayer;

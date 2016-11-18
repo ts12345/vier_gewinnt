@@ -1,9 +1,13 @@
 import javax.swing.JFrame;
- 
 
 public abstract class SPIELER
 {
     public SPIELER()
+    {
+
+    }
+
+    public void VerarbeiteGegnerischenZug(int gegnerischerSpieler)
     {
 
     }
