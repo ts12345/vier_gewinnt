@@ -57,16 +57,16 @@ public class VIEW extends JPanel
 
         setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
         setBorder(BorderFactory.createLineBorder(Color.yellow));
-       
+
         loadImages();
 
         spielbrettMitLoecherVorbereiten();
     }
-    
+
     public void spielbrettMitLoecherVorbereiten() {
         Rectangle2D blauesFeld = new Rectangle2D.Float(0, 0 + size , breite * size, hoehe * size + size);
         Ellipse2D loch = new Ellipse2D.Double(0, 0, 0, 0);
-       
+
         spielbrett = new Area(blauesFeld);
 
         for(int i = 0;  i < spielfeld.getBreite(); i++) {
@@ -114,17 +114,13 @@ public class VIEW extends JPanel
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
-        // Blaue Spielfläche ohne Löcher
+        // Blaue Spielfläche mit Löcher auf schwarzem Hintergrund        
         g.setColor(Color.BLACK);
-
         g.fillRect(0, 0 + size , breite * size, hoehe * size + size);
 
-        g.setColor(Color.BLUE);
-
-        g2d.fill(spielbrett);
-
+        // Vorschau zeichnen (falls noetig)
         int[][] s = spielfeld.getSpielfeld();
-        if(controller.spieleramzug == 2&& drawNeeded)
+        if(controller.spieleramzug == 2 && drawNeeded)
         {
             g.drawImage(roterStein, spalte * size,0 , size, size, null);
         }
@@ -133,7 +129,7 @@ public class VIEW extends JPanel
             g.drawImage(gelberStein, spalte * size,0 , size, size, null);
         }
 
-        // Jetzt werden rote oder blaue Spielsteine gezeichnet bzw. schwarze Loecher
+        // Jetzt werden rote oder blaue Spielsteine gezeichnet, falls noetig
         for(int i = 0;  i < spielfeld.getBreite(); i++) {
             for(int j = 0 ;  j < spielfeld.getHoehe(); j++) {
 
@@ -153,6 +149,9 @@ public class VIEW extends JPanel
 
             }
         }
+
+        g.setColor(Color.BLUE);
+        g2d.fill(spielbrett);
 
         if(showWinner)
         {
