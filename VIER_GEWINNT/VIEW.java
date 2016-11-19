@@ -57,11 +57,16 @@ public class VIEW extends JPanel
 
         setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
         setBorder(BorderFactory.createLineBorder(Color.yellow));
+       
         loadImages();
 
+        spielbrettMitLoecherVorbereiten();
+    }
+    
+    public void spielbrettMitLoecherVorbereiten() {
         Rectangle2D blauesFeld = new Rectangle2D.Float(0, 0 + size , breite * size, hoehe * size + size);
         Ellipse2D loch = new Ellipse2D.Double(0, 0, 0, 0);
-
+       
         spielbrett = new Area(blauesFeld);
 
         for(int i = 0;  i < spielfeld.getBreite(); i++) {
