@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+
+import java.awt.geom.*;
+
 /**
  * Die Klasse VIEW zeigt das Spielfeld an und interagiert mit dem Spieler.
  * 
@@ -29,6 +32,8 @@ public class VIEW extends JPanel
     public boolean showWinner;
     private int winner;
 
+    private Area spielbrett;
+
     private void loadImages() {
         try {
             roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
@@ -37,6 +42,10 @@ public class VIEW extends JPanel
         } catch (IOException ex) {
 
         }
+    }
+
+    public Area getSpielbrett() {
+        return spielbrett;
     }
 
     public VIEW(SPIELFELD spielfeld, CONTROLLER controller)
@@ -49,6 +58,22 @@ public class VIEW extends JPanel
         setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
         setBorder(BorderFactory.createLineBorder(Color.yellow));
         loadImages();
+
+        Rectangle2D blauesFeld = new Rectangle2D.Float(0, 0 + size , breite * size, hoehe * size + size);
+        Ellipse2D loch = new Ellipse2D.Double(0, 0, 0, 0);
+
+        spielbrett = new Area(blauesFeld);
+
+        for(int i = 0;  i < spielfeld.getBreite(); i++) {
+            for(int j = 0 ;  j < spielfeld.getHoehe(); j++) {
+
+                {
+                    loch = new Ellipse2D.Double(i * size,(-j + 5) * size + size, (size*96)/100, (size*96)/100);
+                    spielbrett.subtract(new Area(loch));
+                }
+
+            }
+        }
     }
 
     /**
@@ -76,15 +101,24 @@ public class VIEW extends JPanel
         return size;
     }
 
+    public void repaintPreview() {
+        //        repaint();
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
 
         // Blaue Spielfläche ohne Löcher
-        g.setColor(Color.BLUE);
+        g.setColor(Color.BLACK);
+
         g.fillRect(0, 0 + size , breite * size, hoehe * size + size);
 
-        int[][] s = spielfeld.getSpielfeld();
+        g.setColor(Color.BLUE);
 
+        g2d.fill(spielbrett);
+
+        int[][] s = spielfeld.getSpielfeld();
         if(controller.spieleramzug == 2&& drawNeeded)
         {
             g.drawImage(roterStein, spalte * size,0 , size, size, null);
@@ -109,7 +143,7 @@ public class VIEW extends JPanel
                 if(s[i][j] == 0)
                 {
                     g.setColor(Color.BLACK);
-                    g.fillOval(i * size,(-j + 5) * size + size, size, size);
+                    //                    g.fillOval(i * size,(-j + 5) * size + size, size, size);
                 }
 
             }

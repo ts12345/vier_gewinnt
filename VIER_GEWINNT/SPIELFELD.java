@@ -196,4 +196,8 @@ public class SPIELFELD
 
         }
     }
+
+    public void entferneOberstenStein(int spalte) {
+        spielfeld[spalte][freiesFeld(spalte) - 1] = 0;
+    }
 }

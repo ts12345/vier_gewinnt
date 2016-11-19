@@ -156,11 +156,16 @@ public class CONTROLLER
         boolean geklappt = spielfeld.spielSteinSetzen(x, spieleramzug);
         if (geklappt)
         {
+            view.showPreview(false);
+            spielfeld.entferneOberstenStein(x);
+            int y = spielfeld.freiesFeld(x);
+            STEIN_ANIMATION_THREAD t = new STEIN_ANIMATION_THREAD(x, y, spieleramzug, view);
+            t.run();
+            spielfeld.spielSteinSetzen(x, spieleramzug);
             soundengine.playClick();
             view.repaint();
         }
         return geklappt;
-
     }
 
     public void testModelAndView() {
