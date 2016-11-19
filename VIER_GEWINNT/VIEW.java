@@ -34,20 +34,6 @@ public class VIEW extends JPanel
 
     private Area spielbrett;
 
-    private void loadImages() {
-        try {
-            roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
-            gelberStein = ImageIO.read(new File("textures/gelber_Stein.png"));
-
-        } catch (IOException ex) {
-
-        }
-    }
-
-    public Area getSpielbrett() {
-        return spielbrett;
-    }
-
     public VIEW(SPIELFELD spielfeld, CONTROLLER controller)
     {
         this.spielfeld = spielfeld;
@@ -61,6 +47,20 @@ public class VIEW extends JPanel
         loadImages();
 
         spielbrettMitLoecherVorbereiten();
+    }
+    
+    private void loadImages() {
+        try {
+            roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
+            gelberStein = ImageIO.read(new File("textures/gelber_Stein.png"));
+
+        } catch (IOException ex) {
+
+        }
+    }
+
+    public Area getSpielbrett() {
+        return spielbrett;
     }
 
     public void spielbrettMitLoecherVorbereiten() {
