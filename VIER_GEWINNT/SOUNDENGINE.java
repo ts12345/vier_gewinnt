@@ -18,7 +18,6 @@ public class SOUNDENGINE
         File fanfare = new File("sounds/fanfare.wav"); 
         this.click = click;
         this.fanfare = fanfare;
-
     }
 
     public static void PlaySound(File Sound){
@@ -30,7 +29,6 @@ public class SOUNDENGINE
         {
             //System.out.println("fail");
         }
-
     }
 
     public void playClick(){

@@ -29,7 +29,6 @@ public class STEIN_ANIMATION_THREAD implements Runnable
         try {
             roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
             gelberStein = ImageIO.read(new File("textures/gelber_Stein.png"));
-
         } catch (IOException ex) {
 
         }
@@ -77,7 +76,6 @@ public class STEIN_ANIMATION_THREAD implements Runnable
     }
 
     public void run() {
-
         int curX = x * 100;
         int curY = 0;
         int i = 0;
@@ -112,7 +110,6 @@ public class STEIN_ANIMATION_THREAD implements Runnable
             try {
                 Thread.sleep(timeToSleep);  // milliseconds
             } catch (InterruptedException ex) { } 
-
         }
     }
 
@@ -130,5 +127,3 @@ public class STEIN_ANIMATION_THREAD implements Runnable
             return b;
     }
 }
-
- 

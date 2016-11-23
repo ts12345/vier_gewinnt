@@ -64,5 +64,4 @@ public class TEST_SPIELSTEINTEXTURE extends JPanel {
         
         t.run();
     }
-
 }

@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Server f�r JAVACHAT
+ * modifizierter Server für JAVACHAT
  * @author S. Friedl (Basierend auf "Wie geht's?" - ISB-Arbeitskreis)
  * @version 1.0
  */

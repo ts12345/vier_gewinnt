@@ -50,4 +50,3 @@ public class HUMANPLAYER_LISTENER extends MouseAdapter
         return lastX;
     }
 }
-

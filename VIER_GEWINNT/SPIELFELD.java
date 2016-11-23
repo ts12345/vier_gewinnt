@@ -1,4 +1,3 @@
-
 /**
  * Die Klasse SPIELFELD erstellt ein Spielfeld und setzt Spielsteine
  * gibt an, wenn man gewinnt
@@ -101,8 +100,7 @@ public class SPIELFELD
      * @param y ist die y-coordinate des Spielsteins
      * @return ob der Stein in einer 4er Reihe liegt
      */
-    public boolean checkFourInARow(int spieler, int x ,int y){
-
+    public boolean checkFourInARow(int spieler, int x ,int y) {
         int counter = 0; //zum zaelen der gleichartigen Steine in einer Reihe
 
         //checkt die Waagrechte
@@ -131,7 +129,6 @@ public class SPIELFELD
                     return true; //wird wahr wenn vier Steine in einer Reihe liegen
                 }
             }
-
         }
 
         //checkt die Diagonale von rechts nach links
@@ -146,7 +143,6 @@ public class SPIELFELD
                     return true; //wird wahr wenn vier Steine in einer Reihe liegen
                 }
             }
-
         }
 
         //checkt die Diagonale links nach rechts
@@ -161,7 +157,6 @@ public class SPIELFELD
                     return true; //wird wahr wenn vier Steine in einer Reihe liegen
                 }
             }
-
         }
 
         return false; //wenn keine vier Steine gefunden worden sind wird falsch zurück gegeben
@@ -169,11 +164,9 @@ public class SPIELFELD
 
     public void leereSpielfeld () {
         for (int x = 0; x < 7; x++){
-
             for (int y = 0; y < 6; y++) {
                 spielfeld [x][y] = 0;
             }
-
         }
     }
 
