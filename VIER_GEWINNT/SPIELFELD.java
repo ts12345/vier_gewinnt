@@ -13,8 +13,7 @@ public class SPIELFELD
     /**
      * Konstruktor der neues Spielfeldarray anlegt
      */
-    public SPIELFELD()
-    {
+    public SPIELFELD() {      
         spielfeld = new int[7][6];   
     }
 
@@ -27,8 +26,7 @@ public class SPIELFELD
      * @param spieler 1: Spieler1; 2: Spieler2
      * @return setzen ausgefuehrt?
      */
-    public boolean spielSteinSetzen (int x, int spieler)
-    {
+    public boolean spielSteinSetzen (int x, int spieler) {
         int i = freiesFeld(x);
         if(i == spielfeld[x].length){
             return false;
@@ -62,7 +60,7 @@ public class SPIELFELD
      * 
      * @return die Hoehe des niedrigsten freien Felds (0 bis hoehe - 1  ist gueltig, wenn die spalte voll ist, wird hoehe ausgegeben)
      */
-    public int freiesFeld(int s){
+    public int freiesFeld(int s){        
         boolean a = true;
         int i = 0;
         while(a){
@@ -87,8 +85,7 @@ public class SPIELFELD
      * 
      * @return das 2D - array
      */
-    public int[][] getSpielfeld()
-    {
+    public int[][] getSpielfeld() {
         return spielfeld;
     }
 

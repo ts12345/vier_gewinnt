@@ -183,5 +183,9 @@ public class VIEW extends JPanel
     public void setSpalte(int xWert)
     {
         spalte = (xWert / size);
+        
+        if(spalte > (breite - 1)) {
+            spalte = breite - 1;
+        }
     }
 }
