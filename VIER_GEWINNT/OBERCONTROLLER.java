@@ -19,28 +19,30 @@ public class OBERCONTROLLER
         String player2 = scan.nextLine();
         SPIELER s1;
         SPIELER s2;
-        CONTROLLER commandante = new CONTROLLER();
+        int size = 80;
+        CONTROLLER commandante = new CONTROLLER(size);
+       
         switch(player){
             case "2":
             s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
-            s2 = new HUMANSPIELER();
+            s2 = new HUMANSPIELER(size);
             break;
             case "3":
             s1 = new NETZWERKSPIELER("localhost", 2001);
-            s2 = new HUMANSPIELER();
+            s2 = new HUMANSPIELER(size);
             break;
             case "4":
             s2 = new NETZWERKSPIELER("localhost", 2002);
-            s1 = new HUMANSPIELER();
+            s1 = new HUMANSPIELER(size);
             break;
             default:
-            s1 = new HUMANSPIELER();
+            s1 = new HUMANSPIELER(size);
             switch(player2){
                 case "2":
                 s2 = new COMPUTERSPIELER_TS(commandante.spielfeld);
                 break;
                 default:
-                s2 = new HUMANSPIELER();
+                s2 = new HUMANSPIELER(size);
             }
         }
 

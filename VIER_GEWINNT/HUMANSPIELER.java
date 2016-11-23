@@ -14,12 +14,13 @@ public class HUMANSPIELER extends SPIELER
     // Signal, das wir benutzen um vom Listener zu erfahren, wann geklickt wurde
     private CyclicBarrier doneSignal;
     private HUMANPLAYER_LISTENER listener;
-
+    private int size;
     /**
      * Konstruktor für Objekte der Klasse HUMANSPIELER
      */
-    public HUMANSPIELER()    
+    public HUMANSPIELER(int size)
     {
+        this.size = size;
         // CylclicBarrier(2)
         // Die 2 bedeutet, dass zweimal await() aufgerufen werden muss, bis alle Threads weitermachen
         doneSignal = new CyclicBarrier(2);
@@ -42,7 +43,7 @@ public class HUMANSPIELER extends SPIELER
         catch (BrokenBarrierException ex) { }
 
         System.out.println("got click");
-        return (int)(listener.getLastX()/100);
+        return (int)(listener.getLastX() / size);
     }
 
     public boolean isHuman() {

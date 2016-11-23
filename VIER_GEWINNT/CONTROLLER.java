@@ -17,11 +17,14 @@ public class CONTROLLER
     SOUNDENGINE soundengine;
     int spieleramzug;
     JFrame frameView = new JFrame("Vier gewinnt!");
+    int size;
 
-    public CONTROLLER()
+    public CONTROLLER(int size)
     {
+        this.size = size;
         spielfeld = new SPIELFELD();         //Neues Spielfeld
         view = new VIEW(spielfeld,this);     //Neuer View
+        view.setsize(size); 
         listener = new LISTENER(this);
         frameView.addMouseMotionListener(listener);
         soundengine = new SOUNDENGINE();

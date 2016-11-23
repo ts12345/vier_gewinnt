@@ -10,7 +10,8 @@ public class STEIN_ANIMATION_THREAD implements Runnable
     private Graphics g;
     private int x;
     private int y;
-    int spieler;
+    private int spieler;
+    private int size;
 
     private VIEW p;
     private Graphics onscreenGraphics;
@@ -42,6 +43,7 @@ public class STEIN_ANIMATION_THREAD implements Runnable
         this.y = y;
         this.p = p;
         this.spieler = spieler;
+        this.size = p.getsize();
 
         onscreenGraphics = p.getGraphics();         
 
@@ -76,10 +78,10 @@ public class STEIN_ANIMATION_THREAD implements Runnable
     }
 
     public void run() {
-        int curX = x * 100;
+        int curX = x * size;
         int curY = 0;
         int i = 0;
-        int size = 100;
+
 
         BufferedImage stein;
 
@@ -92,8 +94,8 @@ public class STEIN_ANIMATION_THREAD implements Runnable
         offscreen = createImage(p);     
         Graphics2D g = offscreen.createGraphics();            
 
-        while(curY < (6 - y)*size - 30 )  { // Execute one update step
-            g.drawImage(vorlage.getSubimage(curX, curY, 100, 100), curX, curY, null);
+        while(curY < (6 - y)*size - size/3 )  { // Execute one update step
+            g.drawImage(vorlage.getSubimage(curX, curY, size, size), curX, curY, null);
 
             curY = i * i;            
             curY = calculateYPosition(timeToSleep * i);

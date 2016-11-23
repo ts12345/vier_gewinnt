@@ -19,7 +19,7 @@ public class VIEW extends JPanel
     SPIELFELD spielfeld;
 
     // Groesse eines "Basisquadrats
-    private final static int size = 100;
+    private int size = 100;
     private int breite;
     private int hoehe;
     private BufferedImage roterStein;
@@ -48,7 +48,7 @@ public class VIEW extends JPanel
 
         spielbrettMitLoecherVorbereiten();
     }
-    
+
     private void loadImages() {
         try {
             roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
@@ -104,6 +104,14 @@ public class VIEW extends JPanel
     public int getsize()
     {
         return size;
+    }
+
+    public void setsize(int size)
+    {
+        this.size = size;
+        setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
+        setBorder(BorderFactory.createLineBorder(Color.yellow));
+        spielbrettMitLoecherVorbereiten();
     }
 
     public void repaintPreview() {
@@ -183,7 +191,7 @@ public class VIEW extends JPanel
     public void setSpalte(int xWert)
     {
         spalte = (xWert / size);
-        
+
         if(spalte > (breite - 1)) {
             spalte = breite - 1;
         }
