@@ -1,8 +1,8 @@
-
 import java.util.ArrayList;
 import java.util.Random;
+
 /**
- * Beschreiben Sie hier die Klasse COMPUTERSPIELER_TS.
+ * Computerspieler
  * 
  * @author TS 
  * @version (eine Versionsnummer oder ein Datum)

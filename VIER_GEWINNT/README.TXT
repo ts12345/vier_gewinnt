@@ -1,14 +1,13 @@
-------------------------------------------------------------------------
-Dies ist die README-Datei des Projekts. Hier sollten Sie Ihr Projekt
-beschreiben.
-Erzählen Sie dem Leser (jemand, der nichts über dieses Projekt weiss),
-alles, was er/sie wissen muss. Üblicherweise sollte der Kommentar 
-zumindest die folgenden Angaben umfassen:
-------------------------------------------------------------------------
+Vier gewinnt
+============
+Version: Keine.Ahnung.Hoch.10 Beta 08/15
 
-PROJEKTBEZEICHNUNG:
-PROJEKTZWECK:
-VERSION oder DATUM:
-WIE IST DAS PROJEKT ZU STARTEN:
-AUTOR(EN):
-BENUTZERHINWEISE:
+Wie der Titel bereits sagt, ist dies ein Vier-Gewinnt-Spiel.
+
+Start:
+------
+Führen Sie die Datei "_Starte_Netzwerkspiel.bat" im Projektverzeichnis aus
+Ein Starter für Offline-Spiele wird erarbeitet.
+
+AUTOR(EN): sollten wir vllt mal auflisten
+BENUTZERHINWEISE: sollten wir vllt mal einfügen
