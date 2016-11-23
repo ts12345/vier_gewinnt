@@ -15,9 +15,11 @@ public class OBERCONTROLLER
         Scanner scan = new Scanner(System.in);
         System.out.println("Bitte geben Sie die Art von Spieler 1 ein (1 - Humanspieler, 2 - Computerspieler, 3 - Netzwerkspieler)");
         String player = scan.nextLine();
-        CONTROLLER commandante = new CONTROLLER();
+        System.out.println("Und jetzt fuer Spieler 2:");
+        String player2 = scan.nextLine();
         SPIELER s1;
         SPIELER s2;
+        CONTROLLER commandante = new CONTROLLER();
         switch(player){
             case "2":
             s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
@@ -33,8 +35,6 @@ public class OBERCONTROLLER
             break;
             default:
             s1 = new HUMANSPIELER();
-            System.out.println("Und jetzt fuer Spieler 2:");
-            String player2 = scan.nextLine();
             switch(player2){
                 case "2":
                 s2 = new COMPUTERSPIELER_TS(commandante.spielfeld);
@@ -43,9 +43,11 @@ public class OBERCONTROLLER
                 s2 = new HUMANSPIELER();
             }
         }
+
         while(true){
             commandante.spielStarten(s1,s2);
             commandante.reset();
         }
     }
 }
+
