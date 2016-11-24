@@ -96,7 +96,6 @@ public class COMPUTERSPIELER_TS extends SPIELER {
         
         // lädt die Spielernummer und schreibt sie in die LOG-Datei
         this.playerNumber = this.playerNumber();
-        this.playerNumber = 1;
         this.opponentNumber = 3 - this.playerNumber;
         this.logIt("Ich bin: " + this.playerNumber + " Du bist: " + this.opponentNumber);
         
