@@ -12,16 +12,54 @@ public class OBERCONTROLLER
     }
 
     public OBERCONTROLLER(){
+        // Legt Variablen zur variablen Festlegung der Spielfeldgröße fest
+        int size;
+        int sizeinput;
+        
+        // erstellt den Scanner
         Scanner scan = new Scanner(System.in);
+        
+        // Frägt im Starter die Sollspielfeldgröße ab und speichert den Wert in der sizeinput-Variable
+        System.out.println("Bitte geben Sie die Spielfeldgröße ein. Mögliche Werte: 1 - 5 [3]");
+        sizeinput = scan.nextInt();
+        
+        // weist der Eingabe den entsprechenden size-Wert zu
+        switch(sizeinput) {
+            case 1:
+                size = 60;
+                break;
+                
+            case 2:
+                size = 80;
+                break;
+                
+            case 4:
+                size = 120;
+                break;
+                
+            case 5:
+                size = 140;
+                break;
+            
+            default:
+                size = 100;
+                break;
+        }
+        
+        // Legt die Typen der Spieler 1 und 2 fest
         System.out.println("Bitte geben Sie die Art von Spieler 1 ein (1 - Humanspieler, 2 - Computerspieler, 3 - Netzwerkspieler)");
         String player = scan.nextLine();
         System.out.println("Und jetzt fuer Spieler 2:");
         String player2 = scan.nextLine();
+        
+        // deklariert Referenzattribute für beide Spieler
         SPIELER s1;
         SPIELER s2;
-        int size = 80;
+        
+        // deklariert und erstellt Referenz auf einen Controller
         CONTROLLER commandante = new CONTROLLER(size);
        
+        // erstellt Referenz auf die beiden Spieler
         switch(player){
             case "2":
             s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
