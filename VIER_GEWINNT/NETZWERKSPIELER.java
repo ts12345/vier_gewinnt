@@ -34,7 +34,9 @@ public class NETZWERKSPIELER extends SPIELER
     {
         int Zug = 1;
         try{ 
-            Zug = Integer.parseInt(vomServer.readLine());}
+            String move = vomServer.readLine();
+            System.out.println("Empfangen: " + move);
+            Zug = Integer.parseInt(move);}
         catch(Exception e)
         {
             System.out.println("Kein Zug empfangen");
@@ -44,6 +46,7 @@ public class NETZWERKSPIELER extends SPIELER
 
     public void VerarbeiteGegnerischenZug(int ZuggegnerischerSpieler)
     {
+        System.out.println("Sende: " + ZuggegnerischerSpieler);
         zumServer.println(ZuggegnerischerSpieler);
     }
 }

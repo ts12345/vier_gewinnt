@@ -8,7 +8,6 @@ import java.util.Scanner;
  * @version 1.0
  */
 
-
 public class SERVER {
     /** bidir Schnittstelle zur Netzwerkprotokoll-Implementierung des Servers*/
     private ServerSocket serverSocket1 = null;
@@ -28,7 +27,6 @@ public class SERVER {
     private String client1Nachricht = null;
     private String client2Nachricht = null;
 
-    
     /**
      * IOException tritt auf, falls es Probleme mit dem Socket gibt
      * �BERARBEITEN!!!!!!!!
@@ -43,10 +41,12 @@ public class SERVER {
         do {//lesen und antworten
             System.out.println("warte auf Botschaft von Client 1...");
             client1Nachricht = vomClient1.readLine();
+            System.out.println("Client 1: " + client1Nachricht);
             zumClient2.println(client1Nachricht);
-            
+
             System.out.println("warte auf Botschaft von Client 2...");
             client2Nachricht = vomClient2.readLine();
+            System.out.println("Client 2: " + client2Nachricht);
             zumClient1.println(client2Nachricht);            
         } while (EXIT == false);
 
@@ -63,19 +63,19 @@ public class SERVER {
 
         int port1;
         int port2;
-        
+
         // System.out.println("Port fuer Client 1 eingeben: ");
         // port1 = s.nextInt();
 
         // Provisorische Zuweisung der Netzwerkports:
         port1 = 2001;
         port2 = 2002;
-        
+
         serverSocket1 = new ServerSocket(port1);
-        
+
         // System.out.println("Port fuer Client 2 eingeben:" );
         // port2 = s.nextInt();
-        
+
         serverSocket2 = new ServerSocket(port2);
 
         System.out.println("Server gestartet...");
@@ -123,7 +123,7 @@ public class SERVER {
         zumClient2.println("Verbunden - Sie sind Client 2");
         System.out.println("Client 2 verbunden");
     }
-    
+
     /**
      * beendet die Verbindung zu Client 1
      */
@@ -143,7 +143,7 @@ public class SERVER {
         client2Socket.close();
         System.out.println("Verbindung zu Client 2 beendet");
     }
-    
+
     /**
      * Hauptprogramm zum Erzeugen des Serverobjekts
      * @param args keine Parameter beim Programmaufruf erforderlich
