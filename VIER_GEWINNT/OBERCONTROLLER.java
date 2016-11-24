@@ -5,39 +5,37 @@ import java.util.Scanner;
  * @author nobody knows cause nobody cares 
  * @version (eine Versionsnummer oder ein Datum)
  */
-public class OBERCONTROLLER
-{
-    public static void main(String[] args){
+public class OBERCONTROLLER {
+    public static void main(String[] args) {
         OBERCONTROLLER oberkontrollrat = new OBERCONTROLLER();
     }
 
-    public OBERCONTROLLER(){
+    public OBERCONTROLLER() {
         // Legt Variablen zur variablen Festlegung der Spielfeldgröße fest
         int size;
-        int sizeinput;
         
         // erstellt den Scanner
         Scanner scan = new Scanner(System.in);
         
         // Frägt im Starter die Sollspielfeldgröße ab und speichert den Wert in der sizeinput-Variable
         System.out.println("Bitte geben Sie die Spielfeldgröße ein. Mögliche Werte: 1 - 5 [3]");
-        sizeinput = scan.nextInt();
+        String sizeinput = scan.nextLine();
         
         // weist der Eingabe den entsprechenden size-Wert zu
         switch(sizeinput) {
-            case 1:
+            case "1":
                 size = 60;
                 break;
                 
-            case 2:
+            case "2":
                 size = 80;
                 break;
                 
-            case 4:
+            case "4":
                 size = 120;
                 break;
                 
-            case 5:
+            case "5":
                 size = 140;
                 break;
             
