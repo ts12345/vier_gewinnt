@@ -57,7 +57,7 @@ public class STARTER {
             case "2": sp1 = 2; break;
             case "3": sp1 = 3; break;
             case "4": sp1 = 4; break;
-            default: "1": sp1 = 1; break;
+            default: sp1 = 1; break;
         }
         
         switch(player2) {
