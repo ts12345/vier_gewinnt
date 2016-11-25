@@ -1,16 +1,16 @@
 import java.util.Scanner;
+
 /**
- * Beschreiben Sie hier die Klasse OBERCONTROLLER.
- * 
- * @author nobody knows cause nobody cares 
- * @version (eine Versionsnummer oder ein Datum)
+ * Objekte der Klasse OBERCONTROLLER verwalten den Ablauf eines Netzwerkspiels
  */
 public class OBERCONTROLLER {
     public static void main(String[] args) {
         OBERCONTROLLER oberkontrollrat = new OBERCONTROLLER();
     }
 
-    public OBERCONTROLLER() {
+    // Konstruktor für Objekte der Klasse OBERCONTROLLER
+    // Übergabewerte für Feldgröße und Typ der Spieler
+    public OBERCONTROLLER(int sizeVonStart, int sp1, int sp2) {
         // Legt Variablen zur variablen Festlegung der Spielfeldgröße fest
         int size;
         
