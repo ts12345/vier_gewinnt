@@ -65,6 +65,7 @@ public class STARTER {
             case "2": sp2 = 2; break;
             case "3": sp2 = 3; break;
             case "4": sp2 = 4; break;
+            default: sp2 = 1; break;
         }
         
         // legt einen neuen OBERCONTROLLER an
