@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author SFr682k
  */
 public class STARTER {   
-    public static void main() {
+    public static void main(String[] args) {
         new STARTER();
     }
     
