@@ -1,2 +1,2 @@
 cd %CD%
-java -Dfile.encoding=cp850 OBERCONTROLLER
+java -Dfile.encoding=cp850 STARTER
