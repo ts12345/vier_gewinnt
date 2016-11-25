@@ -5,7 +5,7 @@ import java.util.Scanner;
  */
 public class OBERCONTROLLER {
     public static void main(String[] args) {
-        OBERCONTROLLER oberkontrollrat = new OBERCONTROLLER();
+        OBERCONTROLLER oberkontrollrat = new OBERCONTROLLER(100,1,1);
     }
 
     // Konstruktor für Objekte der Klasse OBERCONTROLLER
