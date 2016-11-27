@@ -1,4 +1,3 @@
-
 import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -121,7 +120,7 @@ public class Menue extends JFrame {
 
                     System.out.println("starte spiel 1 vs 1");
 
-                    Runnable spielRunnable = new SPIELTHREAD(size, sp1, sp2);
+                    Runnable spielRunnable = new SPIELTHREAD(size, sp1, sp2, "localhost", 2000);
                     Thread spielThread = new Thread(spielRunnable);
                     spielThread.start();
 
