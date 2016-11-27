@@ -114,6 +114,42 @@ public class STEIN_ANIMATION_THREAD implements Runnable
             } catch (InterruptedException ex) { } 
         }
     }
+    
+    public void run2(){
+        int curX = x * size;
+        int curY = y *size;
+        int i = 0;
+
+
+        BufferedImage stein;
+
+        if(spieler == 1) {
+            stein = roterStein;
+        } else {
+            stein  = gelberStein;
+        }
+
+        offscreen = createImage(p);     
+        Graphics2D g = offscreen.createGraphics();            
+
+        while(curY <size  )  { // Execute one update step
+            g.drawImage(vorlage.getSubimage(curX, curY, size, size), curX, curY, null);           
+            curY = curY+calculateYPosition(timeToSleep * i);
+            i++;
+            g.setColor(Color.BLACK);
+
+            g.drawImage(stein, curX, curY, size, size, null);
+            g.setColor(Color.BLUE);
+            g.fill(p.getSpielbrett());
+
+
+            onscreenGraphics.drawImage(offscreen, 0, 0, null);
+
+            try {
+                Thread.sleep(timeToSleep);  // milliseconds
+            } catch (InterruptedException ex) { } 
+        }
+    }
 
     public int max(int a, int b) {
         if(a > b)

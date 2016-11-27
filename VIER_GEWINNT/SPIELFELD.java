@@ -170,4 +170,14 @@ public class SPIELFELD
     public void entferneOberstenStein(int spalte) {
         spielfeld[spalte][freiesFeld(spalte) - 1] = 0;
     }
+    
+    public boolean[][] besetzt(){
+        boolean[][] ret = new boolean[spielfeld.length][spielfeld[0].length];
+        for (int i1=0; i1<spielfeld.length; i1++){
+            for (int i2=0; i2<spielfeld[i1].length; i2++){
+                ret[i1][i2]=(spielfeld[i1][i2]!=0);
+            }
+        }
+        return ret;
+    }
 }
