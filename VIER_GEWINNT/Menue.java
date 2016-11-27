@@ -13,7 +13,7 @@ import javax.swing.border.Border;
 import javax.swing.*;
 
 public class Menue extends JFrame {
-	
+
     private JLabel label1;
     private JLabel label2;
     private JLabel label3;
@@ -21,7 +21,6 @@ public class Menue extends JFrame {
     private JLabel label5;
     private JLabel label6;
     private JPanel panel1;
-    
 
     //Constructor 
     public Menue(){
@@ -113,23 +112,26 @@ public class Menue extends JFrame {
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
-        
+
         label2.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
                     int size = 100;
                     int sp1 = 1;
                     int sp2 = 1;
-                    
-                    OBERCONTROLLER controll = new OBERCONTROLLER(size,sp1,sp2);
-                    
+
+                    System.out.println("starte spiel 1 vs 1");
+
+                    Runnable spielRunnable = new SPIELTHREAD(size, sp1, sp2);
+                    Thread spielThread = new Thread(spielRunnable);
+                    spielThread.start();
+
+                    System.out.println("gestartet! spiel 1 vs 1");
+
                 }
 
             });
 
     }
-
- 
-
     public static void main(String[] args){
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -137,6 +139,7 @@ public class Menue extends JFrame {
                     new Menue();
                 }
             });
+
     }
 
 }
