@@ -34,12 +34,12 @@ public class STARTER {
         }
         
         // Frägt die Typen von Spieler 1 und Spieler 2 ab
-        System.out.println("Bitte geben Sie die Art von Spieler 1 ein:")
+        System.out.println("Bitte geben Sie die Art von Spieler 1 ein:");
         System.out.println("(Mögliche Werte: [1] - Humanspieler, 2 - Computerspieler, 3/4 - Netzwerkspieler)");
         String player1 = scan.nextLine();
         System.out.println(" ");
         
-        System.out.println("Bitte geben Sie die Art von Spieler 2 ein:")
+        System.out.println("Bitte geben Sie die Art von Spieler 2 ein:");
         System.out.println("(Mögliche Werte: [1] - Humanspieler, 2 - Computerspieler, 3/4 - Netzwerkspieler)");
         String player2 = scan.nextLine();
         System.out.println(" ");
