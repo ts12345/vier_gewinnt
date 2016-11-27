@@ -49,7 +49,7 @@ public class OBERCONTROLLER {
             default:
                 s1 = new HUMANSPIELER(size);
                 s2 = new HUMANSPIELER(size);
-            }
+                break;
         }
 
         while(true){
