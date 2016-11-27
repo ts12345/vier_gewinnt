@@ -4,13 +4,9 @@ import java.util.Scanner;
  * Objekte der Klasse OBERCONTROLLER verwalten den Ablauf eines Netzwerkspiels
  */
 public class OBERCONTROLLER {
-    public static void main(String[] args) {
-        OBERCONTROLLER oberkontrollrat = new OBERCONTROLLER(100,1,1);
-    }
-
     // Konstruktor für Objekte der Klasse OBERCONTROLLER
     // Übergabewerte für Feldgröße und Typ der Spieler
-    public OBERCONTROLLER(int size, int sp1, int sp2) {
+    public OBERCONTROLLER(int size, int sp1, int sp2, String serverIP, int hauptport) {
         // erstellt den Scanner
         Scanner scan = new Scanner(System.in);
         
@@ -27,20 +23,24 @@ public class OBERCONTROLLER {
             s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
             s2 = new HUMANSPIELER(size);
             break;
+                
             case 3:
-            s1 = new NETZWERKSPIELER("localhost", 2001);
+            s1 = new NETZWERKSPIELER(serverIP, 2001);
             s2 = new HUMANSPIELER(size);
             break;
+
             case 4:
-            s2 = new NETZWERKSPIELER("localhost", 2002);
+            s2 = new NETZWERKSPIELER(serverIP, 2002);
             s1 = new HUMANSPIELER(size);
             break;
+                
             default:
             s1 = new HUMANSPIELER(size);
             switch(sp2){
                 case 2:
                 s2 = new COMPUTERSPIELER_TS(commandante.spielfeld);
                 break;
+
                 default:
                 s2 = new HUMANSPIELER(size);
             }
@@ -52,4 +52,3 @@ public class OBERCONTROLLER {
         }
     }
 }
-
