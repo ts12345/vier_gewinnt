@@ -18,6 +18,9 @@ public class NETZWERKSPIELER extends SPIELER
             server = new Socket(ipadresse,port);
             zumServer = new PrintWriter(server.getOutputStream(),true);
             vomServer = new BufferedReader(new InputStreamReader(server.getInputStream()));
+            String text = vomServer.readLine();
+            System.out.println("Empfangen: " + text);
+
         }catch(Exception e)
         {
             System.out.println("Keine Verbindung am Server!");

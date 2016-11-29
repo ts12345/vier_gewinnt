@@ -37,12 +37,12 @@ public class OBERCONTROLLER {
                 break;
                 
             case 3:
-                s1 = new NETZWERKSPIELER(serverIP, 2001);
+                s1 = new NETZWERKSPIELER(serverIP, 2002);
                 s2 = new HUMANSPIELER(size);
                 break;
 
             case 4:
-                s2 = new NETZWERKSPIELER(serverIP, 2002);
+                s2 = new NETZWERKSPIELER(serverIP, 2001);
                 s1 = new HUMANSPIELER(size);
                 break;
                 
