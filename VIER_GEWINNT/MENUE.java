@@ -11,7 +11,7 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.border.Border;
 import javax.swing.*;
 
-public class Menue extends JFrame {
+public class MENUE extends JFrame {
     // Deklariert Variablen für Schaltflächen und das Panel an sich
     private JLabel label1;
     private JLabel label2;
@@ -22,7 +22,7 @@ public class Menue extends JFrame {
     private JPanel panel1;
 
     //Konstruktor
-    public Menue(){
+    public MENUE(){
         // Die hier gesetzten Zeichenketten erscheinen auf dem grafischen Menü
         String fenstertitel = "VIER GEWINNT!";
         String caption = "Vier gewinnt!";
@@ -174,7 +174,7 @@ public class Menue extends JFrame {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    new Menue();
+                    new MENUE();
                 }
             });
 
