@@ -13,7 +13,10 @@ public class STARTER {
     
     public STARTER() {
         // Deklariert Variablen für Übergabe an OBERCONTROLLER
-        int size, spieler, hauptport;
+        int size, spieler, hauptport; String serverIP = "localhost";
+        
+        // Deklariert Variable, die besagt, ob ein Netzwerkspiel gestartet wird:
+        boolean networkGame = false;
         
         // erstellt den Scanner
         Scanner scan = new Scanner(System.in);
@@ -42,15 +45,16 @@ public class STARTER {
         // Bereinigt die Werteeingabe von oben:
         switch(player) {
             case "2": spieler = 2; break;
-            case "3": spieler = 3; break;
-            case "4": spieler = 4; break;
+            case "3": spieler = 3; networkGame = true; break;
+            case "4": spieler = 4; networkGame = true; break;
             default:  spieler = 1; break;
         }
-        
-        // Abfrage der IP-Adresse (derzeit auskommentiert und überritten):
-            // System.out.println("Geben Sie die IP-Adresse des Servers ein:")
-            // String serverIP = scan.nextLine()
-        String serverIP = "localhost";
+    
+        // Abfrage der IP-Adresse, falls ein Netzwerkspiel gestartet werden soll:
+        if(networkGame == true) {
+            System.out.println("Geben Sie die IP-Adresse des Servers ein:");
+            serverIP = scan.nextLine();
+        }
         
         // Festlegung des Hauptports, auf dem alle Anfragen einlaufen (ggf. im OBERCONTROLER überritten):
         hauptport = 2000;
