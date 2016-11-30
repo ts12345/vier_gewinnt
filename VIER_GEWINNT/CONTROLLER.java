@@ -97,7 +97,7 @@ public class CONTROLLER
             while(( !gueltigerZug ) && ( anzahlVersuche !=3 )){
 
                 lastx = players[currentPlayer].getNextMove();
-
+           
                 try {
                     Thread.sleep(pause); 
                 } catch(InterruptedException ex) {
@@ -188,7 +188,7 @@ public class CONTROLLER
     {
         return view;
     }
-    
+
     public void alleSteinefallen(){
         boolean[][] check = spielfeld.besetzt();
         STEIN_ANIMATION_THREAD[][] t = new STEIN_ANIMATION_THREAD[check.length][check[0].length];
@@ -204,6 +204,15 @@ public class CONTROLLER
         //alleSteinefallen();
         spielfeld.leereSpielfeld();
         view.showWinner = false;
+        
+        try {
+            Thread.sleep(5000); 
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        
+        
+        frameView.dispose();
     }
 
     public void testeDiagonalengewinnMethode() {

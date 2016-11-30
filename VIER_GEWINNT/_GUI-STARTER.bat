@@ -1,4 +1,4 @@
-REM  VIER GEWINNT! - Startskript für den grafischen Starter
+﻿REM  VIER GEWINNT! - Startskript für den grafischen Starter
 REM  Dieses Startskript ist nur ein Provisorium, bis VIER GEWINNT! als JAR gepackt vorliegt
 
 REM am Zeilenanfang bedeutet, dass es sich um einen Kommentar handelt
@@ -22,4 +22,4 @@ REM  Wechselt in das "Vier Gewinnt"-Verzeichnis:
 cd %CD%
 
 REM  Startet "Vier Gewinnt":
-java -Dfile.encoding=cp850 Menue
+java -Dfile.encoding=cp850 MENUE
