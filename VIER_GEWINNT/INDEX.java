@@ -1,33 +1,38 @@
 
 /**
- * Write a description of class INDEX here.
+ * Objekte der Klasse INDEX teilen dem ZENSOR mit, welche Phrasen zensiert werden
+ * Die INDEX-Klasse befindet sich in Bearbeitung
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author SFr682k 
+ * @version 2016-12-01
  */
-public class INDEX
-{
-    // instance variables - replace the example below with your own
-    private int x;
+public class INDEX {
+    // deklariert Variablen für die Größe des Arrays
+    private int width = 15;  // 15 Felder in x-Richtung, nicht ändern!
+    private int length;      //  y Felder in y-Richtung
+    
+    // deklariert Variablen für die Anzahl der Wörter im Array
+    private int size;
+    
+    // deklariert ein Array für den Index
+    String[][] index;
 
-    /**
-     * Constructor for objects of class INDEX
-     */
-    public INDEX()
-    {
-        // initialise instance variables
-        x = 0;
+    // Konstruktor
+    public INDEX() {
+        // HIER manuell die Anzahl der indizierten Wörter einfügen
+        size = 1;
+        
+        // Hier wird demnächst die benötigte Anzahl der Felder in y-Richtung berechnet
+        length = 1;
+        
+        // Initialisiert das Array für die indizierten Wörter
+        index = new String[width][length];
+        
+        // Weiterer Quellcode folgt
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    // Methode, die zu zensierende Wörter auf den Index setzt
+    public void getIndex() {
+        // @hobbyduck, eine Vorbereitung für Ihre Liste kommt noch
     }
 }
