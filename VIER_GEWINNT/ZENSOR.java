@@ -35,29 +35,51 @@ public class ZENSOR {
             stelleZensieren[i] = false;
         }
         
-        // Die folgende Zensurpozedur muss noch (üb-)erarbeitet werden:
-            // Durchforstet mit Hilfe von gezählten Wiederholungen die Zeichenkette
-            for(int i = 0; i < inputLength; i++) {
-                for (int j = inputLength; j > i; j--) {
-                    // hier muss ich noch Code hinzufügen ...
-                }
-            }
+        // Legt fest, wie viele Zeichen einer anstößigen Phrase stehen bleiben
+        // zensiereAbZeichen = 1  bewirkt:   Zensur  -> Z*****
+        int zensiereAbZeichen = 1;
         
-            // deklariert das Zensurzeichen:
-            String zensurzeichen = "*";
-            
-            // geht den Eingabetext Zeichen für Zeichen durch
-            // Dabei werden zu zensierende Zeichen durch das Zensurzeichen ersetzt
-            for(int i = 0; i < inputLength; i++) {
-                if(stelleZensieren[i] == true) {
-                    output = output + zensurzeichen;
-                } else {
-                    output = output + input.charAt(i);
+        // Legt einen Zwischenspeicher für die Zensurprozedur an:
+        String zensurPruefen;
+        
+        // holt sich die Größe des Index:
+        int indexSize = schindlersListe.getIndexSize();
+                
+        // Durchforstet mit Hilfe von gezählten Wiederholungen die Zeichenkette
+        // i: Anfang der Auswahl, j: Ende der Auswahl
+        for(int i = 0; i < inputLength; i++) {
+            for(int j = inputLength; j > i; j--) {
+                // leert Zwischenspeicher
+                zensurPruefen = "";
+                
+                // schreibt die Auswahl in den Zwischenspeicher
+                for(int k = i; k < j; k++) {
+                    zensurPruefen = zensurPruefen + input.charAt(k);
+                }
+                
+                // gleicht ab, ob die Auswahl indiziert ist und zensiert wenn nötig
+                for(int k = 0; k < indexSize; k++) {
+                    if(zensurPruefen.equalsIgnoreCase(schindlersListe.getIndexValue(k))) {
+                        for(int l = i + zensiereAbZeichen; l < j; l++) {
+                            stelleZensieren[l] = true;
+                        }
+                    }
                 }
             }
-            
-        // Da obige Zensurprozedur noch nicht funktioniert, Rückgabe des Eingabewerts
-        output = input;
+        }
+        
+        // deklariert das Zensurzeichen:
+        String zensurzeichen = "*";
+        
+        // geht den Eingabetext Zeichen für Zeichen durch
+        // Dabei werden zu zensierende Zeichen durch das Zensurzeichen ersetzt
+        for(int i = 0; i < inputLength; i++) {
+            if(stelleZensieren[i] == true) {
+                output = output + zensurzeichen;
+            } else {
+                output = output + input.charAt(i);
+            }
+        }
         
         // Gibt die bereinigte Version der Eingabe zurück
         return output;
