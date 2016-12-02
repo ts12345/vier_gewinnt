@@ -10,7 +10,7 @@ public class INDEX {
     private int size;
     
     // deklariert ein Array für den Index
-    String[] index;
+    private String[] index;
 
     // Konstruktor
     public INDEX() {
