@@ -97,7 +97,7 @@ public class CONTROLLER
             while(( !gueltigerZug ) && ( anzahlVersuche !=3 )){
 
                 lastx = players[currentPlayer].getNextMove();
-           
+
                 try {
                     Thread.sleep(pause); 
                 } catch(InterruptedException ex) {
@@ -189,29 +189,16 @@ public class CONTROLLER
         return view;
     }
 
-    public void alleSteinefallen(){
-        boolean[][] check = spielfeld.besetzt();
-        STEIN_ANIMATION_THREAD[][] t = new STEIN_ANIMATION_THREAD[check.length][check[0].length];
-        for (int i1=0; i1<check.length; i1++){
-            for (int i2=0; i2<check[i1].length; i2++){
-                t[i1][i2]= new STEIN_ANIMATION_THREAD(i1, i2, spielfeld.getSpielfeld()[i1][i2], view);
-                t[i1][i2].run2();
-            }
-        }
-    }
-
     public void reset() {
-        //alleSteinefallen();
         spielfeld.leereSpielfeld();
         view.showWinner = false;
-        
+
         try {
             Thread.sleep(5000); 
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-        
-        
+
         frameView.dispose();
     }
 
