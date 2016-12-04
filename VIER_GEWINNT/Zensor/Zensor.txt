@@ -1,5 +1,12 @@
 Affe
 Esel
+Dumm
+Doof
+Kind
+Schwein
+Hass
+Nazi
+Verdammt
 #END#
 Wörter sind immer in einer neuen Zeile zu ergänzen.
 Alles ab hier wird ignoriert, Platz für freundliche Kommentare:
