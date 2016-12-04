@@ -1,60 +1,46 @@
+import java.util.List;
+import java.util.LinkedList;
+import java.io.*;
+
 /**
  * Objekte der Klasse INDEX teilen dem ZENSOR mit, welche Phrasen zensiert werden
  * Die INDEX-Klasse befindet sich in Bearbeitung
  * 
- * @author SFr682k 
+ * @author SFr682k and the one and only hobbyduck
  * @version 2016-12-01
  */
-public class INDEX {
+public class INDEX{
     // deklariert Variable für die Größe des Arrays
-    private int size;
-    
+    private List<String> index;
+
     // deklariert ein Array für den Index
-    private String[] index;
+    //private String[] index;
 
     // Konstruktor
     public INDEX() {
-        // HIER manuell die Anzahl der indizierten Wörter einfügen
-        // WICHTIG:   Letztes Wort = Position in Array + 1   !!!!
-        size = 3;
-                
-        // Initialisiert das Array für die indizierten Wörter
-        index = new String[size];
-        
-        // Lädt die auf dem Index vorhandenen Wörter
+        index=new LinkedList<String>();
         loadIndex();
     }
 
+    List<String> getList(){
+        return new LinkedList(index);
+    }
+
     // Methode, die zu zensierende Wörter auf den Index setzt
-    public void loadIndex() {
-        // Schreibt die Liste der zu zensierenden Wörter in den Index
-        // Bitte bei "0" beginnen!!
-        index[0] = "Wort 1";
-        index[1] = "Wort 2";
-        index[2] = "Wort 3";
-    }
-    
-    // Methode, die die Größe des Index zurückgibt
-    public int getIndexSize() {
-        return size;
-    }
-    
-    // Methode, die das Wort aus Stelle x des Index zurückgibt
-    public String getIndexValue(int position) {
-        // Deklariert einen Zwischenspeicher
-        String wort;
-        
-        // Prüft die Eingabe; gibt bei fehlerhaften Werten das erste/letzte Wort zurück
-        if (position < 0) {
-            position = 0;
-        } else if (position >= size) {
-            position = size - 1;
+    public void loadIndex(){
+        try{
+            FileReader fr = new FileReader("Zensor/Zensor.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String zeile;
+            do{
+                zeile = br.readLine();
+                index.add(0,zeile);
+            }
+            while(!zeile.startsWith("#END#"));
+            index.remove(0);
+            }
+            catch (Exception e){
+                System.out.println(e.toString());
         }
-        
-        // Lädt das Wort an Position x in den Zwischenspeicher
-        wort = index[position];
-        
-        // Gibt den Inhalt des Zwischenspeichers zurück
-        return wort;
     }
 }

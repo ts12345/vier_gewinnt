@@ -1,0 +1,5 @@
+Affe
+Esel
+#END#
+Wörter sind immer in einer neuen Zeile zu ergänzen.
+Alles ab hier wird ignoriert, Platz für freundliche Kommentare:
