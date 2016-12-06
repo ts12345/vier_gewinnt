@@ -28,7 +28,7 @@ public class ZENSOR {
             stelleZensieren[i] = false;
         }
         
-        /* /
+
         int zensiereAbZeichen = 1; // zensiereAbZeichen = 1  bewirkt:  Zensur -> Z*****
         String zensurzeichen = "*"; // Das bzw. die Zeichen, mit denen zensiert wird
         boolean zensurlueckenSchliessen = true; // wenn true: S********** statt S******w***
