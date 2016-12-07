@@ -1,1 +1,18 @@
+Affe
+Esel
+Dumm
+Doof
+Kind
+Schwein
+Hass
+Nazi
+Verdammt
+Vollpfosten
 #END#
+
+Version 2016-12-07
+
+Wörter sind immer in einer neuen Zeile zu ergänzen.
+Alles ab #END# wird ignoriert
+
+Platz für freundliche Kommentare:
