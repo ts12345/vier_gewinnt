@@ -4,7 +4,7 @@ import java.util.List;
  * Objekte der Klasse ZENSOR zensieren unangebrachte Wörter in Zeichenketten
  * 
  * @author SFr682k and the one and only hobbyduck
- * @version 2016-12-04
+ * @version 2016-12-07
  */
 public class ZENSOR {
     // deklariert ein Referenzattribut für den INDEX
@@ -28,10 +28,11 @@ public class ZENSOR {
             stelleZensieren[i] = false;
         }
         
-
+        /** Beginn der benutzerdefinierten Einstellungen */
         int zensiereAbZeichen = 1; // zensiereAbZeichen = 1  bewirkt:  Zensur -> Z*****
         String zensurzeichen = "*"; // Das bzw. die Zeichen, mit denen zensiert wird
         boolean zensurlueckenSchliessen = true; // wenn true: S********** statt S******w***
+        /** Ende der benutzerdefinierten Einstellungen */
         
         // Lädt Zensurliste
         List<String> index = schindlersListe.getList();
