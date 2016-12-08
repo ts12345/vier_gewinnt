@@ -30,6 +30,9 @@ public class VIEW extends JPanel {
     // Deklariert Zwischenspeicher für Spielstein-Bilder
     private BufferedImage roterStein;
     private BufferedImage gelberStein;
+    private BufferedImage gelberGewinner;
+    private BufferedImage roterGewinner;
+    
 
     // Variable für die aktuell ausgewählte Spalte
     private int spalte;
@@ -67,6 +70,8 @@ public class VIEW extends JPanel {
         try {
             roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
             gelberStein = ImageIO.read(new File("textures/gelber_Stein.png"));
+            gelberGewinner =  ImageIO.read(new File("textures/gelber Gewinner.jpg"));
+            roterGewinner =  ImageIO.read(new File("textures/roter Gewinner.jpg"));
         } catch (IOException ex) {
             // nichts zum Auffangen vorhanden
         }
@@ -175,13 +180,15 @@ public class VIEW extends JPanel {
         if(showWinner) {
             String str;
             if (winner==0) {
-                str = "Spieler 1 hat gewonnen!";
+                //str = "Spieler 1 hat gewonnen!";
+                g.drawImage(gelberGewinner,0,0,breite * size, hoehe * size, null);
             } else {
-                str = "Spieler 2 hat gewonnen!";
+                //str = "Spieler 2 hat gewonnen!";
+                g.drawImage(roterGewinner,0,0,breite * size, hoehe * size, null);
             }
             
-            g.setColor(Color.GREEN);
-            g.drawString(str, 300, 500);
+            //g.setColor(Color.GREEN);
+            //g.drawString(str, 300, 500);
         }
     }
 

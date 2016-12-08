@@ -123,8 +123,8 @@ public class CONTROLLER
         }
 
         //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
-        soundengine.playFanfare();
         view.showWinner(playerwon);
+        soundengine.playFanfare();
     }
 
     /**
@@ -191,14 +191,12 @@ public class CONTROLLER
 
     public void reset() {
         spielfeld.leereSpielfeld();
-        view.showWinner = false;
-
+        view.showWinner = true;
         try {
-            Thread.sleep(5000); 
+            Thread.sleep(4000); 
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
-
         frameView.dispose();
     }
 
