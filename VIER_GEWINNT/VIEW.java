@@ -178,17 +178,13 @@ public class VIEW extends JPanel {
 
         // Zeigt, wenn gewollt, den Sieger an
         if(showWinner) {
-            String str;
             if (winner==0) {
-                //str = "Spieler 1 hat gewonnen!";
-                g.drawImage(gelberGewinner,0,0,breite * size, hoehe * size, null);
+                // Gelb hat gewonnen
+                g.drawImage(gelberGewinner,0,0,breite * size, (hoehe + 1) * size, null);
             } else {
-                //str = "Spieler 2 hat gewonnen!";
-                g.drawImage(roterGewinner,0,0,breite * size, hoehe * size, null);
+                // Rot hat gewonnen
+                g.drawImage(roterGewinner,0,0,breite * size, (hoehe + 1) * size, null);
             }
-            
-            //g.setColor(Color.GREEN);
-            //g.drawString(str, 300, 500);
         }
     }
 
