@@ -22,22 +22,21 @@ public class VIEW extends JPanel {
 
     // Groesse eines Basisquadrats
     private int size = 100;
-    
+
     // Deklaration der Variablen für Feldbreite und -höhe
     private int breite;
     private int hoehe;
-    
-    // Deklariert Zwischenspeicher für Spielstein-Bilder
+
+    // Deklariert Zwischenspeicher für (Spielstein-)Bilder
     private BufferedImage roterStein;
     private BufferedImage gelberStein;
     private BufferedImage gelberGewinner;
     private BufferedImage roterGewinner;
     private BufferedImage unentschieden;
-    
 
     // Variable für die aktuell ausgewählte Spalte
     private int spalte;
-    
+
     // Variable, die besagt, ob eine Stein-Vorschau gezeichnet werden muss
     static boolean drawNeeded;
 
@@ -50,10 +49,13 @@ public class VIEW extends JPanel {
         // Erzeugt Referenz auf Spielfeld und Controller
         this.spielfeld = spielfeld;
         this.controller = controller;
-        
+
         // Ermittelt Feldbreite und -höhe
         breite = spielfeld.getBreite();
         hoehe  = spielfeld.getHoehe();
+        
+        // Ermittelt den Wert der size-Variable
+        size = controller.getSize();
 
         // Setzt bevorzugte Fenstergröße und zeichnet die Außenlinie des Felds
         setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
@@ -86,10 +88,12 @@ public class VIEW extends JPanel {
 
     // bereitet ein Spielfeld vor
     public void spielbrettMitLoecherVorbereiten() {
+        size = controller.getSize();
+        
         // deklariert und initialisiert benötigte Variablen
         Rectangle2D blauesFeld = new Rectangle2D.Float(0, 0 + size , breite * size, hoehe * size + size);
         Ellipse2D loch = new Ellipse2D.Double(0, 0, 0, 0);
-        
+
         // zeichnet das leere Spielfeld
         spielbrett = new Area(blauesFeld);
 
@@ -102,42 +106,9 @@ public class VIEW extends JPanel {
         }
     }
 
-    // Druckmethode, die das Spielfeld auf der Konsole ausgibt
-    public void printOutToConsole() {
-        print(spielfeld.getSpielfeld());
-    }
-
-    // Hilfsmethode, die ein zweidimensionales int Array ausdrucken kann
-    private void print(int[][] sp){
-        for (int i=sp[0].length-1; i>=0; i--){
-            for(int i2=0; i2<sp.length; i2++){
-                //System.out.print(sp[i2][i]+"   ");
-            }
-            //System.out.println();
-        }
-        //System.out.println();
-    }
-
-    // gibt den Wert der Rastergröße zurück
-    public int getsize() {
-        return size;
-    }
-
-    // setzt den Wert der Rastergröße
-    public void setsize(int size) {
-        this.size = size;
-        setPreferredSize(new Dimension(breite * size, (hoehe + 1) * size));
-        setBorder(BorderFactory.createLineBorder(Color.yellow));
-        spielbrettMitLoecherVorbereiten();
-    }
-
-    // Methode zur Vorschau der Repaint-Methode
-    public void repaintPreview() {
-        // repaint();
-    }
-
-    
     public void paintComponent(Graphics g) {
+        size = controller.getSize();
+        
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
@@ -147,12 +118,12 @@ public class VIEW extends JPanel {
 
         // Vorschau zeichnen (falls noetig)
         int[][] s = spielfeld.getSpielfeld();
-        
+
         // Zeichnet Stein-Vorschau Spieler 2, falls drawNeeded == true
         if(controller.spieleramzug == 2 && drawNeeded) {
             g.drawImage(roterStein, spalte * size,0 , size, size, null);
         }
-        
+
         // Zeichnet Stein-Vorschau Spieler 1, falls drawNeeded == true
         if(controller.spieleramzug == 1 && drawNeeded) {
             g.drawImage(gelberStein, spalte * size,0 , size, size, null);
@@ -206,6 +177,8 @@ public class VIEW extends JPanel {
 
     // Ermittelt die aktuelle Spalte
     public void setSpalte(int xWert) {
+        size = controller.getSize();
+        
         spalte = (xWert / size);
 
         // x-Wert außerhalb: Rückgabe des letztmöglichen x-Werts

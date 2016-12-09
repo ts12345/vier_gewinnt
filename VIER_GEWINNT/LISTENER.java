@@ -55,11 +55,15 @@ public class LISTENER implements MouseMotionListener {
     public void mouseDragged(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
     public void mousePressed(MouseEvent e){}
-
     
     // Rückgabemethode für die letzte x-Koordinate
-    public static int getLastX() {
-        return lastX;
+    public int getLastXCol() {
+        int spalteX;
+        int size = controller.getSize();
+        
+        spalteX = lastX / size;
+        
+        return spalteX;
     }
 
     // Rückgabemethode für die letzte y-Koordinate

@@ -14,6 +14,7 @@ public class STEIN_ANIMATION_THREAD implements Runnable
     private int size;
 
     private VIEW p;
+    private CONTROLLER controller;
     private Graphics onscreenGraphics;
 
     private BufferedImage offscreen;
@@ -35,15 +36,15 @@ public class STEIN_ANIMATION_THREAD implements Runnable
         }
     }
 
-    public STEIN_ANIMATION_THREAD(int x, int y, int spieler, VIEW p)
-    {
+    public STEIN_ANIMATION_THREAD(int x, int y, int spieler, VIEW p, CONTROLLER controller) {
         loadImages();
 
         this.x = x;
         this.y = y;
         this.p = p;
         this.spieler = spieler;
-        this.size = p.getsize();
+        this.controller = controller;
+        this.size = controller.getSize();
 
         onscreenGraphics = p.getGraphics();         
 
@@ -115,7 +116,7 @@ public class STEIN_ANIMATION_THREAD implements Runnable
         }
     }
     
-    public void run2(){
+    public void run2() {
         int curX = x * size;
         int curY = y *size;
         int i = 0;

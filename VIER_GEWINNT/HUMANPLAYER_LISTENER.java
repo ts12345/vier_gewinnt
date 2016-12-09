@@ -12,12 +12,18 @@ import java.util.concurrent.*;
 public class HUMANPLAYER_LISTENER extends MouseAdapter {
     private int lastX;
     private int lastY;
+    private int size;
+    
     private boolean listenForClick;
     private CyclicBarrier doneSignal;
+    private CONTROLLER controller;
 
-    public HUMANPLAYER_LISTENER(CyclicBarrier doneSignal) {
+    public HUMANPLAYER_LISTENER(CyclicBarrier doneSignal, CONTROLLER controller) {
         listenForClick = false;
         this.doneSignal =  doneSignal;
+        this.controller = controller;
+        
+        size = controller.getSize();
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -26,9 +32,10 @@ public class HUMANPLAYER_LISTENER extends MouseAdapter {
         if(listenForClick) {
             lastX = e.getX();
             lastY = e.getY();
+            size = controller.getSize();
             
-            // in der Folgezeile das 7*100 bedeutet: 7 Spalten zu je 100 Pixel
-            if(lastX > 7*100) {
+            // 7 ist hier die Anzahl der Spalten, size die Größe der Spalten
+            if(lastX > 7*size) {
                 return;
             }
             
@@ -45,8 +52,13 @@ public class HUMANPLAYER_LISTENER extends MouseAdapter {
     public void startListening() {
         listenForClick = true;
     }
-
-    public int getLastX() {
-        return lastX;
+    
+    public int getLastXCol() {
+        int spalteX;
+        size = controller.getSize();
+        
+        spalteX = lastX / size;
+        
+        return spalteX;
     }
 }

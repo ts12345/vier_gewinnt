@@ -28,27 +28,27 @@ public class OBERCONTROLLER {
                 int startspieler = random.nextInt(2);
                 
                 if(startspieler == 0) {
-                    s1 = new HUMANSPIELER(size);
+                    s1 = new HUMANSPIELER(commandante);
                     s2 = new COMPUTERSPIELER_TS(commandante.spielfeld);
                 } else {
                     s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
-                    s2 = new HUMANSPIELER(size);
+                    s2 = new HUMANSPIELER(commandante);
                 }
                 break;
                 
             case 3:
                 s1 = new NETZWERKSPIELER(serverIP, 2002);
-                s2 = new HUMANSPIELER(size);
+                s2 = new HUMANSPIELER(commandante);
                 break;
 
             case 4:
                 s2 = new NETZWERKSPIELER(serverIP, 2001);
-                s1 = new HUMANSPIELER(size);
+                s1 = new HUMANSPIELER(commandante);
                 break;
                 
             default:
-                s1 = new HUMANSPIELER(size);
-                s2 = new HUMANSPIELER(size);
+                s1 = new HUMANSPIELER(commandante);
+                s2 = new HUMANSPIELER(commandante);
                 break;
         }
 
