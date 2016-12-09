@@ -1,4 +1,4 @@
-REM  VIER GEWINNT - Startskript für den Server
+﻿REM  VIER GEWINNT - Startskript für den Server
 
 REM am Zeilenanfang bedeutet, dass es sich um einen Kommentar handelt
 
@@ -21,4 +21,4 @@ REM  Wechselt in das Verzeichnis mit dem "Vier Gewinnt"-Server:
 cd %CD%
 
 REM  Startet den "Vier Gewinnt"-Server
-java -Dfile.encoding=cp850 SERVER
+java -Dfile.encoding=cp850 STARTER

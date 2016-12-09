@@ -2,9 +2,12 @@
 
 VIER_GEWINNT/*.class
 VIER_GEWINNT/*.ctxt
+VIER_GEWINNT_SERVER/*.class
+VIER_GEWINNT_SERVER/*.ctxt
 
 
 # BlueJ-Config-Datei
 
 VIER_GEWINNT/package.bluej
+VIER_GEWINNT_SERVER/package.bluej
 .gitignore

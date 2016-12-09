@@ -31,7 +31,7 @@ public class SERVER {
      * IOException tritt auf, falls es Probleme mit dem Socket gibt
      * �BERARBEITEN!!!!!!!!
      */
-    public SERVER() throws IOException {
+    public SERVER(int hauptport, boolean chatSupport, boolean zensieren) throws IOException {
         ServerStarten();
         boolean EXIT = false;
 
@@ -142,18 +142,5 @@ public class SERVER {
         vomClient2.close();
         client2Socket.close();
         System.out.println("Verbindung zu Client 2 beendet");
-    }
-
-    /**
-     * Hauptprogramm zum Erzeugen des Serverobjekts
-     * @param args keine Parameter beim Programmaufruf erforderlich
-     */
-    public static void main(String[] args) {
-        try {
-            new SERVER();
-        } catch (Exception e) {
-            System.err.println("Fehler in der Serververabeitung.");
-            System.exit(1);
-        }
     }
 }
