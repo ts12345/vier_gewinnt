@@ -9,8 +9,7 @@ import java.awt.event.*;
  * @since (21.04.16)
  */
 
-public class CONTROLLER
-{
+public class CONTROLLER {
     SPIELFELD spielfeld;    //Referenz auf das Spielfeld
     VIEW view;              //Referenz auf die Darstellung
     LISTENER listener;
@@ -19,8 +18,7 @@ public class CONTROLLER
     JFrame frameView = new JFrame("Vier gewinnt!");
     int size;
 
-    public CONTROLLER(int size)
-    {
+    public CONTROLLER(int size) {
         this.size = size;
         spielfeld = new SPIELFELD();         //Neues Spielfeld
         view = new VIEW(spielfeld,this);     //Neuer View
@@ -44,8 +42,7 @@ public class CONTROLLER
      * @param n     Anzahl zu setzender Steine
      */
 
-    public void fillRandomly(int n)
-    {
+    public void fillRandomly(int n) {
         for(int i = 0; i < n; i++)
         {
             if((i%2) == 0)
@@ -63,6 +60,9 @@ public class CONTROLLER
      */
     public void spielStarten(SPIELER s1, SPIELER s2){
         int pause = 0;
+        
+        int belegteFelder = 0;
+        int spielfeldgroesse = spielfeld.getBreite() * spielfeld.getHoehe();
 
         s1.activateListener(frameView);
         s2.activateListener(frameView);
@@ -74,57 +74,74 @@ public class CONTROLLER
 
         int currentPlayer = 1;
 
-        int lastx=0;
-        int playerwon=4;
+        int lastx = 0;
+        int playerwon = 4;
 
         boolean spielZuEnde = false;
+        
+        
+        
         while ( !spielZuEnde ){
-            int anzahlVersuche = 0;
-            boolean gueltigerZug = false;
-            spieleramzug = nextplayer(currentPlayer);
-            if(players[currentPlayer].isHuman())
-            {
-                view.showPreview(true);
-                pause = 0;
-            }
-
-            else
-            {
-                view.showPreview(false);
-                pause = 1000;
-            }
-
-            while(( !gueltigerZug ) && ( anzahlVersuche !=3 )){
-
-                lastx = players[currentPlayer].getNextMove();
-
-                try {
-                    Thread.sleep(pause); 
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-
-                spieleramzug=currentPlayer;
-
-                gueltigerZug = spielsteinSetzen(lastx, currentPlayer);                                
-                anzahlVersuche++;
-
-                if(anzahlVersuche == 3){
-                    spielZuEnde = true;
-                    playerwon = nextplayer(currentPlayer);
-                }
-            }
-            players[nextplayer(currentPlayer)].VerarbeiteGegnerischenZug(lastx);
-            if(spielfeld.checkFourInARow(currentPlayer,lastx,spielfeld.freiesFeld(lastx)-1)){
+            if (belegteFelder == spielfeldgroesse) {
                 spielZuEnde = true;
-                playerwon = currentPlayer;
+                playerwon = 3;
+            } else {
+                int anzahlVersuche = 0;
+                boolean gueltigerZug = false;
+                
+                spieleramzug = nextplayer(currentPlayer);
+                if(players[currentPlayer].isHuman()) {
+                    view.showPreview(true);
+                    pause = 0;
+                } else {
+                    view.showPreview(false);
+                    pause = 1000;
+                }
+    
+                while(( !gueltigerZug ) && ( anzahlVersuche !=3 )){
+    
+                    lastx = players[currentPlayer].getNextMove();
+    
+                    try {
+                        Thread.sleep(pause); 
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    }
+    
+                    spieleramzug=currentPlayer;
+    
+                    gueltigerZug = spielsteinSetzen(lastx, currentPlayer);                                
+                    anzahlVersuche++;
+    
+                    if(anzahlVersuche == 3) {
+                        spielZuEnde = true;
+                        playerwon = nextplayer(currentPlayer);
+                    }
+                }
+                
+                belegteFelder++;
+                System.out.println(belegteFelder);
+                
+                players[nextplayer(currentPlayer)].VerarbeiteGegnerischenZug(lastx);
+                
+                if(spielfeld.checkFourInARow(currentPlayer,lastx,spielfeld.freiesFeld(lastx)-1)){
+                    spielZuEnde = true;
+                    playerwon = currentPlayer;
+                }
+            
+                currentPlayer = nextplayer(currentPlayer);
             }
-            currentPlayer = nextplayer(currentPlayer);
         }
-
+        
         //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
         view.showWinner(playerwon);
-        soundengine.playFanfare();
+        System.out.println("Siegspieler:" + playerwon);
+        
+        if (playerwon == 3) {
+            soundengine.playDrawer();
+        } else {
+            soundengine.playFanfare();
+        }
     }
 
     /**

@@ -12,30 +12,35 @@ public class SOUNDENGINE
 {
     File click;
     File fanfare;
-    public SOUNDENGINE()
-    {
+    File drawer;
+    public SOUNDENGINE() {
         File click = new File("sounds/click.wav"); 
-        File fanfare = new File("sounds/fanfare.wav"); 
+        File fanfare = new File("sounds/fanfare.wav");
+        File drawer = new File("sounds/drawer.wav");
         this.click = click;
         this.fanfare = fanfare;
+        this.drawer = drawer;
     }
 
     public static void PlaySound(File Sound){
-        try{
+        try {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(Sound));
             clip.start();            
-        }catch(Exception e)
-        {
+        } catch(Exception e) {
             //System.out.println("fail");
         }
     }
 
-    public void playClick(){
+    public void playClick() {
         PlaySound(click);
     }
     
-    public void playFanfare(){
+    public void playFanfare() {
         PlaySound(fanfare);
+    }
+    
+    public void playDrawer() {
+        PlaySound(drawer);
     }
 }
