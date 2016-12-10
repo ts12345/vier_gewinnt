@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Objekte der Klasse STARTER starten ein neues Spiel
- * Eine grafische Oberfläche ist geplant
+ * Eine grafischer Starter wird von der Klasse MENUE gestellt
  * 
  * @author SFr682k
  */

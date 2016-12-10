@@ -1,6 +1,5 @@
 import java.io.File;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem; import javax.sound.sampled.Clip;
 
 /**
  * Die Klasse SOUNDENGINE spielt Sounds ab.
@@ -10,14 +9,9 @@ import javax.sound.sampled.Clip;
  * 
  */
 public class SOUNDENGINE {
-    // Töne für während des Spiels
-    File click, illegal;
-    
-    // Töne für Spielende
-    File fanfare, drawer, lost;
-    
-    // Hauptthema
-    File main;
+    File click, illegal;            // Töne während des Spiels
+    File fanfare, drawer, lost;     // Töne für Spielende
+    File main;                      // Hintergrundmusik
     
     public SOUNDENGINE() {
         File click = new File("sounds/click.wav");
@@ -44,17 +38,13 @@ public class SOUNDENGINE {
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(Sound));
             clip.start();            
-        } catch(Exception e) {
-            //System.out.println("fail");
-        }
+        } catch(Exception e) { }
     }
 
     public void playClick()     { playSound(click); }
     public void playIllegal()   { playSound(illegal); }
-    
     public void playFanfare()   { playSound(fanfare); }
     public void playDrawer()    { playSound(drawer); }
     public void playLost()      { playSound(lost); }
-    
     public void playMain()      { playSound(main); }
 }

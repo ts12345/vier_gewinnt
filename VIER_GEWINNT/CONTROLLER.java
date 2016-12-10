@@ -11,20 +11,20 @@ import java.awt.event.*;
  */
 
 public class CONTROLLER {
-    SPIELFELD spielfeld;    //Referenz auf das Spielfeld
-    VIEW view;              //Referenz auf die Darstellung
+    SPIELFELD spielfeld;        // Referenz auf das Spielfeld
+    VIEW view;                  // Referenz auf die Darstellung
     LISTENER listener;
     SOUNDENGINE soundengine;
     int spieleramzug;
     JFrame frameView = new JFrame("Vier gewinnt!");
-    
+
     private int size;
 
     public CONTROLLER(int size) {
         this.size = size;
         spielfeld = new SPIELFELD();          //Neues Spielfeld
         view = new VIEW(spielfeld, this);     //Neuer View
-        
+
         listener = new LISTENER(this);
         frameView.addMouseMotionListener(listener);
         soundengine = new SOUNDENGINE();
@@ -51,14 +51,12 @@ public class CONTROLLER {
         s2.activateListener(frameView);
 
         SPIELER[] players = new SPIELER[3];
-
         players[1] = s1;
         players[2] = s2;
 
-        int currentPlayer = 1;
+        int currentPlayer = 1, playerwon = 4;
 
         int lastx = 0;
-        int playerwon = 4;
 
         boolean spielZuEnde = false;
 
@@ -72,7 +70,7 @@ public class CONTROLLER {
 
                 spieleramzug = nextplayer(currentPlayer);
 
-                if(players[currentPlayer].isHuman()) {
+                if ( players[currentPlayer].isHuman() ) {
                     view.showPreview(true);
                     pause = 0;
                 } else {
@@ -80,21 +78,17 @@ public class CONTROLLER {
                     pause = 1000;
                 }
 
-                while(( !gueltigerZug ) && ( anzahlVersuche !=3 )){
-
+                while( (!gueltigerZug)&&(anzahlVersuche !=3) ) {
                     lastx = players[currentPlayer].getNextMove();
 
-                    try {
-                        Thread.sleep(pause);
-                    } catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                    }
+                    try { Thread.sleep(pause); }
+                    catch(InterruptedException ex) { Thread.currentThread().interrupt(); }
 
-                    gueltigerZug = spielsteinSetzen(lastx, currentPlayer);                                
+                    gueltigerZug = spielsteinSetzen(lastx, currentPlayer);
 
                     if (gueltigerZug == false) {
                         anzahlVersuche++;
-                        if(players[currentPlayer].isHuman()) { soundengine.playIllegal(); }
+                        if( players[currentPlayer].isHuman() ) { soundengine.playIllegal(); }
                     }
 
                     if(anzahlVersuche == 3) {
@@ -107,22 +101,27 @@ public class CONTROLLER {
 
                 players[nextplayer(currentPlayer)].VerarbeiteGegnerischenZug(lastx);
 
-                if(spielfeld.checkFourInARow(currentPlayer,lastx,spielfeld.freiesFeld(lastx)-1)){
+                if( spielfeld.checkFourInARow(currentPlayer, lastx, spielfeld.freiesFeld(lastx) - 1) ) {
                     spielZuEnde = true;
                     playerwon = currentPlayer;
+                    view.showPreview(false);
+                    
+                    try { Thread.sleep(2000); }
+                    catch(InterruptedException ex) { Thread.currentThread().interrupt(); }
                 }
 
                 currentPlayer = nextplayer(currentPlayer);
             }
         }
-
-        //System.out.println("Spieler " + (playerwon+1) + " hat gewonnen");
+   
+        view.showPreview(true);
         view.showWinner(playerwon);
+        view.repaint();
 
-        if (playerwon == 3) {
-            soundengine.playDrawer();
-        } else {
-            soundengine.playFanfare();
+        if (playerwon == 3) { soundengine.playDrawer(); }
+        else {
+            if ( players[playerwon].isHuman() ) { soundengine.playFanfare(); }
+            else { soundengine.playLost(); }
         }
     }
 
@@ -137,11 +136,13 @@ public class CONTROLLER {
             case 1: return 2;
             case 2: return 1;
         }
+        
         return 0;
     }
 
     public boolean spielsteinSetzen(int x, int spieleramzug) {
         boolean geklappt = spielfeld.spielSteinSetzen(x, spieleramzug);
+        
         if (geklappt) {
             view.showPreview(false);
             spielfeld.entferneOberstenStein(x);
@@ -152,50 +153,28 @@ public class CONTROLLER {
             soundengine.playClick();
             view.repaint();
         }
+        
         return geklappt;
     }
 
-    public VIEW getView() {
-        return view;
-    }
+    public VIEW getView() { return view; }
 
     public void reset() {
         spielfeld.leereSpielfeld();
         view.showWinner = true;
-        try {
-            Thread.sleep(4000); 
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+        
+        try { Thread.sleep(6000); }
+        catch(InterruptedException ex) { Thread.currentThread().interrupt(); }
+        
         frameView.dispose();
     }
 
-    public int getSize() {
-        return size;
-    }
-    
+    public int getSize() { return size; }
+
     public void setSize(int size) {
-        if(size < 25) {
-            size = 25;
-        } else if (size > 150) {
-            size = 150;
-        }
-        
+        if(size < 25) { size = 25; }
+        else if (size > 150) { size = 150; }
+
         this.size = size;
-    }
-    
-    public void testeDiagonalengewinnMethode() {
-        reset();
-        int player = 1;
-        for(int i = 0; i < 4; i++) {
-            for(int j = 2; j < 5 - i; j++) {
-                spielsteinSetzen(j, player);
-            }
-            player = 3 - player;
-        }
-        for(int i = 0; i < 4; i++) {
-            spielsteinSetzen(2 + i, 2);
-        }
-        System.out.println(spielfeld.checkFourInARow(2, 3, spielfeld.freiesFeld(3) - 1));
     }
 }

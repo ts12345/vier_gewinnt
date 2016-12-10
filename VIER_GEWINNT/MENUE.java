@@ -22,7 +22,7 @@ public class MENUE extends JFrame {
     private JPanel panel1;
 
     //Konstruktor
-    public MENUE(){
+    public MENUE() {
         // Die hier gesetzten Zeichenketten erscheinen auf dem grafischen Menü
         String fenstertitel = "VIER GEWINNT!";
         String caption = "Vier gewinnt!";
@@ -170,7 +170,7 @@ public class MENUE extends JFrame {
     }
     
     // main-Methode
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {

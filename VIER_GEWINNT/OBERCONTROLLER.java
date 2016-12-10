@@ -5,24 +5,19 @@ import java.util.Random;
  * Objekte der Klasse OBERCONTROLLER verwalten den Ablauf eines Netzwerkspiels
  */
 public class OBERCONTROLLER {
-    // Konstruktor für Objekte der Klasse OBERCONTROLLER
-    // Übergabewerte für Feldgröße und Typ der Spieler
     public OBERCONTROLLER(int size, int spieler, String serverIP, int hauptport) {
-        // erstellt den Scanner
         Scanner scan = new Scanner(System.in);
         
         // deklariert Referenzattribute für beide Spieler
-        SPIELER s1;
-        SPIELER s2;
+        SPIELER s1, s2;
         
         // erstellt auf ein Objekt, das Zufallszahlen erzeugt, Referenz
         Random random = new Random();
         
-        // deklariert und erstellt Referenz auf einen Controller
         CONTROLLER commandante = new CONTROLLER(size);
        
         // erstellt Referenz auf die beiden Spieler
-        switch(spieler){
+        switch(spieler) {
             case 2:
                 // Startspieler wird zufällig ermittelt
                 int startspieler = random.nextInt(2);
@@ -52,8 +47,8 @@ public class OBERCONTROLLER {
                 break;
         }
 
-        while(true){
-            commandante.spielStarten(s1,s2);
+        while(true) {
+            commandante.spielStarten(s1, s2);
             commandante.reset();
         }
     }

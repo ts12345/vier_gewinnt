@@ -5,7 +5,6 @@ import java.util.Random;
  * Computerspieler
  * 
  * @author TS 
- * @version (eine Versionsnummer oder ein Datum)
  */
 public class COMPUTERSPIELER_TS extends SPIELER {
     // Referenzattribut für das "globale" Spielfeld
@@ -15,27 +14,19 @@ public class COMPUTERSPIELER_TS extends SPIELER {
     
     // Referenzattribut und Array für das Testspielfeld (-> Zwischenspeicher)
     private SPIELFELD mySpielfeld;
-    int[][] copy_of_board;
+    int[][] copy_of_board = new int[7][6];
     
-    // deklariert Variablen für eigene und gegnerische Spielernummer
-    private int playerNumber;
-    private int opponentNumber;
+    private int playerNumber, opponentNumber;
 
     // Konstruktor für den Computerspieler
     public COMPUTERSPIELER_TS(SPIELFELD feld) {
-        // setzt Referenz auf das als Parameter angegebene (="globale") Spielfeld
-        this.feld = feld;
-        
         this.random = new Random();
         
-        // setzt Referenz auf das Testspielfeld
-        this.mySpielfeld = new SPIELFELD();
-        
-        // Legt die Größe des zur Übertragung benötigten Arrays fest
-        this.copy_of_board = new int[7][6];
+        this.feld = feld;                      // Referenz auf globales Spielfeld
+        this.mySpielfeld = new SPIELFELD();    // Referenz auf Testspielfeld
     }
 
-    // Lädt den aktuellen Zustand des Spielfeldes in den Zwischenspeicher
+    // Lädt aktuellen Zustand des Spielfeldes in Zwischenspeicher
     private void copyToMyBoard() {
         for (int i = 0; i < 7; ++i) {
             for (int j = 0; j < 6; ++j) {
@@ -44,7 +35,7 @@ public class COMPUTERSPIELER_TS extends SPIELER {
         }
     }
 
-    // Überträgt den Inhalt des Zwischenspeichers auf das Testspielfeld
+    // Überträgt Inhalt des Zwischenspeichers auf Testspielfeld
     private void copyToMySpielfeld() {
         for (int i = 0; i < 7; ++i) {
             for (int j = 0; j < 6; ++j) {
@@ -53,41 +44,29 @@ public class COMPUTERSPIELER_TS extends SPIELER {
         }
     }
 
-    // Ermittelt die Spielernummer des Computerspielers
+    // Ermittelt Spielernummer des Computerspielers
     public int playerNumber() {
-        // deklariert Variable sum, in der die Anzahl aller Spielsteine festgehalten wird
-        int sum = 0;
+        int sum = 0;    // Variable für Anzahl der Spielsteine
         
-         //  Addiert auf die Variable sum den Wert 1 für einen Stein von Spieler 1
-         //  Addiert auf die Variable sum den Wert 2 für einen Stein von Spieler 2
+        // (sum + 1) für Stein von Spieler 1, (sum + 2) für Stein von Spieler 2
         for (int i = 0; i < 7; ++i) {
-            for (int j = 0; j < 6; ++j) {
-                sum += this.copy_of_board[i][j];
-            }
+            for (int j = 0; j < 6; ++j) { sum += this.copy_of_board[i][j]; }
         }
         
-        // Anz. Steine Spieler 1 gleich Anz. Steine Spieler 2: sum Vielfaches von 3
-        if (sum % 3 == 0) {
-            return 1;
-        }
-        
-        return 2;
+        // Anz. Steine Spieler 1 == Anz. Steine Spieler 2: $sum \in V_3$
+        if (sum % 3 == 0) { return 1; }
+        else { return 2; }
     }
 
     // Ermittelt den "optimalen Zug"
     public int getNextMove() {
-        // deklariert Zählervariablen
-        int j;
-        int i;
-        int i2;
+        int i, i2, j;                           // Zählvariablen
         
-        // deklariert Arrays für Bewertung der Zugmöglichkeiten
-        int[] goodMoveScore = new int[7];
+        int[] goodMoveScore = new int[7];       // Bewertung d. Zugmöglichkeiten
         int[] badMoveScore = new int[7];
         
-        // deklariert Variable, ob optimaler Zug gefunden wurde
-        boolean foundBestMove = false;
-        int bestMove = -1;
+        boolean foundBestMove = false;          // optimaler Zug gefunden?
+        int bestMove = -1;                      // bester Zug
         
         // übernimmt mit Hilfe der oben deklarierten Methoden den Spielfeldstatus
         this.copyToMyBoard();
@@ -198,27 +177,19 @@ public class COMPUTERSPIELER_TS extends SPIELER {
         // Hilft der "Good Move Score" nicht weiter, wird ein Zufallszug ermittelt
         if (moves.size() == 0) {
             for (i2 = 0; i2 < 7; ++i2) {
-                if (this.mySpielfeld.spielSteinSetzen(i2, this.playerNumber)) {
-                    moves.add(i2);
-                }
+                if ( this.mySpielfeld.spielSteinSetzen(i2, this.playerNumber) ) { moves.add(i2); }
                 
                 this.logIt("Random Move");
             }
         }
         
-        // Gibt den besten Zug zürück
-        // Gibt es mehrere beste Züge, wird zufällig ein bester Zug ausgewählt
+        // Gibt besten Zug zürück; mehrere beste Züge: zufällige Auswahl
         bestMove = (Integer)moves.get(this.random.nextInt(moves.size()));
         this.logIt("My move: " + bestMove);
         return bestMove;
     }
 
-    // teilt mit, dass der Computerspieler nicht menschlich ist
-    public boolean isHuman() {
-        return false;
-    }
+    public boolean isHuman() { return false; }
 
-    // Log-Funktion
-    public void logIt(String str) {
-    }
+    public void logIt(String str) { }
 }
