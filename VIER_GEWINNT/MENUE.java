@@ -1,170 +1,150 @@
-import javax.swing.UIManager.LookAndFeelInfo;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import javax.swing.border.Border; import javax.swing.*;
+import java.awt.*; import java.awt.event.*; import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.io.File; import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.util.concurrent.*;
 
-public class MENUE extends JFrame {
-    // Deklariert Variablen für Schaltflächen und das Panel an sich
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel label3;
-    private JLabel label4;
-    private JLabel label5;
-    private JLabel label6;
-    private JPanel panel1;
+public class MENUE extends JPanel {
+    private static CyclicBarrier doneSignal = new CyclicBarrier(2);
+    private static MENUE_LISTENER mouseListener;
+
+    private BufferedImage startbildschirm;
+    private Runnable spielRunnable;
+    private Thread spielThread;
+
+    /** Hier gesetzte Werte werden an den Obercontroller weitergegeben */
+    private int     einzelspieler  =            2;  // Mensch gegen Computerspieler
+    private int     mehrspieler    =            1;  // Mensch gegen Mensch
+    private int     netzwerkspiel  =            3;  // Netzwerkspiel, Login an Hauptport
+    private String  serverIP       =  "localhost";  // IP-Adresse des Vier-Gewinnt-Servers
+    private int     hauptport      =         2000;  // Verbindungsport des Vier-Gewinnt-Servers
+    private int     size           =           75;  // Größe eines Basisquadrats
+
+    /** Variablen für Schaltflächen */
+    private int     esOLx, esOLy, esURx, esURy;     // Namen der Variablen setzen sich folgendermaßen zusammen:
+    private int     msOLx, msOLy, msURx, msURy;     // es: Einzelspieler, ms: Mehrspieler, ns: Netzwerkspiel,
+    private int     nsOLx, nsOLy, nsURx, nsURy;     // ip: IP-Adresse, hp: Hauptport
+    private int     ipOLx, ipOLy, ipURx, ipURy;     // OL: Oben links, UR: Unten rechts, ENA: aktiv (enabled)
+    private int     hpOLx, hpOLy, hpURx, hpURy;     // x: x-Koordinate (in px), y: y-Koordinate (in px)
+    private boolean esENA, msENA, nsENA, ipENA, hpENA;
 
     public MENUE() {
-        // Die hier gesetzten Zeichenketten erscheinen auf dem grafischen Menü
-        String fenstertitel = "VIER GEWINNT!";
-        String caption = "Vier gewinnt!";
-        String mode1 = "Einzelspieler";
-        String mode2 = "Mehrspieler";
-        String mode3 = "Netzwerkspiel";
-        String mode4 = "Spieler 1";
-        String mode5 = "Spieler 2";
-        
-        // Die hier gesetzten Zahlenwerte werden an den Obercontroller weitergegeben
-        int spmode1 = 2;       // Mensch gegen Computerspieler
-        int spmode2 = 1;       // Mensch gegen Mensch
-        int spmode4 = 3;
-        int spmode5 = 4;
-        
-        // Legt den Titel des Fensters fest
-        this.setTitle(fenstertitel);
-        this.setSize(500,400);
+        mouseListener = new MENUE_LISTENER(doneSignal, this);
+        Graphics graphics;
 
-        //Panel ohne Layout
-        JPanel contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(500,400));
-        contentPane.setBackground(new Color(0,0,0));
-        
-        // Definiert das Label für Überschrift
-        label1 = new JLabel();
-        label1.setBounds(144,30,189,30);
-        label1.setBackground(new Color(214,217,223));
-        label1.setForeground(new Color(255,255,255));
-        label1.setEnabled(true);
-        label1.setFont(new Font("SansSerif",1,30));
-        label1.setText(caption);
-        label1.setVisible(true);
+        setPreferredSize( new Dimension(525, 525) );
 
-        // Definiert das Label für Modus 1
-        label2 = new JLabel();
-        label2.setBounds(170,116,131,35);
-        label2.setBackground(new Color(214,217,223));
-        label2.setForeground(new Color(255,255,255));
-        label2.setEnabled(true);
-        label2.setFont(new Font("SansSerif",1,20));
-        label2.setText(mode1);
-        label2.setVisible(true);
+        try { startbildschirm = ImageIO.read(new File("textures/startbildschirm.png")); }
+        catch (IOException ex) {}
 
-        // Definiert das Label für Modus 2
-        label3 = new JLabel();
-        label3.setBounds(175,149,131,50);
-        label3.setBackground(new Color(214,217,223));
-        label3.setForeground(new Color(255,255,255));
-        label3.setEnabled(true);
-        label3.setFont(new Font("SansSerif",1,20));
-        label3.setText(mode2);
-        label3.setVisible(true);
+        setSizes();
+        repaint();
 
-        // Definiert das Label für Modus 3
-        label4 = new JLabel();
-        label4.setBounds(168,205,152,30);
-        label4.setBackground(new Color(214,217,223));
-        label4.setForeground(new Color(255,255,255));
-        label4.setEnabled(true);
-        label4.setFont(new Font("SansSerif",1,20));
-        label4.setText(mode3);
-        label4.setVisible(true);
+        JFrame frameView = new JFrame("Vier gewinnt!");
+        frameView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
-        // Definiert das Label für Modus 4
-        label5 = new JLabel();
-        label5.setBounds(201,245,90,35);
-        label5.setBackground(new Color(214,217,223));
-        label5.setForeground(new Color(255,255,255));
-        label5.setEnabled(true);
-        label5.setFont(new Font("SansSerif",1,16));
-        label5.setText(mode4);
-        label5.setVisible(true);
+        frameView.add(this);
+        frameView.pack();
+        frameView.setVisible(true);
 
-        // Definiert das Label für Modus 5
-        label6 = new JLabel();
-        label6.setBounds(201,285,90,35);
-        label6.setBackground(new Color(214,217,223));
-        label6.setForeground(new Color(255,255,255));
-        label6.setEnabled(true);
-        label6.setFont(new Font("SansSerif",1,16));
-        label6.setText(mode5);
-        label6.setVisible(true);
-
-        // Definiert das Panel
-        panel1 = new JPanel(null);
-        panel1.setBorder(BorderFactory.createEtchedBorder(1));
-        panel1.setBounds(165,105,150,100);
-        panel1.setBackground(new Color(214,217,223));
-        panel1.setForeground(new Color(0,0,0));
-        panel1.setEnabled(true);
-        panel1.setFont(new Font("sansserif",0,12));
-        panel1.setVisible(false);
-
-        // Fügt die Labels dem Panel ohne Layout hinzu
-        contentPane.add(label1);
-        contentPane.add(label2);
-        contentPane.add(label3);
-        contentPane.add(label4);
-        contentPane.add(label5);
-        contentPane.add(label6);
-        contentPane.add(panel1);
-
-        //adding panel to JFrame and seting of window position and close operation
-        this.add(contentPane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.pack();
-        this.setVisible(true);
-
-        // Mouse Listener für Modus 1
-        label2.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                int size = 75;
-
-                Runnable spielRunnable = new SPIELTHREAD(size, spmode1, "localhost", 2000);
-                Thread spielThread = new Thread(spielRunnable);
-                spielThread.start();
-            }
-
-        });
-        
-        // Mouse Listener für Modus 2
-        label3.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
-                int size = 75;
-
-                Runnable spielRunnable = new SPIELTHREAD(size, spmode2, "localhost", 2000);
-                Thread spielThread = new Thread(spielRunnable);
-                spielThread.start();
-            }
-
-        });
-
+        frameView.addMouseListener(mouseListener);
+        listen();
     }
-    
-    // main-Methode
-    public static void main(String[] args) {
-        System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    new MENUE();
-                }
-            });
 
+    /**
+      * Einstellungen für Anzahl, Position, Größe und Aktivität der Schaltflächen
+      */
+    private void setSizes() {
+        esOLx =  51;     esOLy = 248;
+        esURx = 214;     esURy = 275;
+        esENA = true;
+
+        msOLx = 317;     msOLy = 248;
+        msURx = 472;     msURy = 275;
+        msENA = true;
+
+        nsOLx = 170;     nsOLy = 322;
+        nsURx = 355;     nsURy = 349;
+        nsENA = false;
+
+        ipOLx = 263;     ipOLy = 386;
+        ipURx = 525;     ipURy = 401;
+        ipENA = false;
+
+        hpOLx = 263;     hpOLy = 418;
+        hpURx = 525;     hpURy = 433;
+        hpENA = false;
     }
+
+    public void paintComponent(Graphics graphics) {        
+        super.paintComponent(graphics);
+        Graphics2D graphics2D = (Graphics2D) graphics;
+
+        graphics.drawImage(startbildschirm, 0, 0, 525, 525, null);
+    }
+
+    /**
+     * Überprüft, ob sich der Mauszeiger beim letzten Klick auf einer Schaltfläche befand.
+     * Wenn ja, wird das Kürzel der Schaltfläche (s. Variablendeklaration) an die "run"-Methode weitergegeben
+     */
+    private void execute(int x, int y) {
+        if     ( inBereich(x, y, esOLx, esURx, esOLy, esURy) && esENA) { run("es"); }
+        else if( inBereich(x, y, msOLx, msURx, msOLy, msURy) && msENA) { run("ms"); }
+        else if( inBereich(x, y, nsOLx, nsURx, nsOLy, nsURy) && nsENA) { run("ns"); }
+        else if( inBereich(x, y, ipOLx, ipURx, ipOLy, ipURy) && ipENA) { run("ip"); }
+        else if( inBereich(x, y, hpOLx, hpURx, hpOLy, hpURy) && hpENA) { run("hp"); }
+        else { listen(); }
+    }
+
+    /** 
+     * Hilfsmethode für execute
+     * Kontrolliert, ob das Koordinatenpaar (x|y) im angegebenen Bereich liegt
+     */
+    private boolean inBereich(int x, int y, int xUGrenze, int xOGrenze, int yUGrenze, int yOGrenze) {
+        if( (x <= xOGrenze) && (x >= xUGrenze) && (y <= yOGrenze) && (y >= yUGrenze) ) {return true;}
+        else { return false; }
+    }
+
+    /**
+     * Startet einen neuen Spielthread
+     */
+    private void run(String schaltflaeche) {
+        switch(schaltflaeche) {
+            case "es":
+                spielRunnable = new SPIELTHREAD(size, einzelspieler, serverIP, hauptport);
+                spielThread   = new Thread(spielRunnable);
+                spielThread.start();
+                break;
+                
+            case "ms":
+                spielRunnable = new SPIELTHREAD(size, mehrspieler, serverIP, hauptport);
+                spielThread   = new Thread(spielRunnable);
+                spielThread.start();
+                break;
+                
+            case "ns":  break;
+            case "ip":  break;
+            case "hp":  break;
+            default:    break;
+        }
+
+        listen();
+    }
+
+    /**
+     * Wartet auf einen Mausklick und gibt die Zeigerposition an die Methode "execute" weiter
+     */
+    private void listen() {
+        doneSignal.reset();
+        mouseListener.startListening();
+
+        try { doneSignal.await(); }
+        catch (InterruptedException ex) { }
+        catch (BrokenBarrierException ex) { }
+
+        execute(mouseListener.getLastX(), mouseListener.getLastY());
+    }
+
+    public static void main(String[] args) { MENUE menue = new MENUE(); }
 }

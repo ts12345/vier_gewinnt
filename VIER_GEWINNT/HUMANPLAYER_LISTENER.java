@@ -31,9 +31,9 @@ public class HUMANPLAYER_LISTENER extends MouseAdapter {
             
             listenForClick = false;
             
-            try {  doneSignal.await(); } 
-            catch (InterruptedException ex) { } 
-            catch (BrokenBarrierException ex) { }       
+            try {  doneSignal.await(); }
+            catch (InterruptedException ex) { }
+            catch (BrokenBarrierException ex) { }
         }   
     }
 

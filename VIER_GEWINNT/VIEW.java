@@ -81,42 +81,42 @@ public class VIEW extends JPanel {
     // Legt fest, ob Vorschau gezeigt werden soll
     public void showPreview(boolean showPreview) { this.drawNeeded = showPreview; }
     
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics graphics) {
         size = controller.getSize();
         
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        super.paintComponent(graphics);
+        Graphics2D graphics2D = (Graphics2D) graphics;
 
         // Blaue Spielfläche mit Löchern auf schwarzem Hintergrund        
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0 + size , breite * size, hoehe * size);
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0, 0 + size , breite * size, hoehe * size);
 
         int[][] s = spielfeld.getSpielfeld();     // lädt aktuelle Belegung des Spielfelds
 
         // Zeichnet Stein-Vorschau, falls drawNeeded == true
-        if(controller.spieleramzug == 2 && drawNeeded) { g.drawImage(roterStein, spalte * size, 0, size, size, null); }
-        if(controller.spieleramzug == 1 && drawNeeded) { g.drawImage(gelberStein, spalte * size, 0, size, size, null); }
+        if(controller.spieleramzug == 2 && drawNeeded) { graphics.drawImage(roterStein, spalte * size, 0, size, size, null); }
+        if(controller.spieleramzug == 1 && drawNeeded) { graphics.drawImage(gelberStein, spalte * size, 0, size, size, null); }
 
         // Jetzt werden platzierte rote / gelbe Spielsteine auf dem Spielfeld gezeichnet
         for(int i = 0;  i < spielfeld.getBreite(); i++) {
             for(int j = 0 ;  j < spielfeld.getHoehe(); j++) {
-                if      (s[i][j] == 1) { g.drawImage(roterStein, i * size,(-j + 5) * size + size, size, size, null); }
-                else if (s[i][j] == 2) { g.drawImage(gelberStein, i * size,(-j + 5) * size + size, size, size, null); }
-                else if (s[i][j] == 3) { g.drawImage(roterSteinReihe, i * size, (-j + 5) * size + size, size, size, null); }
-                else if (s[i][j] == 4) { g.drawImage(gelberSteinReihe, i * size, (-j + 5) * size + size, size, size, null); }
-                else                   { g.setColor(Color.BLACK); }
+                if      (s[i][j] == 1) { graphics.drawImage(roterStein, i * size,(-j + 5) * size + size, size, size, null); }
+                else if (s[i][j] == 2) { graphics.drawImage(gelberStein, i * size,(-j + 5) * size + size, size, size, null); }
+                else if (s[i][j] == 3) { graphics.drawImage(roterSteinReihe, i * size, (-j + 5) * size + size, size, size, null); }
+                else if (s[i][j] == 4) { graphics.drawImage(gelberSteinReihe, i * size, (-j + 5) * size + size, size, size, null); }
+                else                   { graphics.setColor(Color.BLACK); }
             }
         }
 
         // Setzt die Farbe auf blau und füllt das Spielfeld aus
-        g.setColor(Color.BLUE);
-        g2d.fill(spielbrett);
+        graphics.setColor(Color.BLUE);
+        graphics2D.fill(spielbrett);
 
         // Zeigt, wenn gewollt, den Sieger an
         if(showWinner) {
-            if      (winner == 1) { g.drawImage(roterGewinner, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Rot hat gewonnen
-            else if (winner == 2) { g.drawImage(gelberGewinner, 0, 0, breite * size, (hoehe + 1) * size, null); } // Gelb hat gewonnen
-            else if (winner == 3) { g.drawImage(unentschieden, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Unentschieden
+            if      (winner == 1) { graphics.drawImage(roterGewinner, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Rot hat gewonnen
+            else if (winner == 2) { graphics.drawImage(gelberGewinner, 0, 0, breite * size, (hoehe + 1) * size, null); } // Gelb hat gewonnen
+            else if (winner == 3) { graphics.drawImage(unentschieden, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Unentschieden
         }
     }
 

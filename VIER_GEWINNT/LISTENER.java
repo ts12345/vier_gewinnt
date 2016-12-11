@@ -21,7 +21,7 @@ public class LISTENER implements MouseMotionListener {
     
     // Maus innerhalb: Vorschau an / Maus außerhalb: Vorschau aus
     public void mouseEntered(MouseEvent e) { view.showPreview(true); }
-    public void mouseExited(MouseEvent e) { view.showPreview(false); }
+    public void mouseExited(MouseEvent e)  { view.showPreview(false); }
 
     // Teilt dem VIEW-Objekt die aktuelle X-Koordinate der Maus mit
     public void mouseMoved(MouseEvent e) {
@@ -35,9 +35,9 @@ public class LISTENER implements MouseMotionListener {
     }
 
     // Leere Methoden, die derzeit nicht gebraucht werden
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e)  {}
     public void mouseReleased(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e)  {}
     
     public int getLastXCol() {
         int spalteX, size = controller.getSize();
