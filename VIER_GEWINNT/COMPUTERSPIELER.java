@@ -6,9 +6,8 @@ import java.util.Random;
  * 
  * @author TS 
  */
-public class COMPUTERSPIELER_TS extends SPIELER {
-    // Referenzattribut für das "globale" Spielfeld
-    private SPIELFELD feld;
+public class COMPUTERSPIELER extends SPIELER {
+    private SPIELFELD feld;     // Referenzattribut für globales Spielfeld
     
     private Random random;
     
@@ -19,7 +18,7 @@ public class COMPUTERSPIELER_TS extends SPIELER {
     private int playerNumber, opponentNumber;
 
     // Konstruktor für den Computerspieler
-    public COMPUTERSPIELER_TS(SPIELFELD feld) {
+    public COMPUTERSPIELER(SPIELFELD feld) {
         this.random = new Random();
         
         this.feld = feld;                      // Referenz auf globales Spielfeld
@@ -111,7 +110,7 @@ public class COMPUTERSPIELER_TS extends SPIELER {
         
         // Protokollierung und Rückgabe des ggf. in obiger Schleife gefundenen Siegzuges
         if (foundBestMove) {
-            this.logIt("Winner Move");
+            this.logIt("Winner Move: " + bestMove);
             return bestMove;
         }
         
@@ -131,7 +130,7 @@ public class COMPUTERSPIELER_TS extends SPIELER {
         
         // Protokollierung und Rückgabe des ggf. in obiger Schleife gefundenen "Zerstörungszuges"
         if (foundBestMove) {
-            this.logIt("Necessary Destroy Move " + bestMove);
+            this.logIt("Necessary Destroy Move: " + bestMove);
             return bestMove;
         }
         
@@ -162,24 +161,30 @@ public class COMPUTERSPIELER_TS extends SPIELER {
             if (badMoveScore[i2] < 0) continue;
             
             if (goodMoveScore[i2] > maxScore) {
-                this.logIt("Adding Move " + i2);
                 moves.clear();
-                moves.add(i2);
+                if ( !this.feld.spalteVoll(i2) ) {
+                    moves.add(i2);
+                    this.logIt("Adding Move " + i2);
+                }
+                
                 maxScore = goodMoveScore[i2];
             }
             
             if (goodMoveScore[i2] != maxScore) continue;
-            
-            this.logIt("Adding Move " + i2);
-            moves.add(i2);
+                       
+            if ( !this.feld.spalteVoll(i2) ) {
+                moves.add(i2);
+                this.logIt("Adding Move " + i2);
+            }
         }
         
         // Hilft der "Good Move Score" nicht weiter, wird ein Zufallszug ermittelt
         if (moves.size() == 0) {
             for (i2 = 0; i2 < 7; ++i2) {
-                if ( this.mySpielfeld.spielSteinSetzen(i2, this.playerNumber) ) { moves.add(i2); }
-                
-                this.logIt("Random Move");
+                if ( !this.feld.spalteVoll(i2) ) { 
+                    moves.add(i2);
+                    this.logIt("Leere Spalte: " + i2);
+                }
             }
         }
         

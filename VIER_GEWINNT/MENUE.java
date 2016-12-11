@@ -8,8 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import javax.swing.border.Border;
-import javax.swing.*;
+import javax.swing.border.Border; import javax.swing.*;
 
 public class MENUE extends JFrame {
     // Deklariert Variablen für Schaltflächen und das Panel an sich
@@ -21,20 +20,19 @@ public class MENUE extends JFrame {
     private JLabel label6;
     private JPanel panel1;
 
-    //Konstruktor
     public MENUE() {
         // Die hier gesetzten Zeichenketten erscheinen auf dem grafischen Menü
         String fenstertitel = "VIER GEWINNT!";
         String caption = "Vier gewinnt!";
-        String mode1 = "1 vs. 1";
-        String mode2 = "Single Player";
-        String mode3 = "Network Game";
-        String mode4 = "Player 1";
-        String mode5 = "Player 2";
+        String mode1 = "Einzelspieler";
+        String mode2 = "Mehrspieler";
+        String mode3 = "Netzwerkspiel";
+        String mode4 = "Spieler 1";
+        String mode5 = "Spieler 2";
         
         // Die hier gesetzten Zahlenwerte werden an den Obercontroller weitergegeben
-        int spmode1 = 1;
-        int spmode2 = 2;
+        int spmode1 = 2;       // Mensch gegen Computerspieler
+        int spmode2 = 1;       // Mensch gegen Mensch
         int spmode4 = 3;
         int spmode5 = 4;
         
@@ -59,7 +57,7 @@ public class MENUE extends JFrame {
 
         // Definiert das Label für Modus 1
         label2 = new JLabel();
-        label2.setBounds(201,116,90,35);
+        label2.setBounds(170,116,131,35);
         label2.setBackground(new Color(214,217,223));
         label2.setForeground(new Color(255,255,255));
         label2.setEnabled(true);
@@ -69,7 +67,7 @@ public class MENUE extends JFrame {
 
         // Definiert das Label für Modus 2
         label3 = new JLabel();
-        label3.setBounds(174,149,131,50);
+        label3.setBounds(175,149,131,50);
         label3.setBackground(new Color(214,217,223));
         label3.setForeground(new Color(255,255,255));
         label3.setEnabled(true);
@@ -136,16 +134,11 @@ public class MENUE extends JFrame {
         // Mouse Listener für Modus 1
         label2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                int size = 100;
-
-                System.out.println("starte spiel 1 vs 1");
+                int size = 75;
 
                 Runnable spielRunnable = new SPIELTHREAD(size, spmode1, "localhost", 2000);
                 Thread spielThread = new Thread(spielRunnable);
                 spielThread.start();
-
-                System.out.println("gestartet! spiel 1 vs 1");
-
             }
 
         });
@@ -153,16 +146,11 @@ public class MENUE extends JFrame {
         // Mouse Listener für Modus 2
         label3.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                int size = 100;
-
-                System.out.println("starte spiel im single-player-modus");
+                int size = 75;
 
                 Runnable spielRunnable = new SPIELTHREAD(size, spmode2, "localhost", 2000);
                 Thread spielThread = new Thread(spielRunnable);
                 spielThread.start();
-
-                System.out.println("gestartet! spiel im single-player-modus");
-
             }
 
         });
@@ -179,5 +167,4 @@ public class MENUE extends JFrame {
             });
 
     }
-
 }

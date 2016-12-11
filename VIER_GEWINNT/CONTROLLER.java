@@ -163,7 +163,7 @@ public class CONTROLLER {
         spielfeld.leereSpielfeld();
         view.showWinner = true;
         
-        try { Thread.sleep(6000); }
+        try { Thread.sleep(4000); }
         catch(InterruptedException ex) { Thread.currentThread().interrupt(); }
         
         frameView.dispose();

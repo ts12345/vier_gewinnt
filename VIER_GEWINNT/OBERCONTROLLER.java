@@ -24,9 +24,9 @@ public class OBERCONTROLLER {
                 
                 if(startspieler == 0) {
                     s1 = new HUMANSPIELER(commandante);
-                    s2 = new COMPUTERSPIELER_TS(commandante.spielfeld);
+                    s2 = new COMPUTERSPIELER(commandante.spielfeld);
                 } else {
-                    s1 = new COMPUTERSPIELER_TS(commandante.spielfeld);
+                    s1 = new COMPUTERSPIELER(commandante.spielfeld);
                     s2 = new HUMANSPIELER(commandante);
                 }
                 break;

@@ -1,29 +1,21 @@
 import javax.swing.*;
-import java.awt.*; 
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import javax.imageio.ImageIO;
+import java.awt.*;  import java.awt.event.*; import java.awt.image.BufferedImage;
+import java.io.*; import javax.imageio.ImageIO;
 
-public class STEIN_ANIMATION_THREAD implements Runnable
-{
-    private Graphics g;
-    private int x;
-    private int y;
-    private int spieler;
-    private int size;
+/**
+ * STEIN_ANIMATION_THREAD: Thread für die Fallen-Animation der Spielsteine
+ */
+public class STEIN_ANIMATION_THREAD implements Runnable {
+    private Graphics graphics;
+    private int x, y, spieler, size;
 
-    private VIEW p;
+    private VIEW view;
     private CONTROLLER controller;
     private Graphics onscreenGraphics;
 
-    private BufferedImage offscreen;
-    private BufferedImage vorlage;
+    private BufferedImage offscreen, vorlage;
+    private BufferedImage roterStein, gelberStein;
 
-    private BufferedImage roterStein;
-    private BufferedImage gelberStein;
-
-    //    private float acceleration = 5.81f / 2;
     private float acceleration = 5.81f * 2;
     private int timeToSleep = 5;
 
@@ -31,138 +23,73 @@ public class STEIN_ANIMATION_THREAD implements Runnable
         try {
             roterStein = ImageIO.read(new File("textures/roter_Stein.png"));
             gelberStein = ImageIO.read(new File("textures/gelber_Stein.png"));
-        } catch (IOException ex) {
-
-        }
+        } catch (IOException ex) { }
     }
 
-    public STEIN_ANIMATION_THREAD(int x, int y, int spieler, VIEW p, CONTROLLER controller) {
+    public STEIN_ANIMATION_THREAD(int x, int y, int spieler, VIEW view, CONTROLLER controller) {
         loadImages();
 
         this.x = x;
         this.y = y;
-        this.p = p;
+        this.view = view;
         this.spieler = spieler;
         this.controller = controller;
         this.size = controller.getSize();
 
-        onscreenGraphics = p.getGraphics();         
+        onscreenGraphics = view.getGraphics();         
 
-        int w = p.getWidth();
-        int h = p.getHeight();
-        offscreen = createImage(p);
-
-        vorlage = createImage(p);
+        int width = view.getWidth();
+        int height = view.getHeight();
+        
+        offscreen = createImage(view);
+        vorlage = createImage(view);
     }
 
     private int calculateYPosition(int time) {
-        float pos = time * time * acceleration / 1000.0f;
-        return (int) pos;
+        float position = time * time * acceleration / 1000.0f;
+        return (int) position;
     }
 
     public BufferedImage createImage(JPanel panel) {
-        int w = panel.getWidth();
-        int h = panel.getHeight();
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = bi.createGraphics();
-        panel.paint(g);
-        return bi;
-    }
-
-    public BufferedImage createImage(JPanel panel, int x, int y) {
-        int w = panel.getWidth();
-        int h = panel.getHeight();
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = bi.createGraphics();
-        panel.paint(g);
-        return bi;
+        int width  = panel.getWidth();
+        int height = panel.getHeight();
+        
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics2D = bufferedImage.createGraphics();
+        panel.paint(graphics2D);
+        
+        return bufferedImage;
     }
 
     public void run() {
-        int curX = x * size;
-        int curY = 0;
+        int currentX = x * size;
+        int currentY = 0;
         int i = 0;
-
 
         BufferedImage stein;
 
-        if(spieler == 1) {
-            stein = roterStein;
-        } else {
-            stein  = gelberStein;
-        }
+        if(spieler == 1) { stein = roterStein; }
+        else { stein  = gelberStein; }
 
-        offscreen = createImage(p);     
-        Graphics2D g = offscreen.createGraphics();            
+        offscreen = createImage(view);     
+        Graphics2D graphics2D = offscreen.createGraphics();            
 
-        while(curY < (6 - y)*size - size/3 )  { // Execute one update step
-            g.drawImage(vorlage.getSubimage(curX, curY, size, size), curX, curY, null);
+        while(currentY < (6 - y)*size - size/3 )  { // Execute one update step
+            graphics2D.drawImage(vorlage.getSubimage(currentX, currentY, size, size), currentX, currentY, null);
 
-            curY = i * i;            
-            curY = calculateYPosition(timeToSleep * i);
+            currentY = i * i;            
+            currentY = calculateYPosition(timeToSleep * i);
             i++;
-            g.setColor(Color.BLACK);
+            graphics2D.setColor(Color.BLACK);
 
-            g.drawImage(stein, curX, curY, size, size, null);
-            g.setColor(Color.BLUE);
-            g.fill(p.getSpielbrett());
-
+            graphics2D.drawImage(stein, currentX, currentY, size, size, null);
+            graphics2D.setColor(Color.BLUE);
+            graphics2D.fill(view.getSpielbrett());
 
             onscreenGraphics.drawImage(offscreen, 0, 0, null);
 
-            try {
-                Thread.sleep(timeToSleep);  // milliseconds
-            } catch (InterruptedException ex) { } 
+            try { Thread.sleep(timeToSleep); } // timeToSleep in milliseconds
+            catch (InterruptedException ex) { } 
         }
-    }
-    
-    public void run2() {
-        int curX = x * size;
-        int curY = y *size;
-        int i = 0;
-
-
-        BufferedImage stein;
-
-        if(spieler == 1) {
-            stein = roterStein;
-        } else {
-            stein  = gelberStein;
-        }
-
-        offscreen = createImage(p);     
-        Graphics2D g = offscreen.createGraphics();            
-
-        while(curY <size  )  { // Execute one update step
-            g.drawImage(vorlage.getSubimage(curX, curY, size, size), curX, curY, null);           
-            curY = curY+calculateYPosition(timeToSleep * i);
-            i++;
-            g.setColor(Color.BLACK);
-
-            g.drawImage(stein, curX, curY, size, size, null);
-            g.setColor(Color.BLUE);
-            g.fill(p.getSpielbrett());
-
-
-            onscreenGraphics.drawImage(offscreen, 0, 0, null);
-
-            try {
-                Thread.sleep(timeToSleep);  // milliseconds
-            } catch (InterruptedException ex) { } 
-        }
-    }
-
-    public int max(int a, int b) {
-        if(a > b)
-            return a;
-        else 
-            return b;
-    }
-
-    public int min(int a, int b) {
-        if(a < b)
-            return a;
-        else 
-            return b;
     }
 }
