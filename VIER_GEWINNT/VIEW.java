@@ -22,6 +22,7 @@ public class VIEW extends JPanel {
     private BufferedImage roterStein, gelberStein;
     private BufferedImage roterSteinReihe, gelberSteinReihe;
     private BufferedImage gelberGewinner, roterGewinner, unentschieden;
+    private BufferedImage gelbGibtAuf, rotGibtAuf;
 
     private int spalte;              // aktuell ausgewählte Spalte
     static boolean drawNeeded;       // Stein-Vorschau zeichen - ja/nein
@@ -56,6 +57,9 @@ public class VIEW extends JPanel {
             roterGewinner  = ImageIO.read(new File("textures/roter Gewinner.jpg"));
             gelberGewinner = ImageIO.read(new File("textures/gelber Gewinner.jpg"));
             unentschieden  = ImageIO.read(new File("textures/unentschieden.jpg"));
+            
+            gelbGibtAuf = ImageIO.read(new File("textures/gelbGibtAuf.jpg"));
+            rotGibtAuf  = ImageIO.read(new File("textures/rotGibtAuf.jpg"));
         } catch (IOException ex) { }
     }
 
@@ -116,7 +120,9 @@ public class VIEW extends JPanel {
         if(showWinner) {
             if      (winner == 1) { graphics.drawImage(roterGewinner, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Rot hat gewonnen
             else if (winner == 2) { graphics.drawImage(gelberGewinner, 0, 0, breite * size, (hoehe + 1) * size, null); } // Gelb hat gewonnen
-            else if (winner == 3) { graphics.drawImage(unentschieden, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Unentschieden
+            else if (winner == 3) { graphics.drawImage(gelbGibtAuf, 0, 0, breite * size, (hoehe + 1) * size, null); }    // Gelb gibt auf, Rot gewinnt
+            else if (winner == 4) { graphics.drawImage(rotGibtAuf, 0, 0, breite * size, (hoehe + 1) * size, null); }     // Rot gibt auf, Gelb gewinnt
+            else if (winner == 5) { graphics.drawImage(unentschieden, 0, 0, breite * size, (hoehe + 1) * size, null); }  // Unentschieden
         }
     }
 

@@ -8,11 +8,11 @@ import java.util.List;
  */
 public class ZENSOR {
     // deklariert ein Referenzattribut für den INDEX
-    INDEX schindlersListe;
+    INDEX blacklist;
 
     public ZENSOR() {
         // Erstellt Referenz auf den INDEX
-        schindlersListe = new INDEX();
+        blacklist = new INDEX();
     }
 
     // Methode, die eine Eingabezeichenkette bereinigt zurückgibt
@@ -35,7 +35,7 @@ public class ZENSOR {
         /** Ende der benutzerdefinierten Einstellungen */
         
         // Lädt Zensurliste
-        List<String> index = schindlersListe.getList();
+        List<String> index = blacklist.getList();
         
         // Schaut, welche Zeichen zensiert werden müssen
         while(!index.isEmpty()) {

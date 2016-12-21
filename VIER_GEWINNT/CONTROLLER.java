@@ -55,15 +55,13 @@ public class CONTROLLER {
         players[2] = s2;
 
         int currentPlayer = 1, playerwon = 4;
-
         int lastx = 0;
-
         boolean spielZuEnde = false;
 
         while ( !spielZuEnde ) {
             if (belegteFelder == spielfeldgroesse) {
                 spielZuEnde = true;
-                playerwon = 3;
+                playerwon = 5;
             } else {
                 int anzahlVersuche = 0;
                 boolean gueltigerZug = false;
@@ -93,7 +91,7 @@ public class CONTROLLER {
 
                     if(anzahlVersuche == 3) {
                         spielZuEnde = true;
-                        playerwon = nextplayer(currentPlayer);
+                        playerwon = nextplayer(currentPlayer) + 2;
                     }
                 }
 
@@ -118,6 +116,8 @@ public class CONTROLLER {
         view.showWinner(playerwon);
         view.repaint();
 
+        if (playerwon > 2) { playerwon = playerwon - 2; }
+        
         if (playerwon == 3) { soundengine.playDrawer(); }
         else {
             if ( players[playerwon].isHuman() ) { soundengine.playFanfare(); }
