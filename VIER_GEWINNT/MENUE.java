@@ -123,7 +123,12 @@ public class MENUE extends JPanel {
                 spielThread.start();
                 break;
                 
-            case "ns":  break;
+            case "ns":
+                spielRunnable = new SPIELTHREAD(size, netzwerkspiel, serverIP, hauptport);
+                spielThread   = new Thread(spielRunnable);
+                spielThread.start();
+                break;
+                
             case "ip":  break;
             case "hp":  break;
             default:    break;
