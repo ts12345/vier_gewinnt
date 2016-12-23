@@ -66,7 +66,7 @@ public class MENUE extends JPanel {
 
         nsOLx = 170;     nsOLy = 322;
         nsURx = 355;     nsURy = 349;
-        nsENA = false;
+        nsENA = true;
 
         ipOLx = 263;     ipOLy = 386;
         ipURx = 525;     ipURy = 401;

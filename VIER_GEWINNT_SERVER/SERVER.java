@@ -1,146 +1,87 @@
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
- * modifizierter Server für JAVACHAT
+ * Server für VIER GEWINNT
  * @author S. Friedl (Basierend auf "Wie geht's?" - ISB-Arbeitskreis)
  * @version 1.0
  */
-
 public class SERVER {
+    SPIELSERVER_THREAD spielsrvthread;
+    Random random;
+    
     /** bidir Schnittstelle zur Netzwerkprotokoll-Implementierung des Servers*/
-    private ServerSocket serverSocket1 = null;
-    private ServerSocket serverSocket2 = null;
+    private ServerSocket serverSocket  = null;
+    
     /** bidir Schnittstelle zur Netzwerkprotokoll-Implementierung des Clients*/
     private Socket client1Socket = null;
     private Socket client2Socket = null;
-
-    /** Schreibkanal zum Client*/
-    private PrintWriter zumClient1 = null;
-    private PrintWriter zumClient2 = null;
-    /** Lesekanal vom Client*/
-    private BufferedReader vomClient1 = null;
-    private BufferedReader vomClient2 = null;
-
-    /** Botschaft von Client zum Server*/
-    private String client1Nachricht = null;
-    private String client2Nachricht = null;
-
+    
+    /** Zwischenspeicher für die aktuellen Einstellungen */
+    private boolean chatSupport;
+    private boolean zensieren;
+    private int     zensAb;
+    private String  zzeichen;
+    private boolean zlueckenSchliessen;
+    
     /**
-     * IOException tritt auf, falls es Probleme mit dem Socket gibt
-     * �BERARBEITEN!!!!!!!!
+     * Startet den "Vier Gewinnt"-Server
      */
-    public SERVER(int hauptport, boolean chatSupport, boolean zensieren) throws IOException {
-        ServerStarten();
-        boolean EXIT = false;
-
-        Client1VerbindungStarten(); //auf Client 1 warten und verbinden
-        Client2VerbindungStarten(); //auf Client 2 warten und verbinden
-
-        do {//lesen und antworten
-            System.out.println("warte auf Botschaft von Client 1...");
-            client1Nachricht = vomClient1.readLine();
-            System.out.println("Client 1: " + client1Nachricht);
-            zumClient2.println(client1Nachricht);
-
-            System.out.println("warte auf Botschaft von Client 2...");
-            client2Nachricht = vomClient2.readLine();
-            System.out.println("Client 2: " + client2Nachricht);
-            zumClient1.println(client2Nachricht);            
-        } while (EXIT == false);
-
-        Client1VerbindungBeenden();
-        Client2VerbindungBeenden();
-        ServerStoppen();
+    public SERVER(int hauptport, boolean chatSupport, boolean zensieren, int zensAb, String zzeichen, boolean zlueckenSchliessen) throws IOException {
+        random = new Random();
+        
+        this.chatSupport = chatSupport;
+        this.zensieren = zensieren;
+        this.zensAb = zensAb;
+        this.zzeichen = zzeichen;
+        this.zlueckenSchliessen = zlueckenSchliessen;
+        
+        serverStarten(hauptport);        
+        main();
     }
 
     /**
-     * fragt den Port ab und erzeugt den Serversocket
+     * frägt den Port ab und erzeugt den Serversocket
      */
-    private void ServerStarten() throws IOException {
-        Scanner s = new Scanner(System.in);
-
-        int port1;
-        int port2;
-
-        // System.out.println("Port fuer Client 1 eingeben: ");
-        // port1 = s.nextInt();
-
-        // Provisorische Zuweisung der Netzwerkports:
-        port1 = 2001;
-        port2 = 2002;
-
-        serverSocket1 = new ServerSocket(port1);
-
-        // System.out.println("Port fuer Client 2 eingeben:" );
-        // port2 = s.nextInt();
-
-        serverSocket2 = new ServerSocket(port2);
-
+    private void serverStarten(int hauptport) throws IOException {
+        serverSocket = new ServerSocket(hauptport);
         System.out.println("Server gestartet...");
     }
 
     /**
-     * schliesst den Serversocket
+     * HAUPTMETHODE
+     * ============
+     * 1. Wartet, bis sich zwei Spieler mit dem Server verbunden haben
+     * 2. Übergibt die beiden Spieler den entsprechenden Serverthreads
+     * 3. "Telefonnummerntausch" beider Spieler
+     * 4. das Ganze von vorne ...
      */
-    private void ServerStoppen() throws IOException {
-        serverSocket1.close();
-        serverSocket2.close();
+    private void main() throws IOException {
+        do {
+            client1Socket = serverSocket.accept();
+            client2Socket = serverSocket.accept();
+            
+            spielsrvthread = new SPIELSERVER_THREAD(client1Socket, client2Socket);            
+            new Thread(spielsrvthread).start();
+
+            int startspieler = startspielerLosen();
+            spielsrvthread.spielStarten(startspieler);
+        } while (true);
+    }
+    
+    /**
+     * schließt den Serversocket
+     */
+    private void serverStoppen() throws IOException {
+        serverSocket.close();
         System.out.println("Server gestoppt...");
     }
-
-    /**
-     * wartet auf Verbindung zu Client 1 und erzeugt noetige Lese- und Schreibobjekte
-     * nachdem eine Verbindung hergestellt wurde
-     */
-    private void Client1VerbindungStarten() throws IOException {
-        //warten auf die Verbindung
-        client1Socket = serverSocket1.accept();  
-
-        // Der clientSocket wird zum Lesen und Schreiben geoeffnet 
-        zumClient1 = new PrintWriter(client1Socket.getOutputStream(), true);
-        vomClient1 = new BufferedReader(new InputStreamReader(client1Socket.getInputStream()));
-
-        //Begruessung des Clients senden
-        zumClient1.println("Verbunden - Sie sind Client 1");
-        System.out.println("Client 1 verbunden");
-    }
-
-    /**
-     * wartet auf Verbindung zu Client 2 und erzeugt noetige Lese- und Schreibobjekte
-     * nachdem eine Verbindung hergestellt wurde
-     */
-    private void Client2VerbindungStarten() throws IOException {
-        //warten auf die Verbindung
-        client2Socket = serverSocket2.accept();  
-
-        // Der clientSocket wird zum Lesen und Schreiben geoeffnet 
-        zumClient2 = new PrintWriter(client2Socket.getOutputStream(), true);
-        vomClient2 = new BufferedReader(new InputStreamReader(client2Socket.getInputStream()));
-
-        //Begruessung des Clients senden
-        zumClient2.println("Verbunden - Sie sind Client 2");
-        System.out.println("Client 2 verbunden");
-    }
-
-    /**
-     * beendet die Verbindung zu Client 1
-     */
-    private void Client1VerbindungBeenden() throws IOException {
-        zumClient1.close();
-        vomClient1.close();
-        client1Socket.close();
-        System.out.println("Verbindung zu Client 1 beendet");
-    }
-
-    /**
-     * beendet die Verbindung zu Client 2
-     */
-    private void Client2VerbindungBeenden() throws IOException {
-        zumClient2.close();
-        vomClient2.close();
-        client2Socket.close();
-        System.out.println("Verbindung zu Client 2 beendet");
+    
+    /** Lost den Startspieler aus */
+    private int startspielerLosen() {
+        int startspieler = random.nextInt(2) + 1;        
+        return startspieler;
     }
 }

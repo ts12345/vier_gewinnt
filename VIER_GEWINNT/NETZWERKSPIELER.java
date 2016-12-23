@@ -9,37 +9,47 @@ public class NETZWERKSPIELER extends SPIELER {
     private PrintWriter zumServer = null;
     private BufferedReader vomServer = null;
 
-    public NETZWERKSPIELER(String ipadresse, int port) {
+    public NETZWERKSPIELER(Socket srvsocket) {
         try {
-            server = new Socket(ipadresse,port);
-            
+            server = srvsocket;
+
             zumServer = new PrintWriter(server.getOutputStream(), true);
             vomServer = new BufferedReader(new InputStreamReader(server.getInputStream()) );
-            
-            String text = vomServer.readLine();
-            System.out.println("Empfangen: " + text);
-        } catch(Exception e) {
-            System.out.println("Keine Verbindung am Server!");
-            System.exit(1);
-        }
+        } catch(Exception e) { System.out.println("Keine Verbindung zum Server!"); }
     }
 
     public boolean isHuman() { return false; }
 
     public int getNextMove() {
-        int Zug = 1;
-        
-        try { 
-            String move = vomServer.readLine();
-            System.out.println("Empfangen: " + move);
-            Zug = Integer.parseInt(move);
-        } catch(Exception e) { System.out.println("Kein Zug empfangen"); }
-        
-        return Zug;
+        int zug = -1;
+
+        do {
+            try { 
+                String inbox = vomServer.readLine();
+                
+                System.out.println("Empfangen: " + inbox);
+
+                char move = inbox.charAt(5);
+                switch(move) {
+                    case '0': zug =  0; break;
+                    case '1': zug =  1; break;
+                    case '2': zug =  2; break;
+                    case '3': zug =  3; break;
+                    case '4': zug =  4; break;
+                    case '5': zug =  5; break;
+                    case '6': zug =  6; break;
+                    default:  zug = -1; break;
+                }
+
+                System.out.println("Konvertiert: " + zug);
+            } catch(Exception e) { System.out.println("Kein Zug empfangen"); }
+        } while(zug != -1);
+
+        return zug;
     }
 
-    public void VerarbeiteGegnerischenZug(int ZuggegnerischerSpieler) {
-        System.out.println("Sende: " + ZuggegnerischerSpieler);
-        zumServer.println(ZuggegnerischerSpieler);
+    public void VerarbeiteGegnerischenZug(int zugGegnerischerSpieler) {
+        System.out.println("Sende: " + zugGegnerischerSpieler);
+        zumServer.println("MVE: " + zugGegnerischerSpieler);
     }
 }

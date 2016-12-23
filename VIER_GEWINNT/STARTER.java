@@ -1,25 +1,17 @@
 import java.util.Scanner;
 
 /**
- * Objekte der Klasse STARTER starten ein neues Spiel
- * Eine grafischer Starter wird von der Klasse MENUE gestellt
+ * Objekte der Klasse STARTER starten über die Konsole ein neues Spiel
  * 
  * @author SFr682k
  */
 public class STARTER {   
-    public static void main(String[] args) {
-        new STARTER();
-    }
+    public static void main(String[] args) { new STARTER();  }
     
     public STARTER() {
-        // Deklariert Variablen für Übergabe an OBERCONTROLLER
-        int size, spieler, hauptport; String serverIP = "localhost";
-        
-        // Deklariert Variable, die besagt, ob ein Netzwerkspiel gestartet wird:
-        boolean networkGame = false;
-        
-        // erstellt den Scanner
-        Scanner scan = new Scanner(System.in);
+        int size, spieler, hauptport; String serverIP = "localhost";    // Variablen für Übergabe an OBERCONTROLLER
+        boolean networkGame = false;                                    // Besagt, ob ein Netzwerkspiel gestartet wird
+        Scanner scan = new Scanner(System.in);                          // Scanner für Tastatureingaben
         
         // Frägt die Sollspielfeldgröße ab und speichert sie in der sizeinput-Variable ab
         System.out.println("Bitte geben Sie die Spielfeldgröße ein.");
@@ -38,7 +30,7 @@ public class STARTER {
         
         // Frägt die Typen von Spieler 1 und Spieler 2 ab
         System.out.println("Bitte geben Sie den Spielmodus ein:");
-        System.out.println("(Mögliche Werte: [1] - Mensch gegen Mensch, 2 - Mensch gegen KI, 3/4 - Netzwerkspiel)");
+        System.out.println("(Mögliche Werte: [1] - Mensch gegen Mensch, 2 - Mensch gegen KI, 4/5 - Netzwerkspiel alt)");
         String player = scan.nextLine();
         System.out.println(" ");
         
@@ -47,6 +39,7 @@ public class STARTER {
             case "2": spieler = 2; break;
             case "3": spieler = 3; networkGame = true; break;
             case "4": spieler = 4; networkGame = true; break;
+            case "5": spieler = 5; networkGame = true; break;
             default:  spieler = 1; break;
         }
     
@@ -56,10 +49,7 @@ public class STARTER {
             serverIP = scan.nextLine();
         }
         
-        // Festlegung des Hauptports, auf dem alle Anfragen einlaufen (ggf. im OBERCONTROLER überritten):
-        hauptport = 2000;
-        
-        // legt einen neuen OBERCONTROLLER an
-        OBERCONTROLLER hugoDerBoss = new OBERCONTROLLER(size, spieler, serverIP, hauptport);
+        hauptport = 2000;       // Hauptports, auf dem alle Anfragen einlaufen:
+        OBERCONTROLLER hugoDerBoss = new OBERCONTROLLER(size, spieler, serverIP, hauptport);        // legt einen neuen OBERCONTROLLER an
     }
 }

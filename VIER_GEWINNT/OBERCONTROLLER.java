@@ -1,17 +1,13 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.net.*;
 
 /**
  * Objekte der Klasse OBERCONTROLLER verwalten den Ablauf eines Netzwerkspiels
  */
 public class OBERCONTROLLER {
     public OBERCONTROLLER(int size, int spieler, String serverIP, int hauptport) {
-        Scanner scan = new Scanner(System.in);
-        
-        // deklariert Referenzattribute für beide Spieler
         SPIELER s1, s2;
         
-        // erstellt auf ein Objekt, das Zufallszahlen erzeugt, Referenz
         Random random = new Random();
         
         CONTROLLER commandante = new CONTROLLER(size);
@@ -32,13 +28,17 @@ public class OBERCONTROLLER {
                 break;
                 
             case 3:
-                s1 = new NETZWERKSPIELER(serverIP, 2002);
-                s2 = new HUMANSPIELER(commandante);
-                break;
-
-            case 4:
-                s2 = new NETZWERKSPIELER(serverIP, 2001);
-                s1 = new HUMANSPIELER(commandante);
+                NETZWERKSTARTER netzwerkstarter = new NETZWERKSTARTER(serverIP, hauptport);
+                int spielerNr = netzwerkstarter.getSpielerNr();
+                Socket netzwerksocket = netzwerkstarter.getSocket();
+                
+                if(spielerNr == 1) {
+                    s1 = new HUMANSPIELER(commandante);
+                    s2 = new NETZWERKSPIELER(netzwerksocket);
+                } else {
+                    s1 = new NETZWERKSPIELER(netzwerksocket);
+                    s2 = new HUMANSPIELER(commandante);
+                }
                 break;
                 
             default:
@@ -47,9 +47,9 @@ public class OBERCONTROLLER {
                 break;
         }
 
-        while(true) {
+        // while(true) {
             commandante.spielStarten(s1, s2);
             commandante.reset();
-        }
+        // }
     }
 }
